@@ -1,5 +1,5 @@
 \section{Unit 1}
-\subsection{Systems of Linear Equations}
+\subsection{Lecture 1 (1.1-1.2)}
 
 A system of linear equations is when you have more than 1 equation with more than 1 unknown.
 
@@ -206,7 +206,7 @@ A matrix can also be put in RREF (reduced row echelon form) if it is alreay in R
 
 It's important to note that the RREF for any given matrix is \textit{unique}.
 
-\begin{example}{}{}
+\begin{example}{Solve the System}{}
     \begin{align*}
         \begin{cases}
             x_1 + 2x_2 - x_3 &= 2 \\
@@ -229,6 +229,222 @@ It's important to note that the RREF for any given matrix is \textit{unique}.
             1 & 2 & -1 & 2 \\
             0 & -3 & 3 & -3 \\
             0 & 0 & 0 & 0
-        \end{amatrix}
+        \end{amatrix} \\
+    \end{align*}
+    Now because there is no pivot in the third column of our matrix, $x_3$ is what's known as a `free variable'. All this means is that $x_3$ can take on any value, we'll notate this by $x_3 = t$ with $t \in \RR$.
+    \begin{align*}
+        &\Rightarrow\begin{cases}
+            x_3 &= t \\
+           -3x_2 + 3x_3 &= -3 \\
+           x_1 + 2x_2 - x_3 &= 2
+        \end{cases} \\
+        &\Rightarrow X_{\text{gen}} = \begin{pmatrix}
+            -t \\
+            1 + t \\
+            t
+        \end{pmatrix}
     \end{align*}
 \end{example}
+
+\subsection{Lecture 2 (1.3-1.4)}
+
+As a reminder from last time, given a system with an augmented matrix 
+$\begin{amatrix}{1}
+    A & B
+\end{amatrix}$
+the system will have
+\begin{enumerate}
+    \item \underline{no} solutions if there is a pivot in the last column of 
+    $\begin{amatrix}{1}
+        A & B
+    \end{amatrix}_{\text{REF}}$
+    \item \underline{one} solution if $\begin{amatrix}{1}
+        A & B
+    \end{amatrix}_{\text{REF}}$ is $m \times n$ with $n$ pivots (and no pivots in the last column)
+    \item \underline{infinite} solutions if $\begin{amatrix}{1}
+        A & B
+    \end{amatrix}_{\text{REF}}$ is $m \times n$ with less than $n$ pivots (and no pivots in the last column)
+\end{enumerate}
+
+\begin{defbox}{Vectors}{}
+    For a vector $\vec{AB}$, point $A$ is the tail and point $B$ is the head. Two vectors, $\vec{AB}$ and $\vec{CD}$ are equal if, and only if, their magnitude and directions are equal. Vectors in $\RR^{2}$ can be notated as $\big(\begin{smallmatrix} a_1 \\ a_ 2\end{smallmatrix}\big)$ where the point $(a_1, a_2)$ is the head and the tail is (usually) assumed to the origin. Generally, for $\RR^{n}$ we have $\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}$ which will always have size $n \times 1$.
+\end{defbox}
+
+Since we can represent vectors as matricies, we can perform the standard matrix operations on them:
+
+\begin{impbox}{Matrix Operations}{}
+    Let $A$ and $B$ be matricies. Then
+    \begin{enumerate}
+        \item $A + B = C$ where $A$ and $B$ are the same size. This addition is defined as $c_{ij} = a_{ij} + b_{ij}$
+        \item $\lambda A = \hat{A}$ where $\hat{a_{ij}} = \lambda a_{ij}$ for $\lambda \in \RR$
+        \item $A + (-A) = \hat{0}$ where $\hat{0}$ is the \underline{zero-matrix} which has the same size as $A$ with each element being $0$
+        \item Consider matricies $\underset{m \times n}{A}$ and $\underset{n\times 1}{X}$, then $AX$ is defined as
+        \[
+            \underset{m \times 1}{A} = 
+            \begin{pmatrix}
+                a_{11}x_{1} & a_{12}x_2 & \dots & a_{1n}x_n \\
+                a_{21}x_1 & a_{22}x_2 & \dots & a_{2n}x_n \\
+                \vdots & & \ddots & \vdots \\
+                a_{m1}x_1 & a_{m2}x_2 & \dots & a_{mn}x_n
+            \end{pmatrix}
+            \text{ if }
+            \underset{m\times n}{A} = 
+            \begin{pmatrix}
+                a_{11} & a_{12} & \dots & a_{1n} \\
+                a_{21} & a_{22} & \dots & a_{2n} \\
+                \vdots & & \ddots & \vdots \\
+                a_{m1} & a_{m2} & \dots & a_{mn}
+            \end{pmatrix}
+            \text{ and }
+            \underset{n \times 1}{X} = 
+            \begin{pmatrix}
+                x_1 \\
+                x_2 \\
+                \vdots 
+                \\ 
+                x_n
+            \end{pmatrix}
+        \]
+    \end{enumerate}
+\end{impbox}
+
+\begin{example}{Basic Matrix Multiplication}{}
+    Consider the the matricies 
+    \[ 
+        \underset{2 \times 3}{A} = 
+        \begin{pmatrix}
+            1 & -1 & 2 \\
+            3 & 4 & 5 
+        \end{pmatrix} 
+        \text{ and }
+        \underset{3 \times 1}{B} = 
+        \begin{pmatrix}
+            2 \\
+            4 \\
+            7
+        \end{pmatrix}
+    \]
+    Find $AB$.
+    \[ 
+        \underset{2 \times 1}{AB} = 
+        \begin{pmatrix}
+            (1 * 2) + (-1 * 4) + (2 * 7) \\
+            (3 * 2) + (4 * 4) + (5 * 7) 
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            12 \\
+            57
+        \end{pmatrix}
+    \]
+\end{example}
+
+It's important to note that an alternative form of defining matrix multiplication is as follows:
+\[
+    AX = 
+    x_1\begin{pmatrix}
+        a_{11} \\ a_{21} \\ \vdots \\ a_{m1}
+    \end{pmatrix}
+    + x_2\begin{pmatrix}
+        a_{12} \\ a_{22} \\ \vdots \\ a_{m2}
+    \end{pmatrix}
+    + \dots + 
+    x_n\begin{pmatrix}
+        a_{m1} \\ a_{m2} \\ \vdots \\ a_{mn}
+    \end{pmatrix}
+\]
+This is known as the \textbf{linear combination of vectors}.
+
+\begin{defbox}{Linear Combination of Vectors}{}
+    Let $\braces{\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}}$ be a set of vectors from $\RR^{n}$. Then, 
+    \[
+        c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_k\vec{u_k}, \hspace{0.2in} (c_1, c_2, \dots, c_k \in \RR) 
+    \]
+    is called the \textbf{linear combination of vectors} $\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}$.
+\end{defbox}
+
+We can combine the previous two definitions of matrix multiplication and the linear combination of vectors to get this next fact: if we consider a vector 
+\[(\vec{u_k}) = \begin{pmatrix} u_{1k} \\ u_{2k} \\ \vdots \\ u_{nk} \end{pmatrix}\]
+then, $c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_k\vec{u_k} = AX$ where
+\[
+    A = 
+    \begin{pmatrix}
+        \left(\vec{u_1}\right) & \left(\vec{u_2}\right) & \dots & \left(\vec{u_k}\right)
+    \end{pmatrix}
+    \text{ and }
+    X = \begin{pmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_k
+    \end{pmatrix}
+\]
+
+This is especially important when working with systems of equations as we can represent systems as linear combinations of vectors. Given any general system we can rewrite it as a linear combination of vectors as such
+\[ 
+    \left.\begin{cases}
+        a_{11}x_1 + a_{12}x_2 + \dots + a_{1n}x_n &= b_1 \\
+        a_{21}x_1 + a_{22}x_2 + \dots + a_{2n}x_n &= b_1 \\
+        \vdots & \\
+        a_{m1}x_1 + a_{m2}x_2 + \dots + a_{mn}x_n &= b_1 \\
+    \end{cases}\right] \Leftrightarrow AX = B
+\]
+$B$ is said to be a \textit{linear combination of columns of $A$} if, and only if, $A$ and $B$ are \textbf{compatible}. For $A$ and $B$ to be compatible essentially just means that $\begin{amatrix}{1} A & B\end{amatrix}_{\text{REF}}$ has no pivots in the last column.
+
+\begin{defbox}{Span}{}
+    $c_1\vec{v_1} + c_2\vec{v_2} + \dots + c_k\vec{v_k} = \text{Span}\braces{\vec{v_1}, \vec{v_2}, \dots, \vec{v_k}}$ where $c_1, c_2, \dots, c_k$ are \underline{all} possible numbers
+\end{defbox}
+
+For a single vector $\vec{v}$, $\text{Span}\braces{\vec{v}}$ is simply the set containing all scaled multiples of $\vec{v}$.
+
+\begin{example}{Span of Two Vectors}{}
+    Notice that $\text{Span}\braces{\begin{pmatrix} 1 \\ 2\end{pmatrix}, \begin{pmatrix} 3 \\ 4\end{pmatrix}} = \RR^{2}$. This implies that any vector from $\RR^{2}$ can be written as 
+    \[ c_1\begin{pmatrix} 1 \\ 2 \end{pmatrix} + c_2\begin{pmatrix} 3 \\ 4\end{pmatrix}\]
+    We can prove this fact by considering the augmented matrix for $AX=B$:
+    \[ 
+        \begin{amatrix}{2}
+           1 & 3 & b_1 \\
+           2 & 4 & b_2  
+        \end{amatrix}
+        \xrightarrow[R_2 \to R_2 - 2R_1]{} 
+        \begin{amatrix}{2}
+            1 & 3 & b_1 \\
+            0 & -2 & b_2 - 2b_1
+        \end{amatrix}
+    \]
+    Therefore, since there is no pivote in the last column, this system has a single solution for any vector $B = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$
+\end{example}
+
+\begin{example}{}{}
+    Given the following vectors $\vec{a_1}, \vec{a_2}, \vec{a_3}$ and $\vec{b}$, determine if $\vec{b}$ is a linear combination of $\vec{a_1}, \vec{a_2}, \vec{a_3}$.
+    \[
+        \vec{a_1} = \begin{pmatrix} 1 \\ -2 \\ 0 \end{pmatrix} 
+        \hspace{0.2cm}
+        \vec{a_2} = \begin{pmatrix} 0 \\ 1 \\ 2 \end{pmatrix} 
+        \hspace{0.2cm}
+        \vec{a_3} = \begin{pmatrix} 5 \\ -6 \\ 8 \end{pmatrix} 
+        \hspace{0.2cm}
+        \vec{b} = \begin{pmatrix} 2 \\ -1 \\ 6 \end{pmatrix} 
+        \hspace{0.2cm}
+    \]
+    We can start by noticing that $\vec{b} = c_1\vec{a_1} + c_2\vec{a_2} + c_3\vec{a_3} \Leftrightarrow A\begin{pmatrix} c_1 \\ c_2 \\ c_3 \end{pmatrix} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$ where \\ $A = \begin{pmatrix} \left(\vec{a_1}\right) & \left(\vec{a_2}\right) & \left(\vec{a_3}\right) \end{pmatrix}$. Thus, 
+    \[ 
+        \begin{amatrix}{3}
+            1 & 0 & 5 & 2 \\
+            -2 & 1 & -6 & -1 \\
+            0 & 2 & 8 & 6 
+        \end{amatrix} 
+        \xrightarrow[R_2 \to R_2 + 2R_1]{}
+        \begin{amatrix}{3}
+            1 & 0 & 5 & 2 \\
+            0 & 1 & 4 & 3 \\
+            0 & 2 & 8 & 6 
+        \end{amatrix} 
+        \xrightarrow[R_3 \to R_3 - 2R_2]{}
+        \begin{amatrix}{3}
+            1 & 0 & 5 & 2 \\
+            0 & 1 & 4 & 3 \\
+            0 & 0 & 0 & 0 
+        \end{amatrix} 
+    \]
+    Therefore, since there is no pivot in the final column, $B$ is a linear combination of $A$.
+\end{example}
+
+\subsection{Lecture 3 (1.5)}
