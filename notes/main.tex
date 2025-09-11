@@ -29,6 +29,10 @@
 \newenvironment{impbox}[1]{\begin{tcolorbox}[colback=LightSteelBlue2, breakable, sharp corners, title=#1]}{\end{tcolorbox}}
 \newenvironment{defbox}[1]{\begin{tcolorbox}[colback=green!25!white, breakable, sharp corners, title=#1]}{\end{tcolorbox}}
 
+\newtheorem{theorem}{Theorem}[section]
+
+\newenvironment{thm}[1]{\begin{tcolorbox}[colback=SlateBlue1, breakable, sharp corners]\begin{theorem}[#1]}{\end{theorem}\end{tcolorbox}}
+
 \newenvironment{amatrix}[1]{%
   \left(\begin{array}{@{}*{#1}{c}|c@{}}
 }{%
