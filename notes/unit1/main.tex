@@ -633,3 +633,301 @@ Note that since the solution matrix is simply just the zero matrix, we dont need
         -1 \\ -3 \\ 0 \\ 0 
     \end{pmatrix}\]
 \end{example}
+
+\subsection{Lecture 4: 1.3}
+\begin{defbox}{Rank of a Matrix}{}
+    Let $\underset{m \times n}{A}$ be a matrix. Then $\text{rank}(A)$ is the number of pivots in $A_{\text{REF}}$. $\text{rank}(A)$ is equivalent to the number of non-zero rows in $A_{\text{REF}}$. 
+\end{defbox}
+
+It follows from the definition of $\text{rank}(A)$ that the number of free variables in a system is $n - \text{rank}(A)$. This quanitity is known as $\text{null}(A)$.
+
+If $\underset{n \times n}{A}$ is a matrix such that $\text{rank}(A) = n$, then $A_{\text{REF}} = I$ where $I$ is the identity matrix.
+
+\begin{defbox}{Identity Matrix}{}
+    The identity matrix, $I$, is a square matrix which is automatically in RREF and its only non-zero elements are the pivots. For example
+    \[I_2 = \begin{pmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{pmatrix}
+    \hspace{0.2cm}
+    \text{and}
+    \hspace{0.2cm}
+    I_3 = \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}\]
+\end{defbox}
+
+Another important fact about the rank of matrix is that it can only be as great as the minimimum of $n$ and $m$ for a matrix of size $m \times n$. Formally, 
+\[ \text{rank}\left(\underset{m \times n}{A}\right) \leq \min\braces{m, n}\]
+where $\min\braces{x_1, x_2, \dots, x_n}$ returns the smallest value out of $x_1, x_2, \dots, x_n$.
+
+\begin{defbox}{Span of Vectors from $\RR^{n}$}{}
+    The span of a set of vectors from $\RR^{n}$, $\text{Span}\braces{\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}}$ is the set of all possible linear combinations of $\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}$:
+    \[AC = c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_k\vec{u_k}, \hspace{0.4cm}\left(c_1, c_2, \dots, c_k \in \RR \right)\]
+    where 
+    \[
+        A = \begin{pmatrix}
+            \left(\vec{u_1}\right) & \left(\vec{u_2}\right) & \dots & \left(\vec{u_k}\right) 
+        \end{pmatrix}
+        \text{ and } 
+        C = \begin{pmatrix}
+            c_1 \\ c_2 \\ \vdots \\ c_k 
+        \end{pmatrix}
+    \]
+\end{defbox}
+
+The span of the zero vector, is also the zero vector: $\text{Span}\braces{\vec{0}} = \vec{0}$
+
+\begin{example}{Span of a Single Vector}{}
+    Consider a vector $u_1 = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$. Then $\Span{\vec{u_1}} = c\vec{u_1}$ for any $c \in \RR$. Geometrically, this is the set of vectors in the same, or opposite, direction as $\vec{u_1}$ with a scaled magnitude. When put together, $\Span{\vec{u_1}}$ gives a line in $\RR^{2}$.
+\end{example}
+
+\begin{example}{Span of Two Vectors}{}
+    Consider $\vec{u_1} = \begin{pmatrix} 1 \\ 2 \end{pmatrix}$ and $\vec{u_2} = \begin{pmatrix} 1 \\ 1 \end{pmatrix}$. Then, $\Span{\vec{u_1}, \vec{u_2}} = \RR^{2}$ because any vector from $\RR^2$ can be writtin in the form 
+    \[
+        c_1\vec{u_1} + c_2\vec{u_2} = c_1\begin{pmatrix} 1 \\ 2 \end{pmatrix} + c_2\begin{pmatrix} 1 \\ 2 \end{pmatrix}
+    \]
+    \begin{proof}
+        Consider the system 
+        \[
+            c_1\begin{pmatrix} 1 \\ 2 \end{pmatrix} + c_2\begin{pmatrix} 1 \\ 2 \end{pmatrix} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} 
+            \Leftrightarrow 
+            \begin{pmatrix}
+                1 & 1 \\
+                2 & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                c_1 \\ c_2
+            \end{pmatrix}
+            = 
+            \begin{pmatrix}
+                b_1 \\ b_2
+            \end{pmatrix}
+            \Leftrightarrow 
+            A \begin{pmatrix}
+                c_1 \\ c_2 
+            \end{pmatrix}
+            = 
+            \begin{pmatrix}
+                b_1 \\ b_2
+            \end{pmatrix}, 
+            \hspace{0.2cm}
+            \underset{2 \times 2}{A} = \begin{pmatrix}
+                1 & 1 \\
+                2 & 1
+            \end{pmatrix}
+        \]
+        Then, the augmented matrix is 
+        \[
+            \begin{amatrix}{2}
+                1 & 1 & b_1 \\
+                2 & 1 & b_2
+            \end{amatrix}
+            \xrightarrow[R_2 \to R_2 - 2R_1]{} 
+            \begin{amatrix}{2}
+                1 & 1 & b_1 \\
+                0 & -1 & b_2 - 2b_1
+            \end{amatrix}
+            = 
+            \begin{amatrix}{1}
+                A & B
+            \end{amatrix}_{\text{REF}}
+        \]
+        $\therefore$ since the augmented matrix in REF has no pivots in the final column, the system is compatible and contains a solution for all vectors $\begin{pmatrix} b_1 \\ b_2\end{pmatrix} \in \RR$.
+    \end{proof}
+\end{example}
+
+Note as well, that we could've written the final justification using the rank of augmented matrix as reasoning: `$\therefore \text{rank}(A) = 2$, so the system is compatible\dots'. As well, note that since $A$ is a square matrix and $\text{rank}(A) = 2$, that also implies that $A_{\text{RREF}} = I_2$ (it should be pretty easy to put $A$ into RREF and see this for yourself).
+
+\begin{example}{Span of Three Vectors}{}
+    Consider three vectors
+    \[
+        \vec{u_1} = \begin{pmatrix}
+            1 \\ 2
+        \end{pmatrix},
+        \hspace{0.2cm}
+        \vec{u_2} = \begin{pmatrix}
+            2 \\ 4
+        \end{pmatrix}, 
+        \hspace{0.2cm}
+        \vec{u_3} = \begin{pmatrix}
+            3 \\ 6
+        \end{pmatrix}
+    \]
+    and consider the span of $\vec{u_1}, \vec{u_2}$ and $\vec{u_3}$, $\Span{\vec{u_1}, \vec{u_2}, \vec{u_3}}$. Now notice that $u_2 = 2u_1$ and $u_3 = 3u_3$. This implies that $\Span{\vec{u_1}, \vec{u_2}, \vec{u_3}} = \Span{\vec{u_1}}$. $u_2$ and $u_3$ are considered `redudant' in the span.
+    \begin{proof}
+        Consider the matrix representing the vectors of the generation set:
+        \[
+            \begin{pmatrix}
+                1 & 2 & 3 \\
+                2 & 4 & 6
+            \end{pmatrix}
+            \xrightarrow[R_2 \to R_2 - 2R_1]{}
+            \begin{pmatrix}
+                1 & 2 & 3 \\
+                0 & 0 & 0
+            \end{pmatrix}
+        \]
+        $\therefore$ no pivots in the second and third columns implies that the second and third vectors are redudant. 
+    \end{proof}
+\end{example}
+
+
+\begin{example}{Span of Three Vectors (again)}
+    Now consider $\vec{u_1}, \vec{u_2}, \vec{u_3}$ such that 
+    \[
+        \vec{u_1} = \begin{pmatrix}
+            1 \\ 3
+        \end{pmatrix}, 
+        \hspace{0.2cm}
+        \vec{u_2} = \begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}, 
+        \hspace{0.2cm}
+        \vec{u_3} = \begin{pmatrix}
+            4 \\ 6
+        \end{pmatrix}
+    \]
+    Notice that $\Span{\vec{u_1}, \vec{u_2}, \vec{u_3}}$ \textbf{must} be reducible since the corresponding matrix has dimensions $2 \times 3 \Rightarrow \text{rank}{A} \leq \min{2, 3} = 2 \therefore$ (at least) one vector is redudant. We can figure out which one as follows 
+    \[
+        \underset{2 \times 3}{A} = \begin{pmatrix}
+            1 & 2 & 4 \\
+            3 & 1 & 6 
+        \end{pmatrix}
+        \xrightarrow[R_2 \to R_2 - 3R_1]{}
+        \begin{pmatrix}
+            1 & 2 & 4 \\
+            0 & -5 & -6
+        \end{pmatrix}
+    \]
+    Thus, no pivot in the third column implies that the third vector is redudant:
+    \[\therefore \Span{\vec{u_1}, \vec{u_2}, \vec{u_3}} = \Span{\vec{u_1}, \vec{u_2}}\]
+\end{example}
+
+\begin{example}{Proving a Vector is in a Span}{}
+    Show that $\begin{pmatrix} 4 \\ 6 \end{pmatrix} \in \Span{\begin{pmatrix} 1 \\ 3 \end{pmatrix}, \begin{pmatrix} 2 \\ 1 \end{pmatrix}}$. We can start with the system 
+    \[
+        c_1\begin{pmatrix} 1 \\ 3 \end{pmatrix} + c_2\begin{pmatrix} 2 \\ 1\end{pmatrix} = \begin{pmatrix} 4 \\ 6 \end{pmatrix}
+        \Rightarrow 
+        \begin{amatrix}{2}
+            1 & 2 & 4 \\
+            3 & 1 & 6
+        \end{amatrix}
+        \xrightarrow[R_2 \to R_2 - 3R_1]{}
+        \begin{amatrix}{2}
+            1 & 2 & 4 \\
+            0 & -5 & -6
+        \end{amatrix}
+    \]
+    This gives 
+    \[
+        \left.\begin{cases}
+            -5c_2 &= 6 \\
+            c_1 + 2c_2 &= 4
+        \end{cases}\right]
+        \Rightarrow 
+        c_2 = \frac{6}{5} \text{ and } c_2 = \frac{8}{5}
+    \]
+    Note that we knew that $\begin{pmatrix} 4 \\ 5 \end{pmatrix} \in \Span{\begin{pmatrix} 1 \\ 3 \end{pmatrix}, \begin{pmatrix} 2 \\ 1 \end{pmatrix}}$ since the system was compatible, we just found the values of $c_1$ and $c_2$ such that 
+    \[
+        c_1\begin{pmatrix} 1 \\ 3 \end{pmatrix} + c_2\begin{pmatrix} 2 \\ 1\end{pmatrix} = \begin{pmatrix} 4 \\ 6 \end{pmatrix}
+    \]
+\end{example}
+
+\begin{example}{Geometric Interpretation of $\RR^{3}$ Span}{}
+    Consider vectors $\vec{u_1}, \vec{u_2}$ and give a geometric interpretation of their span, $\Span{\vec{u_1}, \vec{u_2}}$
+    \[
+        \vec{u_1} = \begin{pmatrix} 8 \\ 2 \\ -6 \end{pmatrix}, 
+        \hspace{0.2cm} 
+        \vec{u_2} = \begin{pmatrix} 12 \\ 3 \\ -9 \end{pmatrix}
+    \]
+    Start by noticing that $\vec{u_2} = \frac{3}{2}\vec{u_1} \therefore u_1 \parallel u_2 \Rightarrow \Span{\vec{u_1}, \vec{u_2}}$ must be a line in $\RR^{3}$ along $\vec{u_1}$.
+\end{example}
+
+\begin{example}{Geometric Interpretation of $\RR^{3}$ Span (again)}
+    Consider vectors $\vec{u_1}, \vec{u_2}$ and give a geometric interpretation of their span, $\Span{\vec{u_1}, \vec{u_2}}$
+    \[
+        \vec{u_1} = \begin{pmatrix} 8 \\ 2 \\ -6 \end{pmatrix}, 
+        \hspace{0.2cm} 
+        \vec{u_2} = \begin{pmatrix} 12 \\ 3 \\ 9 \end{pmatrix}
+    \]
+    Since $\vec{u_1} \nparallel \vec{u_2}, \Span{\vec{u_1}, \vec{u_2}}$ makes a plane in $\RR^{3}$ (spanned by $\vec{u_1}, \vec{u_2}$)
+\end{example}
+
+\begin{example}{}{}
+    Let $A$ and $b$ be matricies such that 
+    \[
+        \underset{3 \times 3}{A} = \begin{pmatrix}
+            1 & 0 & -4 \\
+            0 & 3 & -2 \\
+            -2 & 6 & 3
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            \left(\vec{u_1}\right) & \left(\vec{u_2}\right) & \left(\vec{u_3}\right)
+        \end{pmatrix}
+        \text{ and }
+        b = \begin{pmatrix}
+            4 \\ 1 \\ -4
+        \end{pmatrix}
+    \]
+    Now consider $\mathcal{W} = \Span{\vec{u_1}, \vec{u_2}, \vec{u_3}}$.
+    \begin{parts}
+        \part Is $b \in \mathcal{W}$?
+        \begin{solution}
+            Start by assuming that $c \in \mathcal{W} \therefore c_1\vec{u_1} + c_2\vec{u_2} + c_3\vec{u_3} = b \Leftrightarrow$
+            \[
+                \begin{amatrix}{3}
+                    1 & 0 & -4 & 4 \\
+                    0 & 3 & -2 & 1 \\
+                    -2 & 6 & 3 & -4
+                \end{amatrix} 
+                \xrightarrow[R_3 \to R_3 + 2R_1]{}
+                \begin{amatrix}{3}
+                    1 & 0 & -4 & 4 \\
+                    0 & 3 & -2 & 1 \\
+                    0 & 6 & -5 & 4
+                \end{amatrix} 
+                \xrightarrow[R_3 \to R_3 - 2R_2]{}
+                \begin{amatrix}{3}
+                    1 & 0 & -4 & 4 \\
+                    0 & 3 & -2 & 1 \\
+                    0 & 0 & -1 & 2
+                \end{amatrix} 
+            \]
+            Thus, $\text{rank}{\left(A_{\text{REF}}\right)} = 3 \therefore$ the system is compatible and $b \in \mathcal{W}$
+        \end{solution}
+
+        \part Is $\Span{\vec{u_1}, \vec{u_2}, \vec{u_3}}$ reducible?
+        \begin{solution}
+            \[
+                \underset{3 \times 3}{A} = \begin{pmatrix}
+                    1 & 0 & -4 \\
+                    0 & 3 & -2 \\
+                    -2 & 6 & 3 
+                \end{pmatrix}
+                \xrightarrow[R_3 \to R_3 + 2R_1]{}
+                \begin{pmatrix}
+                    1 & 0 & -4 \\
+                    0 & 3 & -2 \\
+                    0 & 6 & -5 
+                \end{pmatrix} 
+                \xrightarrow[R_3 \to R_3 - 2R_2]{}
+                \begin{pmatrix}
+                    1 & 0 & -4 \\
+                    0 & 3 & -2 \\
+                    0 & 0 & -1 
+                \end{pmatrix} 
+            \]
+            $\text{rank}\left(A_\text{REF}\right) = 3 \therefore$ the span is irreducible.
+        \end{solution}
+
+        \part Is $\Span{\vec{u_1}, \vec{u_2}, \vec{u_3}} = \Span{\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}}$
+        \begin{solution}
+            Yes, they're both $\RR^{3}$
+        \end{solution}
+    \end{parts}
+
+\end{example}
