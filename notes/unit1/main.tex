@@ -1,5 +1,5 @@
 \section{Unit 1}
-\subsection{Lecture 1 (1.1-1.2)}
+\subsection{Lecture 1: Systems of Linear Equations [1.1-1.2]}
 
 A system of linear equations is when you have more than 1 equation with more than 1 unknown.
 
@@ -246,7 +246,7 @@ It's important to note that the RREF for any given matrix is \textit{unique}.
     \end{align*}
 \end{example}
 
-\subsection{Lecture 2 (1.3-1.4)}
+\subsection{Lecture 2: Vector and Matrix Equations [1.3-1.4]}
 
 As a reminder from last time, given a system with an augmented matrix 
 $\begin{amatrix}{1}
@@ -447,7 +447,7 @@ For a single vector $\vec{v}$, $\text{Span}\braces{\vec{v}}$ is simply the set c
     Therefore, since there is no pivot in the final column, $B$ is a linear combination of $A$.
 \end{example}
 
-\subsection{Lecture 3 (1.5)}
+\subsection{Lecture 3: Homogenous Systems of Linear Equations [1.5]}
 
 \begin{defbox}{Homogenous Systems of Linear Equations}{}
     A \textbf{homogenous system of linear equations} is any system in the form 
@@ -634,7 +634,7 @@ Note that since the solution matrix is simply just the zero matrix, we dont need
     \end{pmatrix}\]
 \end{example}
 
-\subsection{Lecture 4: 1.3}
+\subsection{Lecture 4: Span of a Set of Vectors [1.3]}
 \begin{defbox}{Rank of a Matrix}{}
     Let $\underset{m \times n}{A}$ be a matrix. Then $\text{rank}(A)$ is the number of pivots in $A_{\text{REF}}$. $\text{rank}(A)$ is equivalent to the number of non-zero rows in $A_{\text{REF}}$. 
 \end{defbox}
@@ -929,5 +929,178 @@ Note as well, that we could've written the final justification using the rank of
             Yes, they're both $\RR^{3}$
         \end{solution}
     \end{parts}
+\end{example}
 
+\subsection{Lecture 5: Linear Dependence and Independence [1.7]}
+
+\begin{defbox}{Linear Independence and Dependence}{}
+    A set of vectors from $\RR^{n}, \braces{\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}}$, is \textbf{linearly independent} if 
+    \[c_1\vec{u_1} + c_2\vec{u_2} + \dots + c_k\vec{u_k} = 0\]
+    is satisfied if, and only if, $c_1 = c_2 = \dots = c_k = 0$. Otherwise the set is called \textbf{linearly dependent}.
+\end{defbox}
+
+Now, notice that the above equation is actually equivalent to the matrix equation $AC=0$ where
+\[
+    \underset{n\times k}{A} = 
+    \begin{pmatrix}
+        \left(\vec{u_1}\right) & \left(\vec{u_2}\right) & \dots & \left(\vec{u_k}\right)
+    \end{pmatrix}
+    \text{ and }
+    C = 
+    \begin{pmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_k
+    \end{pmatrix}
+\]
+It should be evident that we can now view this as a homogenous system of linear equations. Thus, if $\text{rank}\left(A_{\text{REF}}\right) = k$ the only solution to the homogenous system is the trivial solution, $\vec{0}$. We can also define linear dependence this way: if $\text{rank}\left(A_{\text{REF}}\right) < k$, the system must have non trivial solutions and the set of vectors must be linearly dependent.
+
+\begin{example}{}{}
+    Consider the set of vectors below and determine if it is linearly independent or dependent:
+    \[ 
+        \braces{
+            \begin{pmatrix}
+                1 \\ -2 \\ 4
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                3 \\ 1 \\ 1
+            \end{pmatrix},
+            \begin{pmatrix}
+                1 \\ -2 \\ -1
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                0 \\ 1 \\ 2
+            \end{pmatrix}
+        }
+    \]
+    \begin{solution}
+        This problem is actually fairly easy and requires zero calculations. Consider the matrix formed from these vectors, $A$. Notice that $A$ must have dimensions $3 \times 4$ and recall that for any $m \times n$ matrix, the rank of said matrix is always less than or equal to $\min{m, n}$. Applying this to $A$, we can see that $\text{rank}\left(A_{\text{REF}}\right) \leq \min{3, 4} = 3$. Therefore, since there can be only a max of $3$ pivots, at least one column will not have a pivot, so the system will have non-trivial solutions. This implies that the set of vectors is linearly \textbf{dependent}. 
+    \end{solution}
+\end{example}
+
+A set of vectors that is linearly dependent contains at least one vector that can be represented as a linear combination of the other vectors in the set. This should also remind you of sets of vectors that have reducible spans.
+
+\begin{example}{}{}
+    Consider the set of vectors in the above example, and determine which vector(s) are redudant.
+    \begin{solution}
+        \[
+            \underset{3 \times 4}{A} =
+            \begin{pmatrix}
+                1 & 3 & 1 & 0 \\
+                -2 & 1 & 2 & 1 \\
+                4 & 1 & -1 & 2
+            \end{pmatrix} 
+            \xrightarrow[R_3 \to R_3 - 4R_1]{R_2 \to R_2 + 2R_1}
+            \begin{pmatrix}
+                1 & 3 & 1 & 0 \\
+                0 & 7 & 4 & 1 \\
+                0 & -11 & -5 & -2
+            \end{pmatrix} 
+            \xrightarrow[R_3 \to \frac{9}{7}R_3]{R_3 \to R_3 + \frac{11}{7}R_2}
+            \begin{pmatrix}
+                1 & 3 & 1 & 0 \\
+                0 & 7 & 4 & 1 \\
+                0 & 0 & 1 & *
+            \end{pmatrix} 
+        \]
+        $\therefore$ no pivot in the fourth column implies that the fourth vector is redudant.
+    \end{solution}
+\end{example}
+
+In the above example, notice that we really didn't even need to calculate the element $a_{34}$ since it's value has no effect on whether or not the fourth column will have a pivot or not. 
+
+\begin{example}{}{}
+    Consider the set of vectors below and find a value of $h$ such that the set is linearly dependent 
+    \[ 
+        \braces{
+            \begin{pmatrix}
+                1 \\ -3 \\ 2
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                -3 \\ 10 \\ -6
+            \end{pmatrix},
+            \begin{pmatrix}
+                2 \\ -7 \\ h
+            \end{pmatrix}
+        }
+    \]
+    \begin{solution}
+        \[
+            \underset{3 \times 3}{A} =
+            \begin{pmatrix}
+                1 & 3 & 2  \\
+                -3 & 10 & -6 \\
+                2 & -6 & h
+            \end{pmatrix} 
+            \xrightarrow[R_3 \to R_3 - 2R_1]{R_2 \to R_2 + 3R_1}
+            \begin{pmatrix}
+                1 & 3 & 2  \\
+                0 & 1 & -1 \\
+                0 & 0 & h-4
+            \end{pmatrix} 
+        \]
+        Thus, in order for the set to be linearly dependent, one column must \textit{not} have a pivot. This will happen if $h-4=0 \Rightarrow h = 4$. 
+    \end{solution}
+\end{example}
+
+\begin{example}{}{}
+    Determine the column vectors of $A$ are linearly independent or depdendent where $A=$
+    \[
+        \begin{pmatrix}
+            -4 & -3 & 0 \\
+            0 & -1 & 4 \\
+            1 & 0 & 5 \\
+            5 & 4 & 6
+        \end{pmatrix} 
+        \xrightarrow{R_3 \leftrightarrow R_1}
+        \begin{pmatrix}
+            1 & 0 & 5 \\
+            0 & -1 & 4 \\
+            -4 & -3 & 0 \\
+            5 & 4 & 6
+        \end{pmatrix} 
+        \xrightarrow[R_4 \to R_4 - 5R_1]{R_3 \to R_3 + 4R_1}
+        \begin{pmatrix}
+            1 & 0 & 5 \\
+            0 & -1 & 4 \\
+            0 & -3 & 12 \\
+            0 & 4 & -9
+        \end{pmatrix} 
+        \xrightarrow[R_3 \to R_3 - 3R_2]{\substack{R_4 \to R_4 + 4R_2 \\ R_3 \leftrightarrow R-4}}
+        \begin{pmatrix}
+            1 & 0 & 5 \\
+            0 & -1 & 4 \\
+            0 & 0 & 7 \\
+            0 & 0 & 0
+        \end{pmatrix} 
+    \]
+    $\therefore$ if $\vec{u_1}, \vec{u_2}, \vec{u_3}$ are the column vectors, then they are linearly independent because $\text{rank}\left(A_{REF}\right) = 3$
+\end{example}
+
+\begin{example}{}{}
+    Determine the value of $h$ such that the vectors are linearly dependent 
+    \[
+        \braces{
+            \begin{pmatrix}
+                1 \\ 5 \\ -3
+            \end{pmatrix},
+            \begin{pmatrix}
+                -2 \\ -9 \\ 6
+            \end{pmatrix},
+            \begin{pmatrix}
+                3 \\ h \\ -9
+            \end{pmatrix}
+        } \Rightarrow
+        \underset{3 \times 3}{A} = 
+        \begin{pmatrix}
+            1 & -2 & 3 \\
+            5 & -9 & h \\
+            -3 & 6 & -9
+        \end{pmatrix}
+        \xrightarrow[R_3 \to R_3 + 3R_1]{R_2 \to R_2 - 5R_1}
+        \begin{pmatrix}
+            1 & -2 & 3 \\
+            0 & 1 & h-15 \\
+            0 & 0 & 0
+        \end{pmatrix}
+    \]
+    $\therefore$ since there is no pivot in the third column, the vectors will be linearly independent $\forall h \in \RR$.
 \end{example}
