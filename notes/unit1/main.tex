@@ -1104,3 +1104,116 @@ In the above example, notice that we really didn't even need to calculate the el
     \]
     $\therefore$ since there is no pivot in the third column, the vectors will be linearly independent $\forall h \in \RR$.
 \end{example}
+
+\subsection{Lecture 5: Linear Transformations [1.8]}
+\begin{defbox}{Transformations}{}
+    A linear transformation $\mathcal{T}: \RR^{m} \to \RR^{n}$ given by the map $\underset{m \times n}{A} \cdot \underset{n\times\,1}{\vec{x}} \mapsto \vec{b}$ is a function that can be thought of as finding all vectors $\vec{x} \in \RR^{n}$ that turn into $\vec{b} \in \RR^{m}$ when multiplied by $A$. $\RR^{n}$ is called the \textbf{domain} and $\RR^{m}$ is called the \textbf{co-domain}.
+\end{defbox}
+
+\begin{example}{}{}
+    Consider a linear map $\mathcal{T}: \RR^{3} \to \RR^{3}$ given by $A\vec{x} \mapsto \vec{b}$. For the given matrix $A$ and vectors $\vec{u}$ and $\vec{v}$, find $\mathcal{T}\left(\vec{u}\right)$ and $\mathcal{T}\left(\vec{v}\right)$.
+    \[
+        A = \begin{pmatrix}
+            5 & 0 & 0 \\
+            0 & \frac{1}{2} & 0 \\
+            0 & 0 & \frac{1}{2}
+        \end{pmatrix},
+        \hspace{0.2cm}
+        \vec{u} = \begin{pmatrix}
+            1 \\ 0 \\ -4
+        \end{pmatrix},
+        \hspace{0.2cm}
+        \vec{v} = \begin{pmatrix}
+            a \\ b \\ c
+        \end{pmatrix}
+    \]
+    Since $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$, we have 
+    \[
+        \mathcal{T}\left(\vec{u}\right) = A\vec{u} = \begin{pmatrix}
+            5 \\ 0 \\ -2
+        \end{pmatrix}
+        \text{ and,  }
+        \mathcal{T}\left(\vec{v}\right) = A\vec{v} = \begin{pmatrix}
+            5a \\ \frac{1}{2}a \\ \frac{1}{2}c
+        \end{pmatrix}
+    \]
+\end{example}
+
+\begin{defbox}{\underline{Linear} Transformations}{}
+    A transformation, $\mathcal{T}(\vec{x})$, is \textbf{linear}, if 
+    \[\mathcal{T}\left(a\vec{u} + b\vec{v}\right) = a\mathcal{T}\left(\vec{u}\right) + b\mathcal{T}\left(\vec{v}\right) \Leftrightarrow A\left(a\vec{X} + b\vec{Y}\right) = aA\vec{X} + bB\vec{Y}\]
+\end{defbox}
+
+Note that not all transformations are linear transformations, there is a distinct difference!
+
+\begin{impbox}{Basic Linear Transformations}{}
+    \begin{itemize}
+        \item Dilation Transformation: $\mathcal{T}\left(\vec{u}\right) = r\vec{u}$ for $r \in \RR$
+        \item $90^{\circ}$ Transformation: $\mathcal{T}\left(\vec{u}\right) = A\vec{u} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}\vec{u}$
+        \item Shear Transformation: $\mathcal{T}\left(\vec{u}\right) = A\vec{u} = \begin{pmatrix} 1 & 2 \\ 0 & 1 \end{pmatrix}\vec{u}$
+    \end{itemize}    
+\end{impbox}
+Note that for the \textbf{shear} transformation, the $y$-coordinate ($\hat{\jmath}$) of $\vec{u}$ stays the same, only the $x$-coordinate ($\hat{\imath}$) is stretched.
+
+\begin{example}{Mapping to the Zero Vector}{}
+    Consider the following matrix ${A}$ and find all vectors $\vec{x}$ such that they get mapped to the zero vector when multiplied by $A$:
+    \[\underset{3 \times 4}{A} = \begin{pmatrix}
+        1 & -4 & 7 & -5 \\
+        0 & 1 & -4 & 3 \\
+        2 & -6 & 6 & -4
+    \end{pmatrix}\]
+    We can start by noticing that if we define $\mathcal{T}: \RR^{4} \to \RR^{3}$ such that $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$, then we just need to solve $\mathcal{T}\left(\vec{x}\right) = \vec{0} \Rightarrow A\vec{x} = \vec{0}$:
+    \[
+        A \xrightarrow[R_3 \to R_3 - 2R_1]{} = 
+        \begin{pmatrix}
+            1 & -4 & 7 & -5 \\
+            0 & 1 & -4 & 3 \\
+            0 & 2 & -5 & 6
+        \end{pmatrix}
+        \xrightarrow[R_3 \to R_3 - 2R_2]{} = 
+        \begin{pmatrix}
+            1 & -4 & 7 & -5 \\
+            0 & 1 & -4 & 3 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}
+    \]
+    Thus, since there is no pivot in the third and forth columns, $x_3 = s$ and $x_3 = t$ are free variables (for $s, t, \in \RR$). Backwards substitution into the equations gives:
+    \[
+        \left.\begin{cases}
+            x_2 - 4x_3 + 3x_4 &= 0 \Rightarrow x_2 = 4s - 3t \\
+            x_1 - 4x_2 + 7x_3 - 5x_4 & = 0 \Rightarrow x_1 = 9s - 7t
+        \end{cases}\right] 
+        \Rightarrow 
+        X = s\begin{pmatrix}
+            9 \\ 4 \\ 1 \\ 0
+        \end{pmatrix}
+        + 
+        t\begin{pmatrix}
+            -7 \\ -3 \\ 0 \\ 1
+        \end{pmatrix}
+    \]
+\end{example}
+
+\begin{example}{}{}
+    Consider $\mathcal{T}$ given by $A\vec{X} \mapsto \vec{B}$ and determine if $\vec{b} = \begin{pmatrix}
+        -1 \\ 1 \\ 0
+    \end{pmatrix} \in \mathcal{T}^{\text{img}}$, where $A$ is the same matrix from the above example. Notice that all this questions is really asking is if the system $A\vec{x} = \vec{b}$ is consistent. We can figure this out fairly easily:
+    \[
+        \begin{amatrix}{1}
+            A & b
+        \end{amatrix} 
+        = 
+        \begin{amatrix}{4}
+            1 & -4 & 7 & -5 & -1 \\
+            0 & 1 & -4 & 3 & 1 \\
+            2 & -6 & 6 & -4 & 0
+        \end{amatrix}
+        \xrightarrow[]{\text{ERO}}
+        \begin{amatrix}{4}
+            1 & -4 & 7 & -5 & -1 \\
+            0 & 1 & -4 & 3 & 1\\
+            0 & 0 & 0 & 0 & 1
+        \end{amatrix}
+    \]
+    $\therefore$ the system is consistent so $b \in \mathcal{T}^{\text{img}}$
+\end{example}
