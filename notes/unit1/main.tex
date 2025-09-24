@@ -11,12 +11,14 @@ A system of linear equations is when you have more than 1 equation with more tha
             2x_1 + x_2 &= 4
         \end{cases}
     \]
-    \begin{align*}
-        x_1 + 2x_2 = 5 &\Rightarrow x_1 = 5-2x_2 \\
-        2x_1 + x_2 = 4 &\Rightarrow 2(5-2x_2) + x_2 = 4 \Rightarrow 10-3x_2=4 \\ 
-        &\Rightarrow x_2=2 \\
-        &\Rightarrow x_1 = 1
-    \end{align*}
+    \begin{solution}
+        \begin{align*}
+            x_1 + 2x_2 = 5 &\Rightarrow x_1 = 5-2x_2 \\
+            2x_1 + x_2 = 4 &\Rightarrow 2(5-2x_2) + x_2 = 4 \Rightarrow 10-3x_2=4 \\ 
+            &\Rightarrow x_2=2 \\
+            &\Rightarrow x_1 = 1
+        \end{align*}
+    \end{solution}
 \end{example}
 
 Note that the solution to the previous system $(x_1, x_2) = (1, 2)$ also corresponds to the point of intersection of the lines that each equation represents. This then implies that non-parallel lines have a single solution, paralell lines have no solutions, and scalar multiples of the same line have infinitely many solutions.
@@ -71,13 +73,15 @@ Note that the solution to the previous system $(x_1, x_2) = (1, 2)$ also corresp
         E_1 &= x_1 + 2x_2 = 5 \\
         E_2 &= 2x_1 + x_2 = 4
     \end{cases}\]
-    \begin{align*}
-        -2E_1 &= -2x_1 - 4x_2 = -10 \\
-        E_2 - 2E_1 &= (2x_1 - x_2) - 2x_1 - 4x_2 = 4-10 \\
-        &\Rightarrow -3x_2 = -6 \\
-        &\Rightarrow x_2 = 2 \\
-        &\Rightarrow x_1 = 1
-    \end{align*}
+    \begin{solution}
+        \begin{align*}
+            -2E_1 &= -2x_1 - 4x_2 = -10 \\
+            E_2 - 2E_1 &= (2x_1 - x_2) - 2x_1 - 4x_2 = 4-10 \\
+            &\Rightarrow -3x_2 = -6 \\
+            &\Rightarrow x_2 = 2 \\
+            &\Rightarrow x_1 = 1
+        \end{align*}
+    \end{solution}
 \end{example}
 
 \begin{defbox}{Matricies}
@@ -145,7 +149,6 @@ Thus allowing us to reach the same final answer with a lot less hassle.
 
 A matrix can also be put in RREF (reduced row echelon form) if it is alreay in REF, each pivot is $1$, and the only non-zero element in the pivot column is the pivot. This would be $A_{\text{RREF}}$. Now, lets try to combine all we've done by applying basic ERO to a simple matrix to put it in REF. 
 
-
 \begin{example}{Basic REF}{ref}
     Consider the system 
     \[
@@ -154,96 +157,112 @@ A matrix can also be put in RREF (reduced row echelon form) if it is alreay in R
             2x_1 + x_2 = 4
         \end{cases} 
     \]
-    It's augmented matrix can be put into REF as follows
-    \[
-        \begin{amatrix}{1}
-            A & B
-        \end{amatrix}
-        = 
-        \begin{amatrix}{2}
-            1 & 2 & 5 \\
-            2 & 1 & 4
-        \end{amatrix}
-        \xrightarrow[R_2 \rightarrow R_2 - 2R_1]{} 
-        \begin{amatrix}{2}
-            1 & 2 & 5 \\
-            0 & -3 & -6
-        \end{amatrix}
-        = 
-        \begin{amatrix}{1}
-            A & B
-        \end{amatrix}_{\text{REF}}
-    \]
+    Find $\begin{amatrix}{1} A & B \end{amatrix}$
+    \begin{solution}
+        It's augmented matrix can be put into REF as follows
+        \[
+            \begin{amatrix}{1}
+                A & B
+            \end{amatrix}
+            = 
+            \begin{amatrix}{2}
+                1 & 2 & 5 \\
+                2 & 1 & 4
+            \end{amatrix}
+            \xrightarrow[R_2 \rightarrow R_2 - 2R_1]{} 
+            \begin{amatrix}{2}
+                1 & 2 & 5 \\
+                0 & -3 & -6
+            \end{amatrix}
+            = 
+            \begin{amatrix}{1}
+                A & B
+            \end{amatrix}_{\text{REF}}
+        \]
+    \end{solution}
 \end{example}
 
 \begin{example}{Basic RREF}{}
-    Consider again the system from ex~(\ref{th:ref}) and notice we can put it into RREF as follows:
-    \[
-        \begin{amatrix}{1}
-            A & B
-        \end{amatrix}_{\text{REF}}
-        =  
-        \begin{amatrix}{2}
-            1 & 2 & 5 \\
-            0 & -3 & -6
-        \end{amatrix}
-        \xrightarrow[R_2 \rightarrow -\frac{1}{3}R_2]{} 
-        \begin{amatrix}{2}
-            1 & 2 & 5 \\
-            0 & 1 & 2
-        \end{amatrix}
-        \xrightarrow[R_1 \rightarrow R_1 - 2R_2]{} 
-        \begin{amatrix}{2}
-            1 & 0 & 1 \\
-            0 & 1 & 2
-        \end{amatrix}
-        = 
-        \begin{amatrix}{1}
-            A & B
-        \end{amatrix}_{\text{RREF}}
-    \]
+    Consider again the system from ex~(\ref{th:ref}) and find the RREF of the augmented matrix.
+    \begin{solution} 
+        Notice we can put it into RREF as follows:
+        \[
+            \begin{amatrix}{1}
+                A & B
+            \end{amatrix}_{\text{REF}}
+            =  
+            \begin{amatrix}{2}
+                1 & 2 & 5 \\
+                0 & -3 & -6
+            \end{amatrix}
+            \xrightarrow[R_2 \rightarrow -\frac{1}{3}R_2]{} 
+            \begin{amatrix}{2}
+                1 & 2 & 5 \\
+                0 & 1 & 2
+            \end{amatrix}
+            \xrightarrow[R_1 \rightarrow R_1 - 2R_2]{} 
+            \begin{amatrix}{2}
+                1 & 0 & 1 \\
+                0 & 1 & 2
+            \end{amatrix}
+            = 
+            \begin{amatrix}{1}
+                A & B
+            \end{amatrix}_{\text{RREF}}
+        \]
+    \end{solution}
 \end{example}
 
 It's important to note that the RREF for any given matrix is \textit{unique}.
 
 \begin{example}{Solve the System}{}
-    \begin{align*}
+    Solve the system 
+    \[
         \begin{cases}
             x_1 + 2x_2 - x_3 &= 2 \\
             2x_1 + x_2 + x_3 &= 1 \\ 
             x_1 - x_2 + 2x_3 &= -1
         \end{cases}
-        = 
-        \begin{amatrix}{3}
-            1 & 2 & -1 & 2 \\
-            2 & 1 & 1 & 1 \\
-            1 & -1 & 2 & -1
-        \end{amatrix} &\xrightarrow[\substack{R_2 \to R_2 - 2R_1 \\ R_3 \to R_3 - R_1}]{} 
-        \begin{amatrix}{3}
-            1 & 2 & -1 & 2 \\
-            0 & -3 & 3 & -3 \\
-            0 & -3 & 3 & -3
-        \end{amatrix} \\
-        &\xrightarrow[R_3 \to R_3 - R_2]{}
-        \begin{amatrix}{3}
-            1 & 2 & -1 & 2 \\
-            0 & -3 & 3 & -3 \\
-            0 & 0 & 0 & 0
-        \end{amatrix} \\
-    \end{align*}
-    Now because there is no pivot in the third column of our matrix, $x_3$ is what's known as a `free variable'. All this means is that $x_3$ can take on any value, we'll notate this by $x_3 = t$ with $t \in \RR$.
-    \begin{align*}
-        &\Rightarrow\begin{cases}
-            x_3 &= t \\
-           -3x_2 + 3x_3 &= -3 \\
-           x_1 + 2x_2 - x_3 &= 2
-        \end{cases} \\
-        &\Rightarrow X_{\text{gen}} = \begin{pmatrix}
-            -t \\
-            1 + t \\
-            t
-        \end{pmatrix}
-    \end{align*}
+    \]
+    \begin{solution}
+        \begin{align*}
+            \begin{cases}
+                x_1 + 2x_2 - x_3 &= 2 \\
+                2x_1 + x_2 + x_3 &= 1 \\ 
+                x_1 - x_2 + 2x_3 &= -1
+            \end{cases}
+            = 
+            \begin{amatrix}{3}
+                1 & 2 & -1 & 2 \\
+                2 & 1 & 1 & 1 \\
+                1 & -1 & 2 & -1
+            \end{amatrix} &\xrightarrow[\substack{R_2 \to R_2 - 2R_1 \\ R_3 \to R_3 - R_1}]{} 
+            \begin{amatrix}{3}
+                1 & 2 & -1 & 2 \\
+                0 & -3 & 3 & -3 \\
+                0 & -3 & 3 & -3
+            \end{amatrix} \\
+            &\xrightarrow[R_3 \to R_3 - R_2]{}
+            \begin{amatrix}{3}
+                1 & 2 & -1 & 2 \\
+                0 & -3 & 3 & -3 \\
+                0 & 0 & 0 & 0
+            \end{amatrix} \\
+        \end{align*}
+        Now because there is no pivot in the third column of our matrix, $x_3$ is what's known as a `free variable'. All this means is that $x_3$ can take on any value, we'll notate this by $x_3 = t$ with $t \in \RR$.
+        \begin{align*}
+            &\Rightarrow\begin{cases}
+                x_3 &= t \\
+            -3x_2 + 3x_3 &= -3 \\
+            x_1 + 2x_2 - x_3 &= 2
+            \end{cases} \\
+            &\Rightarrow X_{\text{gen}} = \begin{pmatrix}
+                -t \\
+                1 + t \\
+                t
+            \end{pmatrix}
+        \end{align*}
+    \end{solution}
 \end{example}
 
 \subsection{Lecture 2: Vector and Matrix Equations [1.3-1.4]}
@@ -325,18 +344,20 @@ Since we can represent vectors as matricies, we can perform the standard matrix 
         \end{pmatrix}
     \]
     Find $AB$.
-    \[ 
-        \underset{2 \times 1}{AB} = 
-        \begin{pmatrix}
-            (1 * 2) + (-1 * 4) + (2 * 7) \\
-            (3 * 2) + (4 * 4) + (5 * 7) 
-        \end{pmatrix}
-        = 
-        \begin{pmatrix}
-            12 \\
-            57
-        \end{pmatrix}
-    \]
+    \begin{solution}
+        \[ 
+            \underset{2 \times 1}{AB} = 
+            \begin{pmatrix}
+                (1 * 2) + (-1 * 4) + (2 * 7) \\
+                (3 * 2) + (4 * 4) + (5 * 7) 
+            \end{pmatrix}
+            = 
+            \begin{pmatrix}
+                12 \\
+                57
+            \end{pmatrix}
+        \]
+    \end{solution}
 \end{example}
 
 It's important to note that an alternative form of defining matrix multiplication is as follows:
@@ -1216,4 +1237,289 @@ Note that for the \textbf{shear} transformation, the $y$-coordinate ($\hat{\jmat
         \end{amatrix}
     \]
     $\therefore$ the system is consistent so $b \in \mathcal{T}^{\text{img}}$
+\end{example}
+
+\newpage
+\subsection{Lecture 7: The Matrix of a Linear Transformation [1.9]}
+
+Recall that a function $\mathcal{T}\left(X\right): \RR^{n} \to \RR^{m}$ is called a linear tranformation if
+\begin{enumerate}
+    \item $\mathcal{T}\left(X + Y\right) = \mathcal{T}\left(X\right) + \mathcal{T}\left(Y\right)$, and
+    \item $\mathcal{T}\left(kX\right) = k\mathcal{T}\left(X\right)$ for $k \in \RR$
+\end{enumerate}
+It's important to notice the similarities to the properities of matrix multiplication:
+\begin{enumerate}
+    \item $\underset{m \times n}{A}\left(\underset{n \times 1}{X} + \underset{n \times 1}{Y}\right) = AX + AY$
+    \item $\underset{m \times n}{A}\left(k\underset{n \times 1}{X}\right) = kAX$
+\end{enumerate}
+
+\begin{thm}{}{}
+    Let $\mathcal{T}: \RR^{n} \to \RR^{m}$ be a linear transformation. Then, there exists a matrix, $\underset{m \times n}{A}$ such that 
+    \[\mathcal{T}\left(\vec{x}\right) = A\vec{x}\]
+    for all $\vec{x}\in\RR^{n}$
+    \begin{proof}
+        For any matrix $X$, 
+        \[X = I_{n}X = x_{1}e_{1} + x_{2}e_{2} + \cdots + x_{n}e_{n}\]
+        Then, 
+        \begin{align*}
+            \mathcal{T}(\vec{x}) &= \mathcal{T}\left(x_{1}e_{1} + x_{2}e_{2} + \cdots + x_{n}e_{n}\right) \\ 
+            &= \mathcal{T}\left(x_{1}e_{1}\right) + \mathcal{T}\left(x_{2}e_{2}\right) + \cdots + \mathcal{T}\left(x_{n}e_{n}\right) \\ 
+            &= x_1\mathcal{T}\left(e_1\right) + x_2\mathcal{T}\left(e_2\right) + \cdots + x_n\mathcal{T}\left(e_n\right) \\
+            &= \begin{pmatrix}
+                \left[\mathcal{T}\left(e_1\right)\right] & \left[\mathcal{T}\left(e_2\right)\right] \cdots & \left[\mathcal{T}\left(e_n\right)\right]
+            \end{pmatrix}
+            \begin{pmatrix}
+                x_1 \\ x_2 \\ \vdots \\ x_n
+            \end{pmatrix} \\
+            &= A\vec{x}
+        \end{align*}
+    \end{proof}
+\end{thm}
+Note that $I_n$ is the identity matrix which is an $n \times n$ matrix in which every element is a $0$ except for elements, $a_{11}, a_{22}, \dots, a_{nn}$. Note as well, that $e_{i}$ is the $i$-th column of the identity matrix. For example, consider $I_2$ and $I_3$:
+\[
+    I_2 = \begin{pmatrix} 1 & 0 \\ 0 & 1\end{pmatrix} \text { and } I_3 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{pmatrix}
+\]
+Then $e_1$ for $I_2$ would be $\begin{pmatrix} 1 \\ 0\end{pmatrix}$. Similarly, $e_3$ for $I_3$ would be $\begin{pmatrix} 0 \\ 0 \\ 1\end{pmatrix}$
+
+\begin{defbox}{One-to-one and Onto}{}
+    Consider a linear transformation $\mathcal{T}:\RR^{n} \to \RR^{m}$ given by the map $\vec{x} \mapsto \left(\underset{m \times n}{A}\right)\vec{x}$. Then, $\mathcal{T}$ is called \textbf{onto} when there exists at least one vector $\vec{x}\in\RR^{n}$ for \textit{any} vector $\vec{B}\in\RR^{m}$. $\mathcal{T}$ is called \textbf{one-to-one} when $A\vec{x}=\vec{B}$ has only one solution.
+\end{defbox}
+
+One way to think about it is that $\mathcal{T}$ is \textbf{onto} if any vector in $\RR^{m}$ can be `made' by applying the transformation to a vector $\vec{x}$. $\mathcal{T}$ is \textbf{one-to-one} if for any solution to the equation $A\vec{x}=\vec{B}$, the matrix $\vec{x}$ is the sole, unique, solution to that equation. Note as well, that a transformation can be \underline{both} one-to-one and onto. 
+
+\begin{impbox}{Determining if a tranformation is one-to-one or onto}{}
+    Consider a linear transformation $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$ for a matrix $\underset{m\times\,n}{A}$. 
+    \begin{itemize}
+        \item If $\text{rank}\left(A\right) = m$ (implying that $m \leq n$), then each row in $A$ contains a pivot which ensures that the augmented matrix $\begin{amatrix}{1} A & B\end{amatrix}_{\text{REF}}$ will have no pivots in the final column. In other words, the system $A\vec{x} = \vec{B}$ will be consisten for all $\vec{B}\in\RR^{m}$ and $\mathcal{T}$ is \textbf{onto}.
+        \item If $\text{rank}\left(A\right) = n$ (implying $n \leq m$), then each column in $A$ contains a pivot which ensures that there are no free variables in the system $A\vec{x}=\vec{B}$. In other words, any solution to $A\vec{x}=\vec{B}$ will be unique and $\mathcal{T}$ is \textbf{one-to-one}.
+    \end{itemize}
+\end{impbox}
+
+\begin{example}{Determine if a Transformation is One-to-one or Onto}{}
+    Consider the transformation $\mathcal{T}: \RR^{4} \to \RR^{3}$ given by
+    \[
+        \mathcal{T}\left(\vec{x}\right) = \begin{pmatrix}
+            2x_1 + x_2 - x_3 + x_4 \\
+            x_1 + 3x_2 + 5x_3 - 2x_4 \\
+            3x_1 - x_2 + 2x_3 + 3x_4
+        \end{pmatrix} 
+    \]
+    determine if $\mathcal{T}$ is one-to-one, onto, both, or neither.
+    \begin{solution}
+        We can start by rewriting $\mathcal{T}$ in the form $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$:
+        \[
+            \mathcal{T}\left(\vec{x}\right) = \begin{pmatrix}
+                2 & 1 & -1 & 1 \\
+                1 & 3 & 5 & -2 \\
+                3 & -1 & 2 & 3
+            \end{pmatrix}
+            \begin{pmatrix}
+                x_1 \\ x_2 \\ x_3 \\ x_4
+            \end{pmatrix}
+            = A\vec{x}
+        \]
+        Since $A$ is a $3 \times 4$ matrix, $\text{rank}\left(A\right) \leq 3 \therefore \mathcal{T}$ \underline{cannot be one-to-one}. Now, as per usual, in order to determine the rank of $A$ we must find $A_{\text{REF}}$. We can start with $A \xrightarrow{R_1\to\,R_2}$
+        \[
+            \begin{pmatrix}
+                1 & 3 & 5 & -2 \\
+                2 & 1 & -1 & 1 \\
+                3 & -1 & 2 & 3
+            \end{pmatrix}
+            \xrightarrow[R_3 \to R_3 - 3R_1]{R_2 \to R_2 - 2R_1} 
+            \begin{pmatrix}
+                1 & 3 & 5 & -2 \\
+                0 & -5 & -11 & 5 \\
+                0 & -10 & -13 & 9
+            \end{pmatrix}
+            \xrightarrow{R_3 \to R_3 - 2R_2}
+            \begin{pmatrix}
+                1 & 3 & 5 & -2 \\
+                0 & -5 & -11 & 5 \\
+                0 & 0 & 9 & -1
+            \end{pmatrix}
+        \]
+        Thus, $\text{rank}\left(A\right) = 3 = n$ so $\mathcal{T}$ is \textbf{onto}
+    \end{solution}
+\end{example}
+
+\begin{defbox}{Rotation Transformations}{}
+    Consider vectors $\vec{x}$ which has an angle $\alpha$ from the $x$-axis and $\vec{x'}$ which has an angle $\alpha + \theta$ from the $x$-axis. There exists a transformation $\mathcal{T}$ such that $\mathcal{T}(\vec{x}) = \vec{x'}$. Just like all linear transformations, $\mathcal{T}$ can be written in the form $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$ where 
+    \[A = \underbrace{\begin{pmatrix}
+        \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta
+    \end{pmatrix}}_{\text{Rotation Matrix}}\]
+    Thus, if $\vec{x} = \begin{pmatrix} x \\ y \end{pmatrix}$ and $\vec{x'} = \begin{pmatrix} x' \\ y' \end{pmatrix}$ then, 
+    \[
+        \mathcal{T}\left(\vec{x}\right) = 
+        \begin{pmatrix}
+            \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta
+        \end{pmatrix}
+        \begin{pmatrix}
+            x \\ y 
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            x' \\ y'
+        \end{pmatrix}
+    \]
+\end{defbox}
+
+If you're curious where the definition of the rotation matrix comes from, consider the two vectors $\vec{x} = \begin{pmatrix} x \\ y \end{pmatrix}$ and $\vec{x'} = \begin{pmatrix} x' \\ y' \end{pmatrix}$:
+
+\begin{center}
+    \begin{tikzpicture}
+        \begin{axis}[
+            grid = major,
+            axis lines = center,
+            xmin = 0,
+            xmax = 5,
+            ymin = 0,
+            ymax = 5,
+            xticklabels = {},
+            yticklabels = {},
+            xlabel = {$x$},
+            ylabel = {$y$},
+        ]
+
+        \node[circle, fill, inner sep=1.5pt] (A) at (axis cs: 3, 3) {};
+        \node[] at (axis cs: 3.2, 3.2) [] {$\vec{x}$};
+
+        \node[circle, fill, inner sep=1.5pt] (B) at (axis cs: 1, 4) {};
+        \node[] at (axis cs: 1.15, 4.28) [] {$\vec{x'}$};
+
+        \addplot[line width=1.5pt, dashed, domain=0:3]{x};
+        \addplot[line width=1.5pt, dashed, domain=0:1]{4*x};
+
+        \draw[thick, dotted, green, line width=1.5pt] (A) to [bend right=20] (B);
+
+        \draw[thick, red, line width=1.5pt] (axis cs: 1.5, 0) to [bend right=20] (axis cs: 1, 1);
+
+        \draw[thick, blue, line width=1.5pt] (axis cs: 1, 1) to [bend right=20] (axis cs: 2/5, 8/5);
+
+        \node[] at (axis cs: 1.5, .6) [] {$\alpha$};
+        \node[] at (axis cs: .77, 1.7) [] {$\theta$};
+            
+        \end{axis}
+    \end{tikzpicture}
+\end{center}
+We can represent $\vec{x}$ in polar coordinates as
+\[
+    x = r\cos\alpha \text { and } y = r\sin\alpha
+\]
+Then, 
+\[
+    x' = r\cos\left(\alpha + \theta\right) \text{ and } y' = r\sin\left(\alpha + \theta\right)
+\]
+This gives,
+\begin{align*}
+    x' &= r\cos\left(\alpha + \theta\right) = \overbrace{r\cos\alpha}^{x}\cos\theta - \overbrace{r\sin\alpha}^{y}\sin\theta = x\cos\theta - y\sin\theta \\
+    y' &= \underbrace{r\sin\alpha}_{y}\cos\theta + \underbrace{r\cos\alpha}_{x}\sin\theta = x\sin\theta + y\sin\theta \\
+    &\Rightarrow \begin{pmatrix} x' \\ y' \end{pmatrix} = 
+    \begin{pmatrix}
+        \cos\theta & -\sin\theta \\ 
+        \sin\theta & \cos\theta
+    \end{pmatrix}
+    \begin{pmatrix}
+        x \\ y
+    \end{pmatrix}
+\end{align*}
+
+\newpage 
+
+\begin{example}{Prove $\mathcal{T}$ is a Linear Transformation}{}
+    Consider a transformation $\mathcal{T}$ such that 
+    \[\mathcal{T}\left(\vec{x}\right) = 
+    \begin{pmatrix}
+        0 \\ x_1 + x_2 \\ x_2 + x_3 \\ x_3 + x_4
+    \end{pmatrix}\]
+    determine if $\mathcal{T}$ is a linear transformation.
+    \begin{solution}
+        Notice that $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$ for 
+        \[
+            \underset{4 \times 4}{A} = \begin{pmatrix}
+                0 & 0 & 0 & 0 \\
+                1 & 1 & 0 & 0 \\
+                0 & 1 & 1 & 0 \\
+                0 & 0 & 1 & 1
+            \end{pmatrix}
+            \text{ and }
+            \underset{4 \times 1}{\vec{x}} = \begin{pmatrix}
+                x_1 \\ x_2 \\ x_3 \\ x_4
+            \end{pmatrix}
+        \]
+        Because $\mathcal{T}$ can be put in the form $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$, it must be a linear transformation.
+    \end{solution}
+\end{example}
+
+\begin{example}{Determine if $\mathcal{T}$ is One-to-one or Onto}{}
+    Consider the linear transformation $\mathcal{T}$ from the above example. Determine if $\mathcal{T}$ is one-to-one, onto, both, or neither.
+    \begin{solution}
+        \[
+            \underset{4 \times 4}{A} = \begin{pmatrix}
+                0 & 0 & 0 & 0 \\
+                1 & 1 & 0 & 0 \\
+                0 & 1 & 1 & 0 \\
+                0 & 0 & 1 & 1
+            \end{pmatrix} 
+            \xrightarrow{R_1 \leftrightarrow R_4}
+            \begin{pmatrix}
+                1 & 1 & 0 & 0 \\
+                0 & 1 & 1 & 0 \\
+                0 & 0 & 1 & 1 \\
+                0 & 0 & 0 & 0 
+            \end{pmatrix} 
+        \]
+        Thus, $\text{rank}\left(A\right) \ne 4 = m = n$ so $\mathcal{T}$ is neither one-to-one nor onto.
+    \end{solution}
+\end{example}
+
+\begin{example}{Find the Matrix $A$}{}
+    Given that $\mathcal{T}$ is a linear transformation such that 
+    \[
+        \mathcal{T}\left(\vec{x}\right) = 
+        A\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = 
+        \begin{pmatrix}
+            2x_1 - 3x_2 \\
+            4x_1 \\
+            x_1 - x_2 + x_3
+        \end{pmatrix}
+    \]
+    determine the value of the matrix $A$.
+    \begin{solution}
+        We can find $A$ as the coefficent matrix of $\mathcal{T}$:
+        \[
+            A = \begin{pmatrix}
+               2 & -3 & 0 \\
+               4 & 0 & 0 \\
+               1 & -1 & 1 
+            \end{pmatrix}
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}{Determine if $\mathcal{T}$ is One-to-one or Onto}{}
+    Consider the linear transformation $\mathcal{T}\left(\vec{x}\right) = A\vec{x}$ such that $A$ is the matrix in the above example. Determine if $\mathcal{T}$ is one-to-one, onto, both, or neither.
+    \begin{solution}
+        We can easily figure this out by looking at the rank of $A_{\text{REF}}$. 
+        \[
+            A \xrightarrow[R_2 \leftrightarrow R_1]{R_2 \to \frac{1}{4}R_2}
+            \begin{pmatrix}
+                1 & 0 & 0 \\
+                2 & -3 & 0 \\
+                1 & -1 & 1
+            \end{pmatrix}
+            \xrightarrow[R_3 \to R_3 - R_1]{R_2 \to R_2 - 2R_1}
+            \begin{pmatrix}
+                1 & 0 & 0 \\
+                0 & -3 & 0 \\
+                0 & -1 & 1
+            \end{pmatrix}
+            \xrightarrow[R_2 \to -\frac{1}{3}R_3]{R_3 \to R_3 + R_2}
+            \begin{pmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                0 & 0 & 1
+            \end{pmatrix}
+        \]
+        Thus, $\text{rank}\left(A_{\text{RREF}}\right) = 3 = m = n$ so $\mathcal{T}$ is both one-to-one and onto.
+    \end{solution}
 \end{example}
