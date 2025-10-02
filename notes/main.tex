@@ -22,6 +22,7 @@
 \newcommand{\RR}{\mathbb R}
 \newcommand{\braces}[1]{\ensuremath{\left\{#1 \right\}}}
 \newcommand{\Span}[1]{\ensuremath\text{Span}\braces{#1}}
+\newcommand{\rank}[1]{\ensuremath\text{rank}\left(#1\right)}
 
 \hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
 
@@ -38,6 +39,13 @@
 
 \newenvironment{amatrix}[1]{%
   \left(\begin{array}{@{}*{#1}{c}|c@{}}
+}{%
+  \end{array}\right)
+}
+
+\newenvironment{Lamatrix}[2]{%
+  % #1 = total columns, #2 = split position (vertical line after #2-th column)
+  \left(\begin{array}{@{}*{\the\numexpr#2\relax}{c}|*{\the\numexpr#1-#2\relax}{c}@{}}%
 }{%
   \end{array}\right)
 }
@@ -70,5 +78,7 @@
     \newpage
 
     \include{unit1/main}
+
+    \include{unit2/main}
 
 \end{document}
