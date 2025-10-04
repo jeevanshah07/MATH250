@@ -572,3 +572,184 @@ It should follow from the last line that $\det{A} \neq 0 \Leftrightarrow A^{-1}$
         Thus, $\rank{A}=4 \therefore A$ \underline{is} invertible.
     \end{solution}
 \end{example}
+
+\subsection{Lecture 10: Review for Midterm 1}
+\subsubsection*{Systems of Equations}
+\textit{Homogenous} systems of equations are systems in the form $A\vec{x}=\vec{0}$. These systems always contain at least one solution, $\vec{x} = \vec{0}$ (known as the trivial solution). \textit{Non-Homogenous} systems of equations are system in the form $A\vec{x}=\vec{b}$ where $\vec{b} \ne \vec{0}$.
+
+\begin{example}{Solve the System}{}
+    \[\begin{cases}
+        2x_1 + x_2 - x_3 &= 4 \\
+        x_1 - 2x_2 + x_3 &= 2
+    \end{cases}\]
+    \begin{solution}
+        We can form an augmented matrix and use elementary row operations to find a solution:
+        \[
+            \begin{Lamatrix}{4}{3}
+                2 & 1 & -1 & 4 \\
+                1 & -2 & 1 & 2 
+            \end{Lamatrix} 
+            \xrightarrow{R_1 \leftrightarrow R_2}
+            \begin{Lamatrix}{4}{3}
+                1 & -2 & 1 & 2 \\
+                2 & 1 & -1 & 4 
+            \end{Lamatrix} 
+            \xrightarrow{R_2 \to R_2 - 2R_1}
+            \begin{Lamatrix}{4}{3}
+                1 & -2 & 1 & 2 \\
+                0 & 5 & -3 & 0 
+            \end{Lamatrix} 
+        \]
+        Now, because there is no pivot in the third column, $x_3$ is a free variable: let $x_3 = 5t$ for $t \in \RR$. Then, we can back substitute from the matrix to the equations to get: 
+        \[
+            \left.\begin{cases}
+                5x_2 - 3x_3 &= 0 \\
+                x_1 - 2x_2 + x_3 &= 2
+            \end{cases}\right]
+            \Rightarrow 
+            x_2 = 3t \text{ and } x_1 = 2+t
+        \]
+        We can formally write our solution as follows:
+        \[
+            X_{\text{gen}} = \begin{pmatrix}
+                2 + t \\ 3t \\ 5t
+            \end{pmatrix}
+            = 
+            t\underbrace{\begin{pmatrix}
+                1 \\ 3 \\ 5
+            \end{pmatrix}}_{X_{\text{genhom}}}
+            + \overbrace{\begin{pmatrix}
+                2 \\ 0 \\ 0
+            \end{pmatrix}}^{X_p}
+        \]
+        Where $X_{\text{genhom}}$ is the general homogenous solution and $X_p$ is a particular solution. 
+    \end{solution}
+\end{example}
+
+A system is \textbf{consistent} if there exists at least one solution. $A\vec{x}=\vec{b}$ is consisten if the augmented matrix, $\left(A\,|\,B\right)_{\text{REF}}$ has no pivots in the final column. Equivalently: if $\rank{\underset{m\times\,n}{A}}=m$ then $A\vec{x}=\vec{b}$ is always consistent. We can note a few things from this fact. If $A\vec{x}=\vec{b}$ is consistent, then the span of the columns of $A$ is $\RR^{m}$. As well, consider a linear transformation $\mathcal{T}:\RR^{n}\to\,\RR^{m}$ given by the map $\vec{x} \mapsto A\vec{x}$, then $\mathcal{T}$ will be onto. If the system $A\vec{x}=\vec{b}$ has only a single solution, then $\rank{\underset{m\times\,n}{A}} = n$. Again, consider a linear transformation, $\mathcal{T}:\RR^{m}\to\,\RR^{n}$ given by the mapping $\vec{x}\mapsto\,A\vec{x}$, then $\mathcal{T}$ will be one-to-one. If a linear transformation is one-to-one \textbf{and} onto, then it is called invertible.
+
+\begin{impbox}{}{}
+    Recall that $\rank{\underset{m\times\,n}{A}} \leq \min\braces{m, n}$, so in order for a linear transformation to be both one-to-one and onto, $m$ must equal $n$ (in other words: $A$ must be a square matrix).
+\end{impbox}
+
+\subsubsection*{Span/Linear Dependence}
+Consider a set of vectors, $\braces{\vec{u_1}, \vec{u_2} \dots, \vec{u_k}}$. Then, the \textbf{span} of that set of vectors, denoted $\Span{\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}}$, is the set of all possible linear combinations of $\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}$: 
+\[
+    c_1\vec{u_1} + c_2\vec{u_2} + \cdots + c_k\vec{c_k} = AC, \hspace{0.2cm} 
+    A = \begin{pmatrix}
+        \left(\vec{u_1}\right) & \left(\vec{u_2}\right) & \cdots & \left(\vec{u_k}\right) 
+    \end{pmatrix}
+    \text{ and }
+    C = \begin{pmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_k
+    \end{pmatrix}
+\]
+The set $\braces{\vec{u_1}, \vec{u_2}, \dots, \vec{u_k}}$ is called the \textbf{generating set}.
+
+Consider $AC = \vec{0}$. If the only solution to $AC=\vec{0}$ is the trivial solution, then the vectors $\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k}$ are called \textbf{linearly independent}. If there exists a non-trivial solution to $AC=\vec{0}$, then the vectors are called \textbf{linearly dependent}. If the vectors are linearly dependent, then at least on vector in the generating set is redudant. We can determine which vector is redudant by finding $A_{\text{REF}}$ and noting that any columns without a pivot correspond to redudant vectors. Notice that we can easily determine if vectors are linearly independent or dependent simply by just finding $A_{\text{REF}}$. If $\rank{A_{\text{REF}}} < n$ then the columns will \underline{always be linearly dependent}. If $\rank{A_\text{REF}}=n$, then the columns will \underline{always be linearly independent}.
+
+\begin{example}{}{}
+    Determine a value of $r$ such that the set below is linearly dependent. 
+    \[
+        \braces{\begin{pmatrix}
+            1 \\ -1 \\ 3
+        \end{pmatrix}, 
+        \begin{pmatrix}
+            2 \\ 4 \\ -2
+        \end{pmatrix}, 
+        \begin{pmatrix}
+            r \\ 1 \\ 2
+        \end{pmatrix}}
+    \]
+    \begin{solution}
+        Consider 
+        \[
+            A = \begin{pmatrix}
+                1 & 2 & r \\
+                -1 & 4 & 1 \\
+                3 & -2 & 2
+            \end{pmatrix} 
+            \xrightarrow[R_3 \to R_3 - 3R_1]{R_2 \to R_2 + R1}
+            \begin{pmatrix}
+                1 & 2 & r \\
+                0 & 6 & 1 + r \\
+                0 & -8 & 2 - 3r
+            \end{pmatrix}
+            \xrightarrow{R_3 \to R_3 + \frac{8}{6}R_2}
+            \begin{pmatrix}
+                1 & 2 & r \\
+                0 & 6 & 1 + r \\
+                0 & 0 & \frac{10}{3} - \frac{5}{3}r
+            \end{pmatrix}
+            = A_{\text{REF}}
+        \]
+        Therefore, in order for $\rank{A_\text{REF}}$ to be less then $n=3$, $r$ must be equal to $2$. So, $\boxed{r=2}$
+    \end{solution}
+\end{example}
+
+\subsubsection*{Inverses}
+A $n\times\,n$ matrix is invertible if, and only if, it has rank $n$.
+
+\begin{example}{}{}
+    Let $A$ be the matrix below. Find $A^{-1}$ 
+    \[
+        A = \begin{pmatrix}
+            1 & -2 & 3 \\
+            2 & 1 & 1 \\
+            -1 & 0 & 2
+        \end{pmatrix} 
+    \]
+    \begin{solution}
+        We can find $A^{-1}$ by augmenting $A$ with $I$ and finding $\left(A\,|\,I\right)_\text{RREF}=\left(I\,|\,A^{-1}\right)$.
+        \begin{align*}
+            \left(A\,|\,I\right) = &\begin{Lamatrix}{9}{3}
+                1 & -2 & 3 & 1 & 0 & 0 \\
+                2 & 1 & 1 & 0 & 1 & 0 \\
+                -1 & 0 & 2 & 0 & 0 & 1 
+            \end{Lamatrix}
+            \xrightarrow[R_3\to\,R_3+R_1]{R_2\to\,R_2-2R_1}
+            \begin{Lamatrix}{9}{3}
+                1 & -2 & 3 & 1 & 0 & 0 \\
+                0 & 5 & -5 & -2 & 1 & 0 \\
+                0 & -2 & 5 & 1 & 0 & 1 
+            \end{Lamatrix} \\
+            \xrightarrow{R_2 \to \frac{1}{5}R_2}
+            &\begin{Lamatrix}{9}{3}
+                1 & -2 & 3 & 1 & 0 & 0 \\
+                0 & 1 & -1 & -\frac{2}{5} & \frac{1}{5} & 0 \\
+                0 & -2 & 5 & 1 & 0 & 1 
+            \end{Lamatrix} 
+            \xrightarrow{R_3 \to R_3 + 2R_2}
+            \begin{Lamatrix}{9}{3}
+                1 & -2 & 3 & 1 & 0 & 0 \\
+                0 & 1 & -1 & -\frac{2}{5} & \frac{1}{5} & 0 \\
+                0 & 0 & 3 & \frac{1}{5} & \frac{2}{5} & 1 
+            \end{Lamatrix} \\
+            \xrightarrow[R_3 \to \frac{1}{3}R_3]{R_1\to\,R_1 - R_3} 
+            &\begin{Lamatrix}{9}{3}
+                1 & -2 & 0 & \frac{4}{5} & -\frac{2}{5} & -1 \\
+                0 & 1 & -1 & -\frac{2}{5} & \frac{1}{5} & 0 \\
+                0 & 0 & 1 & \frac{1}{15} & \frac{2}{15} & \frac{1}{3} 
+            \end{Lamatrix}
+            \xrightarrow{R_2 \to R_2 + R_3}
+            \begin{Lamatrix}{9}{3}
+                1 & -2 & 0 & \frac{4}{5} & -\frac{2}{5} & -1 \\
+                0 & 1 & 0 & -\frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+                0 & 0 & 1 & \frac{1}{15} & \frac{2}{15} & \frac{1}{3} 
+            \end{Lamatrix} \\
+            \xrightarrow{R_1 \to R_1 + 2R_2}
+            &\begin{Lamatrix}{9}{3}
+                1 & 0 & 0 & \frac{2}{15} & \frac{4}{15} & -\frac{1}{3} \\
+                0 & 1 & 0 & -\frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+                0 & 0 & 1 & \frac{1}{15} & \frac{2}{15} & \frac{1}{3} 
+            \end{Lamatrix}
+            \Rightarrow
+            \boxed{A^{-1} = 
+            \begin{pmatrix}
+                \frac{2}{15} & \frac{4}{15} & -\frac{1}{3} \\
+                -\frac{1}{3} & \frac{1}{3} & \frac{1}{3} \\
+                \frac{1}{15} & \frac{2}{15} & \frac{1}{3}
+            \end{pmatrix}}
+        \end{align*}
+    \end{solution}
+\end{example}
