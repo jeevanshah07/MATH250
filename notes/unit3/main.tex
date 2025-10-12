@@ -1,0 +1,83 @@
+\section{Unit 3}
+\subsection{Lecture 12: Introduction to Determinants}
+
+\begin{impbox}{}{}
+    Before I start, I must note that I was not able to physically make it to lecture 12, so these notes are simply just a brief overview of concepts covered in lecture.
+\end{impbox}
+
+Back in section~(\ref{lec:9}) we mentioned that a $2 \times 2$ matrix is invertible if, and only if, its \textbf{determinant} was non-zero and we defined the determinant of a two by two matrix as 
+\[
+    \det{A} = ad - bc, \text{ where } A = \begin{pmatrix}
+        a & b \\ c & d
+    \end{pmatrix}
+\]
+The idea of the determinant is one that we will extend to any $n \times n$ matrix. Before we introduce a formal definition of and method for finding the determinant, we must first learn some new notation. 
+
+\begin{defbox}{Submatrix Notation}{}
+    Let $A$ be any $n \times n$ matrix. Then let $A_{ij}$ denote the submatrix obtained by removing the $i$-th row and $j$-th column from $A$. 
+\end{defbox}
+
+For example, consider a $4 \times 4$ matrix 
+\[
+    \underset{4\times\,4}{A} = \begin{pmatrix}
+        1 & 2 & 3 & 4 \\
+        2 & 3 & 4 & 5 \\
+        3 & 4 & 5 & 6 \\
+        4 & 5 & 6 & 7
+    \end{pmatrix}
+\]
+Then, 
+
+\begin{minipage}{0.3\linewidth}
+    \[
+        A_{11} = \begin{pmatrix}
+            3 & 4 & 5 \\
+            4 & 5 & 6 \\
+            5 & 6 & 7
+        \end{pmatrix}
+    \]    
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+    \[
+        A_{22} = \begin{pmatrix}
+            1 & 3 & 4 \\
+            3 & 5 & 6 \\
+            4 & 6 & 7
+        \end{pmatrix}
+    \]
+\end{minipage}
+\hfill
+\begin{minipage}{0.3\linewidth}
+   \[
+        A_{34} = \begin{pmatrix}
+            1 & 2 & 3 \\
+            2 & 3 & 4 \\
+            4 & 5 & 6
+        \end{pmatrix}
+   \] 
+\end{minipage}
+
+\begin{defbox}{The Determinant of a $n\times\,n$ Matrix}{}
+    For $n\geq\,2$ the \textbf{determinant} of a $n\times\,n$ matrix $A$, is 
+    \[\det{A} = a_{11}\det{A_{11}} - a_{12}\det{A_{12}} + \cdots + \left(-1\right)^{1+n}a_{1n}\det{A_{1n}} \\ = \sum_{j=1}^{n} \left(-1\right)^{1+j}\det{A_{1j}}\]
+\end{defbox}
+
+Note that the terms being added are occasionally written in a slightly different form: 
+\[
+    \det{A} = a_{11}C_{11} + a_{12}C_{12} + \cdots + a_{1n}C_{1n}, \text{ where } C_{ij} = \left(-1\right)^{i+j}\det{A_{ij}}
+\]
+The variable $C_{ij}$ is also known as that \textbf{$(i, j)$-cofactor} of $A$. With this in mind, we introduce the next theorem
+
+\begin{thm}{}{}
+    The determinant of a $n\times\,n$ matrix $A$ can be computed by a cofactor expansion across any row or down any column. The expansion across any row is 
+    \[\det{A} = a_{i1}C_{i1} + a_{i2}C_{i2} + \cdots + a_{in}C_{in}\]
+    and the expansion down any column is
+    \[\det{A} = a_{1j}C_{1j} + a_{2j}C_{2j} + \cdots + a_{nj}C_{nj}\]
+\end{thm}
+
+We also have the following theorm 
+
+\begin{thm}{}{}
+    For any triangular matrix $A$, $\det{A}$ is the product of all the entries on the main diagonal of $A$. 
+\end{thm}
