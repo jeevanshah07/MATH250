@@ -1,5 +1,5 @@
 \section{Unit 3}
-\subsection{Lecture 12: Introduction to Determinants}
+\subsection{Lecture 12: Introduction to Determinants [3.1]}
 
 \begin{impbox}{}{}
     Before I start, I must note that I was not able to physically make it to lecture 12, so these notes are simply just a brief overview of concepts covered in lecture.
@@ -81,3 +81,161 @@ We also have the following theorm
 \begin{thm}{}{}
     For any triangular matrix $A$, $\det{A}$ is the product of all the entries on the main diagonal of $A$. 
 \end{thm}
+
+\subsection{Lecture 13: Properties of Determinents [3.1]}
+
+\begin{defbox}{Cofactors}{}
+    Consider a matrix $\underset{n\times\,n}{A}$. Then 
+    \[
+        \det{A} = |A| = \underbrace{\sum_{j=1}^{n}a_{ij}C_{ij}}_{\text{$i$-th row expansion}} = \underbrace{\sum_{i=i}^{n}a_{ij}C_{ij}}_{\text{$j$-th column expansion}}
+    \]
+    where $C_{ij} = \left(-1\right)^{i+j}M_{ij}$. $M_{ij}$ is the matrix obtained by removing the $i$-th row and $j$-th column from $A$. $C_{ij}$ is called the \textbf{cofactor}.
+\end{defbox}
+
+\begin{impbox}{Properties of Determinents}{}
+    Consider an $n\times\,n$ matrix $A$, then
+    \begin{enumerate}
+        \item $\det{A} = \det{A}^{T}$
+        \item $A \xrightarrow{R_i \leftrightarrow R_j} \tilde{A} \Rightarrow \det{\tilde{A}} = -\det{A} \quad (i \neq j)$
+        \item $A \xrightarrow{R_i \to \lambda\,R_i} \tilde{A} \Rightarrow \det{\tilde{A}} = \lambda\det{A} \quad (\lambda \neq 0)$
+        \item ${A} \xrightarrow{\text{ERO}} \tilde{A} = \lambda\,A \Rightarrow \det{\tilde{A}} = \lambda^{n}\det{A}$
+        \item $A \xrightarrow{R_i \to R_i + \lambda\,R_j} \tilde{A} \Rightarrow \det{\tilde{A}} = \det{A} \quad (i \neq j)(\lambda\neq\,0)$
+        \item $\det\left(A_{\text{RREF}}\right)$ = $a_{11} \times a_{22} \times\,\cdots\,\times a_{nn}$
+        \item $\det{A} \neq 0 \Leftrightarrow \rank{A} = n$\label{prop:7}
+        \item $\det{A} \neq 0 \Leftrightarrow A^{-1}$ exists
+        \item $\det\left(AB\right) = \det\left(A\right)\det\left(B\right)$
+        \item $\det\left(A^{-1}\right) = \frac{1}{\det{A}}$
+        \item If $\det{A} \neq 0$ the, $A^{-1}$ = $\frac{C^{T}}{\det{A}}$ where $C$ is the matrix of cofactors
+    \end{enumerate}
+\end{impbox}
+
+One should note that it follows from property $(6)$ that the determinant of any triangular matrix is simply the product of the elements on the main diagonal. You should also note that properties $(7)$ and $(8)$ are equivalent statements since an $n\times\,n$ matrix is only invertible if, and only if, it has rank $n$.
+
+\begin{defbox}{Cramer's Rule}{}
+    Consider an $n\times\,n$ matrix $A$ and an $n\times\,1$ matrix $b$ such that $A\vec{x}=b$ and $\det{A}\neq\,0$. Then, the system has solutions
+    \[x_1 = \frac{\Delta_1}{\det{A}}, x_2 = \frac{\Delta_2}{\det{A}}, \cdots\,, x_n = \frac{\Delta_n}{\det{A}}\]
+    where each $\Delta_k$ is the determinent of the matrix obtained from $A$ by replacing the $k$-th column in $A$ with $b$.
+\end{defbox}
+
+\begin{example}{Solve the system using Cramer's Rule}{}
+    \[\begin{cases}
+        x_1 + 2X_2 - x_3 &= 4 \\
+        2x_1 - x_2 + x_3 &= 3 \\
+        -x_1 + x_3 &= 6
+    \end{cases}\]
+    \begin{solution}
+        Start wi th the following matricies: 
+        \[A = \begin{pmatrix}
+            1 & 2 & -1 \\
+            2 & -1 & 1 \\
+            -1 & 0 & 1
+        \end{pmatrix}
+        \quad 
+        B = \begin{pmatrix}
+            4 \\ 3 \\ 6
+        \end{pmatrix}\]
+        Then we can easily calculate $\det{A}$ as follows:
+        \[\det{A} = \begin{vmatrix}
+            5 & 0 & 1 \\
+            2 & -1 & 1 \\
+            -1 & 0 & 1
+        \end{vmatrix} = -\begin{vmatrix}
+            5 & 1 \\ -1 & 1
+        \end{vmatrix} = -6 \neq 0\]
+        Not only have we found that $\det{A}=-6$ but since it is non-zero we also know we can apply Cramer's rule. Now we can find $\Delta_1, \Delta_2, \Delta_3$:
+        \begin{align*}
+            \Delta_1 &= \begin{vmatrix}
+                4 & 2 & -1 \\
+                3 & -1 & 1 \\
+                6 & 0 & 1
+            \end{vmatrix}
+            = -4 \Rightarrow x_1 = \frac{-4}{-6} = \frac{2}{3} \\
+            \Delta_2 &= \begin{vmatrix}
+                1 & 4 & -1 \\
+                2 & 3 & 1 \\
+                -1 & 6 & 1
+            \end{vmatrix}
+            = -30 \Rightarrow x_2 = \frac{-30}{-6} = 5 \\
+            \Delta_3 &= \begin{vmatrix}
+                1 & 2 & 4 \\
+                2 & -1 & 3 \\
+                -1 & 0 & 6
+            \end{vmatrix}
+            = -40 \Rightarrow x_3 = \frac{-40}{-6} = \frac{20}{3}
+        \end{align*}
+        Thus, 
+        \[X = \begin{pmatrix}
+            \frac{2}{3} \\ 5 \\ \frac{20}{3}
+        \end{pmatrix}\]
+    \end{solution}
+\end{example}
+
+\begin{example}{Find $A^{-1}$ if it exists}{}
+    \[A = \begin{pmatrix}
+        5 & 3 \\ 2 & 1
+    \end{pmatrix}\] 
+    \begin{solution}
+        Start with $\det{A} = 5 - 6 = -1 \neq 0$ to verify that $A^{-1}$ does exist. Then we can find the cofactors as follows 
+        \[C_{11} = 1 \quad C_{12} = -2 \quad C_{21} = -3 \quad C_{22} = 5\]
+        Since $A$ is $2\times\,2$ each cofactor will simply be the only element remaning after removing the corresponding row and column, and then changing the sign based on $\left(-1\right)^{i-j}$. \\ We can now construct $A^{-1}$:
+        \[
+            C = \begin{pmatrix}
+                1 & -2 \\ -3 & 5
+            \end{pmatrix}
+            \Rightarrow 
+            C^{T} = \begin{pmatrix}
+                1 & -3 \\
+                -2 & 5
+            \end{pmatrix}
+            \Rightarrow
+            A^{-1} = -\begin{pmatrix}
+                1 & -3 \\ -2 ^ 5 
+            \end{pmatrix}
+            = \begin{pmatrix}
+                -1 & 3 \\ 2 & -5
+            \end{pmatrix}
+        \]
+        We can easily verify this is correct using the formula for the inverse of a $2\times\,2$ matrix given in section~(\ref{2.2:formula})
+    \end{solution}
+\end{example}
+
+We will now note down a few of the important applications of determinants in math. \\ Consider two vectors $\vec{a} = \langle a_1, a_2, a_3\rangle$ and $\vec{b} = \langle b_1, b_2, b_3\rangle$. Then their cross product will be 
+\[
+    \vec{a} \times \vec{b} = \begin{vmatrix}
+        \hat{\imath} & \hat{\jmath} & \hat{k} \\
+        a_1 & a_2 & a_3 \\
+        b_1 & b_2 & b_3
+    \end{vmatrix}
+\]
+Now, consider a third vector $\vec{c} = \langle c_1, c_2, c_3 \rangle$ and define the triple product of vectors to be $\vec{a} \cdot \left(\vec{b} \times \vec{c}\right)$. This can also be represented as the determinant of the matrix 
+\[
+    \begin{vmatrix}
+        a_1 & a_2 & a_3 \\
+        b_1 & b_2 & b_3 \\
+        c_1 & c_2 & c_3
+    \end{vmatrix}
+\]
+
+\begin{example}{Determine if the Given Set is Linearly Independent}{}
+    \[
+        \braces{\begin{pmatrix}
+            4 \\ 6 \\ 2
+        \end{pmatrix}, \begin{pmatrix}
+            -6 \\ 0 \\ 6
+        \end{pmatrix}, \begin{pmatrix}
+            -3 \\ -5 \\ -2
+        \end{pmatrix}} 
+    \]
+    \begin{solution}
+        Recalling property~(\ref{prop:7}), we know that we only have to find the determinant of the matrix with columns made up of vectors from the set and check that the determinant is non-zero. 
+        \[
+            \begin{vmatrix}
+                4 & -6 & -3 \\
+                6 & 0 & -5 \\
+                2 & 6 & -2
+            \end{vmatrix} 
+            = 4\left(30\right) - \left(-6\right)\left(-2\right) + \left(-3\right)\left(-36\right) = 120 - 12 - 108 = 0
+        \]
+        $\det{A} = 0 \therefore$ the set of vectors is \textbf{not} linearly independent.
+    \end{solution}
+\end{example}

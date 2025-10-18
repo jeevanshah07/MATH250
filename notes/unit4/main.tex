@@ -1,0 +1,296 @@
+\section{Unit 4}
+\subsection{Lecture 14: Vector Spaces and Subspaces [2.8/4.1]}
+
+Consider $\RR^{n}$ and vectors $\vec{u}, \vec{v} \in \RR^{n}$ and notice that the following properties always hold true:
+\begin{enumerate}
+    \item $\forall\,\vec{v}, \vec{u} \in \RR^{n}, \vec{u} + \vec{v} \in \RR^{n}$ (Closure under addition)
+    \item $\forall\,\vec{v} \in \RR^{n}\,,\forall\,\lambda \in \RR, \lambda\vec{v} \in \RR^{n}$ (Closure under scalar multiplication)
+    \item $\vec{0} \in \RR^{n}$ (Inclusion of the zero vector)
+\end{enumerate}
+If you are unaware, the symbol $\forall$ means `for all' and the symbold $\in$ means `contained in'. So, property (1) would be read `for all vectors $v$ and $u$ in $\RR^{n}$, their sum is also in $\RR^{n}$'. \\ Now these properties that $\RR^{n}$ has make it special. In fact because of these three properties we call $\RR^{n}$ a \textbf{vector space}. 
+
+\begin{defbox}{Subspaces of $\RR^{n}$}{}
+    Consider a subset of $\RR^{n}$, $W$. $W$ is a subspace of $\RR^{n}$ if 
+    \begin{enumerate}
+        \item $\forall\,\vec{v}, \vec{u} \in W, \vec{u} + \vec{v} \in W$ (Closure under addition)
+        \item $\forall\,\vec{v} \in W\,,\forall\,\lambda \in \RR, \lambda\vec{v} \in W$ (Closure under scalar multiplication)
+        \item $\vec{0} \in W$ (Inclusion of the zero vector)
+    \end{enumerate}
+\end{defbox}
+
+It's important to note that the \textit{trivial} subspaces of $\RR^n$ are $\RR^n$ itself and the zero subspace: $\braces{\vec{0}}$
+
+\begin{example}{}{}
+    If $V \subseteq \RR^{2} = \braces{\vec{v} \in \RR^{2} \mid \vec{v} \text{ is a unit vector}}$ (read `$V$ is a subset of $\RR^{2}$ such that $V$ is the set of all vectors in $\RR^{2}$ that are unit vectors'), is $V$ a subspace of $\RR^{2}$?
+
+    \begin{solution}
+        If we were to write out $V$ we would have 
+        \[
+            V = \braces{\begin{pmatrix}
+                1 \\ 0
+            \end{pmatrix}, \begin{pmatrix}
+                0 \\ 1
+            \end{pmatrix}} 
+        \]        
+        as these are the only unit vectors in $\RR^2$. From this it should be very clear that $\vec{0} \not\in V \therefore V$ is \textbf{not} a subspace of $\RR^2$.
+    \end{solution}
+\end{example}
+
+\begin{example}{}{}
+    If $V \subseteq \RR^{2} = \braces{\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \in \RR^{2} \mid x_1 + x_2 = 0}$, is $V$ a subspace of $\RR^2$?
+
+    \begin{solution}
+        Consider the parameterization $x_2 = t$ and $x_1 = 1-t$. Then 
+        \[
+            X = \begin{pmatrix}
+                1 - t \\ t
+            \end{pmatrix} 
+            = 
+            \begin{pmatrix}
+                1 \\ 0
+            \end{pmatrix}
+            + 
+            t\begin{pmatrix}
+                -1 \\ 1
+            \end{pmatrix}
+        \]
+        Once again, from this parameterization it should be easy to see that $\vec{0} \not\in V \therefore V$ is \textbf{not} a subspace of $\RR^2$.
+    \end{solution}
+\end{example}
+
+\begin{example}{}{}
+    Let $V = \braces{\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} \in \RR^{3} \mid x_1 + 2x_2 - x_3 = 0}$. Is $V$ a subspace of $\RR^{3}$?
+
+    \begin{solution}
+        Just like before consider the parameterization $x_2 = s, x_3 = t, x_1 = -2s + t$. This gives 
+        \[
+            X = \begin{pmatrix}
+                -2s + t \\ s \\ t
+            \end{pmatrix} 
+            = 
+            s\begin{pmatrix}
+                -2 \\ 1 \\ 0
+            \end{pmatrix}
+            + 
+            t\begin{pmatrix}
+                1 \\ 0 \\ 1
+            \end{pmatrix}
+            = 
+            \Span{\begin{pmatrix}
+                -2 \\ 1 \\ 0
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                1 \\ 0 \\1
+            \end{pmatrix}}
+        \]
+        From this we can see that all three properties are satisfied thus $V$ \textbf{is} a subspace of $\RR^{2}$. 
+    \end{solution}
+\end{example}
+
+You may notice that the above example invovles an equality to the Span of a set of vectors, despite said span not being mentioned once. Well, it is included because of the following theorem:
+
+\begin{thm}{}{}
+    The span of a set of vectors from $\RR^{n}$ is a subspace of $\RR^{n}$. 
+    \begin{proof}
+        Consider two vectors $\vec{v}, \vec{u} \in \RR^{n}$ and the span, $\Span{x_1, x_2, \cdots\,, x_k}$. Then $\vec{v}$ and $\vec{u}$ can be expressed as a linear combination as follows:
+        \begin{align*}
+            \vec{u} &= c_1\vec{x_1} + c_2\vec{x_2} + \cdots + c_k\vec{x_k} \\
+            \vec{v} &= \tilde{c_1}\vec{x_1} + \tilde{c_2}\vec{x_2} + \cdots + \tilde{c_k}\vec{x_k} \\
+            \Rightarrow \vec{u} + \vec{v} &= \left(c_1 + \tilde{c_1}\right)\vec{x_1} + \left(c_2 + \tilde{c_2}\right)\vec{x_2} + \cdots + \left(c_k + \tilde{c_k}\right)\vec{x_k}
+        \end{align*}
+        Then, $\vec{u}, \vec{v}, \vec{u+v} \in \Span{x_1, x_2, \cdots\, x_k}$ by the definition of span.
+    \end{proof} 
+\end{thm}
+
+\begin{example}{}{}
+    Consider the set of all polynomials of degree $3, P_3$. Is $P_3$ a vector space?
+
+    \begin{solution}
+        Let $P$ be any polynomial of degree $3$. Then 
+        \[
+            P\left(x\right) = a_0 + a_1x + a_2x^2 + a_3x^3 
+        \]
+        We can have $P\left(x\right) = 0$ if $\forall x\, a_0=a_1=a_2=a_3=0$, therefore $\vec{0} \in P_3$. \\ Now consider another polynomial $Q$ of degree three:
+        \[
+            Q\left(x\right) = b_0 + b_1x + b_2x^2 + b_3x^3 
+        \]
+        Then, 
+        \[
+            R\left(x\right) = P\left(x\right) + Q\left(x\right) = \left(a_0 + b_0\right) + \left(a_1 + b_1\right)x + \left(a_2 + b_2\right)x^2 + \left(a_3 + b_3\right)x^3 
+        \]
+        But, $R$ is still a degree $3$ polynomial, so $R\in\,P_3$, and thus $P_3$ is closed under addition. We can also consider any scalar $\lambda \in \RR$. Then 
+        \[
+            Q\left(x\right) = \lambda\,P\left(x\right) = \lambda\,a_0 + \lambda\,a_1x + \lambda\,a_2x^2 + \lambda\,a_3x^3 
+        \]
+        Again, $Q \in P_3$ because $Q$ is still a degree $3$ polynomial. Thus $P_3$ \textbf{is} a vector space. 
+    \end{solution}
+\end{example}
+
+One interesting thing comes when we consider vectors in $\RR^4$ and $P_3$. Notice that the general form for a vector in $\RR^{4}$ is 
+\[
+    \begin{pmatrix}
+        x_1 \\ x_2 \\ x_3 \\ x_4
+    \end{pmatrix}
+    = 
+    x_1 \begin{pmatrix}
+        1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix}
+    +
+    x_2 \begin{pmatrix}
+        0 \\ 1 \\ 0 \\ 0
+    \end{pmatrix}
+    + 
+    x_3 \begin{pmatrix}
+        0 \\ 0 \\ 1 \\ 0
+    \end{pmatrix}
+    +
+    x_4 \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ 1
+    \end{pmatrix}
+\]
+Now, consider the general (vector) form of any polynomial in $P_3$: 
+\[
+    \begin{pmatrix}
+        a_0 \\ a_1x \\ a_2x^2 \\ a_3x^3
+    \end{pmatrix}
+    = 
+    a_0 \begin{pmatrix}
+        1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix}
+    + 
+    a_1 \begin{pmatrix}
+        0 \\ x \\ 0 \\ 0
+    \end{pmatrix}
+    + 
+    a_2 \begin{pmatrix}
+        0 \\ 0 \\ x^2 \\ 0
+    \end{pmatrix}
+    + 
+    a_3 \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ x^3
+    \end{pmatrix}
+\]
+Now, hopefully, you notice the extremely similarities in the structures of these two vector spaces. In fact, the structure of each of these vector spaces is considered identical in mathematics and $\RR^4$ is call \textbf{isomorphic} to $P_3$. We can show this by defining a bijective map $\phi: \RR^{4} \to P_3$. Obviously, in this case, $\phi$ is simply the direct mapping of each corresponding vector. \\ Now, if we consider these vectors \textit{without} their coefficients, what we get is actually called the \textbf{standard basis vectors} since 
+\begin{align*}
+    \RR^4 &= \Span{\begin{pmatrix}
+        1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        0 \\ 1 \\ 0 \\ 0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        0 \\ 0 \\ 1 \\ 0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ 1
+    \end{pmatrix}} \\
+    P_3 &= \Span{\begin{pmatrix}
+        1 \\ 0 \\ 0 \\ 0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        0 \\ x \\ 0 \\ 0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        0 \\ 0 \\ x^2 \\ 0
+    \end{pmatrix}, 
+    \begin{pmatrix}
+        0 \\ 0 \\ 0 \\ x^3
+    \end{pmatrix}}
+\end{align*}
+
+\begin{example}
+    Consider $W$ such that $W = \Span{\vec{u}, \vec{v}}$. Find $\vec{u}$ and $\vec{v}$.
+    \[
+        W = \begin{pmatrix}
+            5b + 2c \\ b \\ b
+        \end{pmatrix}  = 
+        \Span{\vec{u}, \vec{v}}
+    \]
+
+    \begin{solution}
+        \[
+            W = b\begin{pmatrix}
+                5 \\ 1 \\ 0
+            \end{pmatrix} 
+            +
+            c\begin{pmatrix}
+                2 \\ 0 \\1
+            \end{pmatrix}
+            =
+            \Span{\begin{pmatrix}
+                5 \\ 1 \\ 0 
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                2 \\ 0 \\ 1
+            \end{pmatrix}}
+            \Rightarrow
+            \vec{u} = \begin{pmatrix}
+                5 \\ 1 \\ 0
+            \end{pmatrix}
+            \text{ and }
+            \vec{v} = \begin{pmatrix}
+                2 \\ 0 \\ 1
+            \end{pmatrix}
+        \]
+    \end{solution}
+\end{example}
+
+We can as well notice that the above span was a subspace of $\RR^3$ since it's span was of a set of vectors contained in $\RR^{3}$.
+
+\begin{example}{}{}
+    Consider $v_1, v_2, v_3$ and $W$ as below. 
+    \[
+        v_1 = \begin{pmatrix}
+            1 \\ 0 \\ -1
+        \end{pmatrix} 
+        \quad 
+        v_2 = \begin{pmatrix}
+            2 \\ 1 \\ 3
+        \end{pmatrix}
+        \quad
+        v_3 = \begin{pmatrix}
+            4 \\ 2 \\ 6
+        \end{pmatrix}
+        \quad 
+        W = \begin{pmatrix}
+            3 \\ 1 \\ 2
+        \end{pmatrix}
+    \] 
+    \begin{parts}
+        \part Is $W \in \Span{v_1, v_2, v_3}$?
+        \begin{solution}
+            Consider $(A \mid W)$ where $A = \begin{pmatrix}
+                \left(\vec{v_1}\right) & \left(\vec{v_2}\right) & \left(\vec{v_3}\right)
+            \end{pmatrix}$
+            \[
+                \begin{Lamatrix}{4}{3}
+                    1 & 2 & 4 & 3 \\
+                    0 & 1 & 2 & 1 \\
+                    -1 & 3 & 6 & 2 
+                \end{Lamatrix} 
+                \xrightarrow{R_3 \to R_3 + R_1}
+                \begin{Lamatrix}{4}{3}
+                    1 & 2 & 4 & 3 \\
+                    0 & 1 & 2 & 1 \\
+                    0 & 5 & 10 & 5 
+                \end{Lamatrix} 
+                \xrightarrow{R_3 \to R_3 + 5R_2}
+                \begin{Lamatrix}{4}{3}
+                    1 & 2 & 4 & 3 \\
+                    0 & 1 & 2 & 1 \\
+                    0 & 0 & 0 & 0 
+                \end{Lamatrix} 
+            \]
+            Thus, the system is consistent so $W \in \Span{v_1, v_2, v_3}$
+        \end{solution}
+
+        \part Is $\braces{v_1, v_2, v_3}$ linearly independent?
+        \begin{solution}
+            From the above part we know that $v_3 = 2v_2 \therefore$ the set is linearly \textbf{depdendent}. 
+        \end{solution}
+    \end{parts}
+\end{example}
+
+\begin{defbox}{Basis of a Subspace}{}
+    The basis of a subspace $W$ of $\RR^{n}$ is any set of linearly independent vectors such that its span is $W$.
+\end{defbox}
