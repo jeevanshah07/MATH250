@@ -294,3 +294,320 @@ We can as well notice that the above span was a subspace of $\RR^3$ since it's s
 \begin{defbox}{Basis of a Subspace}{}
     The basis of a subspace $W$ of $\RR^{n}$ is any set of linearly independent vectors such that its span is $W$.
 \end{defbox}
+
+\subsection{Lecture 15: Column, Row, and Null Spaces [2.9/4.2]}
+\begin{thm}{}{}
+    The span of any non-empty set of vectors from $\RR^{n}$ is a suhspace of $\RR^{n}$
+\end{thm}
+
+\begin{defbox}{The Basis of a Subspace}{}
+    Let $\mathcal{W}$ be a subspace of any given vector space. The \textbf{basis} of $\mathcal{W}$ is the smallest generating set and the biggest linear independent set who's span is $\mathcal{W}$. The \textbf{dimension} of $\mathcal{W}$ is the number of vectors in a basis.
+\end{defbox}
+
+\begin{defbox}{Rank}{}
+    Let $A$ be a matrix. Then $\rank{A}=n$ if, and only if, $A_{\text{REF}}$ has $n$ pivots and there are $n$ nonzero rows in $A_{\text{REF}}$
+\end{defbox}
+
+\begin{defbox}{Nullity}{}
+    The \textbf{nullity} of $A$ is $\nul{A}=n-\rank{A}$
+\end{defbox}
+
+With these definitions in mind, we introduce the following difference subspaces that are associated with a matrix.
+
+\newpage
+
+\begin{impbox}{}{}
+    Consider an $m\times\,n$ matrix $A$. Then we have the following subspaces 
+    \begin{itemize}
+        \item \textbf{Column Space}: The column space of $A$ is defined as \[\Col{A} = \Span{\text{columns of } A}\] and is a subspace of $\RR^{m}$
+        \item \textbf{Row Space}: The row space of $A$ is defined as \[\Row{A} = \Span{\text{rows of } A}\] and is a subspace of $\RR^{n}$
+        \item \textbf{Null Space}: The null space of $A$ is defined as \[\Nul{A} = \Span{\text{set of all solution of } A\vec{x} = 0}\] and is a subspace of $\RR^{n}$
+        \item \textbf{Null Space of $A^{T}$}: The null space of $A^{T}$ is defined as \[\Nul{A^T} = \Span{\text{set of all solutions of } A^{T}\vec{y}=0}\] and is a subspace of $\RR^{m}$
+    \end{itemize}
+\end{impbox}
+
+It's important to notice the following equalities 
+\[
+    \Col{A} = \Row{A^{T}} \text{ and } \Row{A} = \Col{A^{T}}
+\]
+as these will lead directly into the fundamental equations of linear algebra we will define at the end of this section.
+
+In order to find the basis of a column space of $A$, we'll start by finding $A_{\text{REF}}$. Once we have $A_{\text{REF}}$, any column without a pivot corresponds to a redudant vector in the basis.
+\begin{example}{}{}
+    Consider the matrix $A$ below. Find $\mathcal{W} = \Col{A}$ and a basis of $\mathcal{W}$
+    \[
+        A = \begin{pmatrix}
+            1 & -1 & 2 \\
+            -2 & 2 & -4 \\
+            1 & 3 & 2 \\
+            -1 & 5 & -2
+        \end{pmatrix} 
+    \]
+    \begin{solution}
+        We can easily find 
+        \[
+            \Col{A} = \Span{
+                \begin{pmatrix}
+                    1 \\ -2 \\ 1 \\ -1
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -1 \\ 2 \\ 3 \\ 5
+                \end{pmatrix},
+                \begin{pmatrix}
+                    2 \\ -4 \\ 2 \\ -2
+                \end{pmatrix}
+            } 
+        \]
+        In order to find the basis of $\mathcal{W}$ we must find $A_{\text{REF}}$.
+        \[
+            A \xrightarrow[\substack{R_3 \to R_3 - R_1 \\ R_4 \to R_4 + R_1}]{R_2 \to R_2 + 2R_1} 
+            \begin{pmatrix}
+                -1 & -1 & 2 \\
+                0 & 0 & 0 \\
+                0 & 4 & 0 \\
+                0 & 4 & 0     
+            \end{pmatrix}
+            \xrightarrow[R_3 \to R_3 - R_4]{R_2 \leftrightarrow R_4} 
+            \begin{pmatrix}
+                1 & -1 & 2 \\
+                0 & 4 & 0 \\
+                0 & 0 & 0 \\
+                0 & 0 & 0
+            \end{pmatrix}
+            = A_{\text{REF}}
+        \]
+        $A_{\text{REF}}$ has pivots in the first and second column, but no pivot in the third column. Thus, the third vector is redudant and we can choose a basis to be 
+        \[
+            \braces{
+                \begin{pmatrix}
+                    1 \\ -2 \\ 1 \\ -1
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -1 \\ 2 \\ 3 \\ 5
+                \end{pmatrix}
+            }
+        \]
+    \end{solution}
+\end{example}
+
+In order to find a basis of a row space of $A$, we'll start by finding $A_{\text{REF}}$. Each nonzero column in $\left(A_{\text{REF}}\right)^{T}$ is a vector in the basis.
+\begin{example}{}{}{\label{ex:4.2.1}}
+    Consider the matrix $A$ below. Find $\mathcal{W}=\Row{A}$ and a basis of $\mathcal{W}$.
+    \[
+        A = \begin{pmatrix}
+            1 & -1 & 2 \\
+            -2 & 2 & -4 \\
+            1 & 3 & 2 \\
+            -1 & 5 & -2
+        \end{pmatrix} 
+    \]
+    \begin{solution}
+        We can easily find
+        \[
+            \Row{A} = \Span{
+                \begin{pmatrix}
+                    1 \\ -1 \\ 2
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -2 \\ 2 \\ -4
+                \end{pmatrix},
+                \begin{pmatrix}
+                    1 \\ 3 \\ 2
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -1 \\ 5 \\ -2
+                \end{pmatrix}
+            } = \mathcal{W}
+        \]
+        Now, in order to detmine a basis of $\mathcal{W}$ we have to find $A_{\text{REF}}$. But recall that $\Row{A} = \Col{A^T}$, so we can simply take $A_{\text{REF}}$ from~(\ref{ex:4.2.1}) and transpose it:
+        \[
+            \left(A_{\text{REF}}\right)^{T} = \begin{pmatrix}
+                1 & 0 & 0 & 0 \\
+                -1 & 4 & 0 & 0 \\
+                2 & 0 & 0 & 0
+            \end{pmatrix}
+        \]
+        we can easily see the nonzero columns and find a basis to be 
+        \[
+            \braces{\begin{pmatrix}
+                1 \\ -1 \\ 2
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                0 \\ 4 \\ 0
+            \end{pmatrix}}
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}{}{}
+    Consider the matrix $A$ below. Find $\mathcal{W}=\Nul{A}$ and a basis of $\mathcal{W}$.
+    \[
+        A = \begin{pmatrix}
+            1 & -1 & 2 \\
+            -2 & 2 & -4 \\
+            1 & 3 & 2 \\
+            -1 & 5 & -2
+        \end{pmatrix} 
+    \]
+
+    \begin{solution}
+        We know that we can find solutions to $A\vec{x}=0$ by analyzing $A_{\text{REF}}$. Recall that 
+        \[
+            A_{\text{REF}} =  
+            \begin{pmatrix}
+                1 & -1 & 2 \\
+                0 & 4 & 0 \\
+                0 & 0 & 0 \\
+                0 & 0 & 0
+            \end{pmatrix}
+        \]
+        No pivot in the third column tells us that $x_3=t$ is a free variable. We can also see that $x_2=0$ and that $x_1 = -2x_3 = -2t$. Thus, 
+        \[
+            X = \begin{pmatrix}
+                -2t \\ 0 \\ t
+            \end{pmatrix}
+            = t\begin{pmatrix}
+                -2 \\ 0 \\ 1
+            \end{pmatrix}
+        \]
+        Thus, 
+        \[
+            \Nul{A} = \Span{\begin{pmatrix}
+                -2 \\ 0 \\ 1
+            \end{pmatrix}}
+        \]
+        Because the generating set is only a single vector, it is also the basis for $\Nul{A}$.
+    \end{solution}
+\end{example}
+
+\begin{example}{}{}
+    Consider the matrix $A$ below. Find $\mathcal{W}=\Nul{A^{T}}$ and a basis of $\mathcal{W}$.
+    \[
+        A = \begin{pmatrix}
+            1 & -1 & 2 \\
+            -2 & 2 & -4 \\
+            1 & 3 & 2 \\
+            -1 & 5 & -2
+        \end{pmatrix} 
+    \]
+
+    \begin{solution}
+        We must find all the solutions to $A^{T}\vec{y} = 0$ which means we need to find $\left(A^{T}\right)_{\text{REF}}$
+        \[
+            A^{T} = \begin{pmatrix}
+                1 & -2 & 1 & -1 \\
+                -1 & 2 & 3 & 5 \\
+                2 & -4 & 2 & -2
+            \end{pmatrix} 
+            \xrightarrow[R_3 \to R_3 - 2R_1]{R_2 \to R_2 + R_1}
+            \begin{pmatrix}
+                1 & -2 & 1 & -1 \\
+                0 & 0 & 4 & 4 \\
+                0 & 0 & 0 & 0
+            \end{pmatrix}
+        \]
+        No pivot in the second and fourth columns tells us that $y_2 = t$ and $y_4 = s$ are free variables. Solving the system we get 
+        \[
+            Y = \begin{pmatrix}
+                2s + 2t \\ t \\ -s \\ s
+            \end{pmatrix}
+            =
+            t \begin{pmatrix}
+                2 \\ 1 \\ 0 \\ 0
+            \end{pmatrix}
+            + s\begin{pmatrix}
+                2 \\ 0 \\ -1 \\ 1 
+            \end{pmatrix}
+        \]
+        Thus,
+        \[
+            \Nul{A^{T}} = \Span{
+                \begin{pmatrix}
+                    2 \\ 1 \\ 0 \\ 0 
+                \end{pmatrix},
+                \begin{pmatrix}
+                    2 \\ 0 \\ -1 \\ 1
+                \end{pmatrix}
+            }
+        \]
+    \end{solution}
+\end{example}
+
+One thing you should notice that is the number of vectors in a basis of a subspace also corresponds to the number of nonzero rows in $A_{REF}$. Connecting this with the definitions of dimension and rank we can see that 
+\begin{equation}{\label{eq:1}}
+    \dim\left[\Row{A}\right] = \rank{A} = \dim\left[\Col{A^{T}}\right]
+\end{equation}
+
+Now if we recall from earlier that 
+\[
+    \Col{A} = \Row{A^{T}}
+\]
+and 
+\[
+    \dim\left[\Col{A}\right] = \rank{A} = \dim\left[\Row{A}\right]
+\]
+we get 
+\begin{equation}{\label{eq:2}}
+    \rank{A} = \rank{A^{T}}
+\end{equation}
+which is the \textit{first} fundamental equation of linear alegbra. 
+
+We now have the following two facts 
+\[
+    \dim\left[\Nul{A}\right] = n - \rank{A} \text{ and } \dim\left[\nul{A^{T}}\right] = m - \rank{A}
+\]
+
+Combining these with equation~(\ref{eq:1}) we get 
+\begin{align}
+    &\dim\left[\Row{A}\right] + \dim\left[\Nul{A}\right] = n \\
+    &\dim\left[\Col{A}\right] + \dim\left[\Nul{A^T}\right] = m
+\end{align}
+
+Combining all of these we get
+\begin{impbox}{Fundamental Equations of Linear Algebra}{}
+    Below are the three fundamental equations of linear algebra
+    \begin{align}
+        &\rank{A} = \rank{A^T} \\
+        &\dim\left[\Row{A}\right] + \dim\left[\Nul{A}\right] = n \\
+        &\dim\left[\Col{A}\right] + \dim\left[\Nul{A^{T}}\right] = m
+    \end{align}
+\end{impbox}
+
+\begin{example}{}{}
+    Consider the matrix $A$ below. Find $\Nul{A}$. 
+    \[
+        \underset{3\times\,5}{A} = \begin{pmatrix}
+            1 & 5 & -4 & -3 & 1 \\
+            0 & 1 & -2 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 0
+        \end{pmatrix}
+    \]
+
+    \begin{solution}
+        Notice that $A=A_{\text{REF}}$. With this observation we can get that $\rank{A}=2$, $\nul{A} = m - \rank{A} = 5 - 2 = 3$, $\Nul{A} \subset \RR^{5}$, and $\dim\left[\Nul{A}\right] = 3$. Now from $A_{\text{REF}}$ we can see that $x_3 = r, x_4 = s, x_5=t$ are free variables. Thus, 
+        \[
+            X = r\begin{pmatrix}
+                -6 \\ 2 \\ 1 \\ 0 \\ 0
+            \end{pmatrix} 
+            + s\begin{pmatrix}
+                8 \\ -1 \\ 0 \\ 1 \\ 0
+            \end{pmatrix}
+            + t\begin{pmatrix}
+                -1 \\ 0 \\ 0 \\ 0 \\ 1
+            \end{pmatrix}
+            \Rightarrow
+            \Nul{A} = \Span{
+                \begin{pmatrix}
+                    -6 \\ 2 \\ 1 \\ 0 \\ 0
+                \end{pmatrix},
+                \begin{pmatrix}
+                    8 \\ -1 \\ 0 \\ 1 \\ 0
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -1 \\ 0 \\ 0 \\ 0 \\ 1
+                \end{pmatrix}
+            }
+        \]
+        And, once again, because the generating set is composed of the solutions to $A\vec{x} = 0$, we know that it is linearly independent and thus forms a basis.
+    \end{solution}
+\end{example}
