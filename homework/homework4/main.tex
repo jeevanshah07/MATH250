@@ -1,0 +1,453 @@
+\documentclass{exam}
+\usepackage{../../shah250}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shtelen \\ Linear Algebra}{Homework 3}{Jeevan Shah}
+\runningheader{Linear Algebra \\ Homework 2}{}{Shah}
+\firstpagefooter{}{}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+% 3.2 - 37, 41
+% 3.3 - 17, 21
+% 4.1 - 5, 19
+% 2.8 - 11, 31
+% 4.2 - 5, 15
+% 2.9 - 11, 13
+% 4.1 - 13, 43
+
+\begin{document}
+\underline{\#37 [3.2]:} Show that if $A$ is invertible, then $\det A^{-1} = \frac{1}{\det A}$
+\begin{solution}
+    \begin{proof}
+        Consider an $n\times\,n$ matrix $A$ such that it is invertible, and call its inverse $A^{-1}$. By definition of an inverse, $AA^{-1} = I_{n}$, so $\det{\left(AA^{-1}\right)} = \det{\left(I_n\right)} = 1$. But, neither determinant is $0$ (since $A$ is invertible, $\det A \neq 0$). So,
+        \[
+            \det{\left(AA^{-1}\right)} = \det\left(A\right) \cdot \det\left(A^{-1}\right) = 1 \Rightarrow \det\left(A^{-1}\right) = \frac{1}{\det A}
+        \]
+        Thus, we have shown that the determinant of $A^{-1}$ is $\frac{1}{\det A}$.
+    \end{proof}
+\end{solution}
+
+\underline{\#41 [3.2]:} Let $U$ be a square matrix such that $U^{T}U = I$. Show that $\det U = \pm\,1$
+\begin{solution}
+    \begin{proof}
+        Consider a matrix $U$ such that $U^{T}U = I$. Then, 
+        \[
+            \det\left(U^{T}U\right) = \det\left(U^{T}\right) \cdot \det\left(U\right) = \det{I} = 1
+        \]
+        But, for all matricies $\det{A} = \det{A^{T}}$. Thus, 
+        \[
+            \det\left(U^{T}\right) \cdot \det\left(U\right) = \det\left(U\right) \cdot \det\left(U\right) = \left(\det{U}\right)^{2} = 1 \Rightarrow \det{U} = \pm 1
+        \]
+        Hence we have shown that $\det U = \pm 1$
+    \end{proof}
+\end{solution}
+
+\underline{\#17 [3.3]:} Show that if $A$ is $2 \times 2$, then Theorem $8$ gives the same formula for $A^{-1}$ as that given by Theorem $4$ in section $2.2$.
+\begin{solution}
+    \begin{proof}
+        Consider any $2\times\,2$ matrix $A$ such that 
+        \[
+            A = \begin{pmatrix}
+                a & b \\
+                c & d
+            \end{pmatrix}.
+        \]
+        By the formula in section $2.2$ we have 
+        \begin{equation}{\label{eq:1}}
+            A^{-1} = \frac{1}{\det A}\begin{pmatrix}
+                d & -b \\
+                -c & a       
+            \end{pmatrix}
+        \end{equation}
+        We will show this is equivalent to the inverse found by applying Theorem $8$, $B^{-1}$. We can start by finding the cofactors of $A$: 
+        \begin{align*}
+            C_{11} &= \left(-1\right)^{1+1}\left(d\right) = d \\
+            C_{12} &= \left(-1\right)^{1+2}\left(c\right) = -c \\
+            C_{21} &= \left(-1\right)^{2+1}\left(b\right) = -b \\
+            C_{22} &= \left(-1\right)^{2+2}\left(a\right) = a
+        \end{align*}
+        We can now find $C^{T}$:
+        \[
+            C = \begin{pmatrix}
+                d & -c \\
+                -b & a
+            \end{pmatrix} 
+            \Rightarrow 
+            C^{T} = \begin{pmatrix}
+                d & -b \\
+                -c & a
+            \end{pmatrix}.
+        \]
+        Thus, 
+        \[
+            B^{-1} = \frac{1}{\det A}\begin{pmatrix}
+                d & -b \\
+                -c & a
+            \end{pmatrix}.
+        \]
+        So, $A^{-1} = B^{-1}$ and the two methods for finding the inverse of a $2\times\,2$ matrix are equivalent.
+    \end{proof}
+\end{solution}
+
+\underline{\#21 [3.3]:} Find the are of the parallelogram who verticies are
+\[
+    (-2,0), (0, 3), (1, 3), (-1, 0)
+\]
+\begin{solution}
+    We start by shifting the parallelogram to have a vertex at the origin. Our new list of verticies is 
+    \[
+        (0, 0), (2, 3), (3, 3), (1, 0).
+    \]
+    We can form a matrix $A$ of the verticies 
+    \[
+        A = \begin{pmatrix}
+            2 & 3 \\
+            3 & 3
+        \end{pmatrix} 
+    \]
+    Taking the absolute value of the determinant of $A$ gives $|\det A| = |-3| = 3\text{un}^2$ for our area. 
+\end{solution}
+
+\underline{\#5 [4.1]:} Determine if the set of all polynomials of the form $\mathbf{p}(t) = at^2$ for $a \in \RR$ is a subspace of $\mathbb{P}_n$ for an appropiate value of $n$. 
+\begin{solution}
+    First of all, since $\mathbf{p}$ is a polynomial of degree $2$, the appropiate value of $n$ is $n=2$. \\ We can start by checking scalar multiplication. Consider $\lambda\mathbf{p}\left(t\right)$ for $\lambda \in \RR$. Then 
+    \[
+        \mathbf{p}\left(t\right) = \lambda\,at^{2} = \alpha\,t^{2}, \quad \alpha = \lambda\,a.
+    \]
+    But $\alpha \in \RR$ since $\RR$ is closed under multiplication. Thus $\lambda\mathbf{p}(t)$ is in our subspace, and so our subspace is closed under scalar multiplication. \\ We will now check vector addition. Consider $\mathbf{p}_1(t) = at^2$ and $\mathbf{p}_2(t) = bt^2$. Then 
+    \[
+        \mathbf{p}_1(t) + \mathbf{p}_2(t) = at^2 + bt^2 = \left(a+b\right)t^2
+    \]
+    but $a+b \in \RR$ since $\RR$ is closed under addition. Thus, $\mathbf{p}_1(t) + \mathbf{p}_2(t)$ is in our subspace and our subspace is closed under vector addition. \\ It is also worth noticing that $\vec{0}$ is in our subspace since $\mathbf{p}\left(0\right) = 0$. \\ Thus, since our subspace is closed under scalar multiplication, vector addition, and contains the zero vector, it \textit{is} a subspace of $\mathbb{P}_2$.
+\end{solution}
+
+\underline{\#19 [4.1]:} Consider the set of functions 
+\[
+    \mathcal{W} = \braces{y(t) \mid y(t) = c_1\cos\omega\,t + c_2\sin\omega\,t}
+\]
+for a fixed $\omega$ and arbitary $c_1, c_2$. Show that $\mathcal{W}$ is vector space.
+\begin{solution}
+    \begin{proof}
+        We will start by showing that $\mathcal{W}$ is closed under scalar multiplication. Consider $\lambda\,y(t)$ for $\lambda \in \RR$, 
+        \[
+            \lambda\,y(t) = \lambda\left(c_1\cos\omega\,t + c_2\sin\omega\,t\right) = \lambda\,c_1\cos\omega\,t + \lambda\,c_2\sin\omega\,t.
+        \]
+        But $\lambda\,c_1, \lambda\,c_2 \in \RR$ so $\lambda\,y(t) \in \mathcal{W}$ and thus, $\mathcal{W}$ is closed under scalar multiplication. \\
+        We will now show that $\mathcal{W}$ is closed under vector addition. Consider $y_1(t), y_2(t) \in \mathcal{W}$. Then, 
+        \[
+            y_1(t) + y_2(t) = \left(c_1\cos\omega\,t + c_2\sin\omega\,t\right) + \left(c_3\cos\omega\,t + c_4\sin\omega\,t\right) = \left(c_1 + c_3\right)\cos\omega\,t + \left(c_2 + c_4\right)\sin\omega\,t.
+        \]
+        But, $\left(c_1 + c_3\right), \left(c_2 + c_4\right) \in \RR$ since $\RR$ is closed under addition. Thus $y_1(t) + y_2(t) \in \mathcal{W}$ and $\mathcal{W}$ is closed under vector addition. \\ As well, $\vec{0} \in \mathcal{W}$ for $c_1 = c_2 = 0$. \\ Thus, since $\mathcal{W}$ is closed under scalar multiplication and vector addition, $\mathcal{W}$ is a vector space.
+    \end{proof}
+\end{solution}
+
+\underline{\#11 [2.8]:} Give integers $p$ and $q$ such that $\Nul{A}$ is a subspace of $\RR^{p}$ and $\Col{A}$ is a subspace of $\RR^{q}$.
+\[
+    A = \begin{pmatrix}
+        3 & 2 & 1 & -5 \\
+        -9 & -4 & 1 & 7 \\
+        9 & 2 & -5 & 1
+    \end{pmatrix}
+\]
+\begin{solution}
+    Let $p=4$ and $q=3$. $\Nul{A}$ will be a set of vectors in $\RR^{4}$ and $\Col{A}$ will be a set of vectors in $\RR^{3}$.  
+\end{solution}
+
+\underline{\#31 [2.8]:} Conisder the matrix $A$ and an echelon form of $A$ below. Find a basis for $\Col{A}$ and a basis for $\Nul{A}$.
+\[
+    A = \begin{pmatrix}
+        4 & 5 & 9 & -2 \\
+        6 & 5 & 1 & 12 \\
+        3 & 4 & 8 & -3 
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+        1 & 2 & 6 & -5 \\
+        0 & 1 & 5 & -6 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+\]
+\begin{solution}
+    Since the pivot columns are the first and second we know that the basis for $\Col{A}$ will be 
+    \[
+        \braces{\begin{pmatrix}
+            4 \\ 6 \\ 3
+        \end{pmatrix}, 
+        \begin{pmatrix}
+            5 \\ 5 \\ 4
+        \end{pmatrix}}.
+    \]
+    It then follows that $x_3$ and $x_4$ are free variables, so let $x_3 = s$ and $x_4 = t$. Solving the system we see 
+    \[
+        X = \begin{pmatrix}
+            4s - 7t \\
+            -5s + 6t \\
+            s \\ 
+            t
+        \end{pmatrix}
+        = 
+        s\begin{pmatrix}
+            4 \\ -5 \\ 1 \\ 0
+        \end{pmatrix}
+        + t\begin{pmatrix}
+            -7 \\ 6 \\ 0 \\ 1
+        \end{pmatrix}.
+    \]
+    Thus, one basis for $\Nul{A}$ is 
+    \[
+        \braces{
+        \begin{pmatrix}
+            4 \\ -5 \\ 1 \\ 0
+        \end{pmatrix}
+        , \begin{pmatrix}
+            -7 \\ 6 \\ 0 \\ 1
+        \end{pmatrix}
+        }.
+    \]
+\end{solution}
+
+\underline{\#5 [4.2]:} Find an explicit description of $\Nul{A}$ by listing vectors that span the null space. 
+\[
+    A = \begin{pmatrix}
+        1 & -2 & 0 & 4 & 0 \\
+        0 & 0 & 1 & -9 & 0 \\
+        0 & 0 & 0 & 0 & 1
+    \end{pmatrix}
+\]
+\begin{solution}
+    Since our matrix $A$ is already in REF we can go straight to backwards substitution and solving the system. Since there is no pivot in the second and fourth columns $x_2$ and $x_4$ are free variables. Let $x_2 = s$ and $x_4 = t$. Then, 
+    \[
+        X = \begin{pmatrix}
+            -4t + 2s \\ s \\ 9t \\ t \\ 0
+        \end{pmatrix} 
+        = t\begin{pmatrix}
+            -4 \\ 0 \\ 9 \\ 1 \\ 0 
+        \end{pmatrix}
+        + s\begin{pmatrix}
+            2 \\ 1 \\ 0 \\ 0 \\ 0
+        \end{pmatrix}.
+    \]
+    So, 
+    \[
+        \Nul{A} = \Span{
+            \begin{pmatrix}
+                -4 \\ 0 \\ 9 \\ 1 \\ 0
+            \end{pmatrix},
+            \begin{pmatrix}
+                2 \\ 1 \\ 0 \\ 0 \\ 0
+            \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\underline{\#15 [4.2]:} If the set below is $\Col{A}$, find $A$. 
+\[
+    \braces{
+        \begin{pmatrix}
+            2s + 3t \\ 
+            r + s - 2t \\
+            4r + s \\
+            3r - s - t
+        \end{pmatrix}
+        \mid
+        r, s, t \in \RR
+    }
+\]
+\begin{solution}
+    Using the definition of the set, we can find the general homogenous solution, $X$, 
+    \[
+        X = s\begin{pmatrix}
+            2 \\ 1 \\ 1 \\ -1
+        \end{pmatrix} 
+        + t\begin{pmatrix}
+            3 \\ -2 \\ 0 \\ -1
+        \end{pmatrix}
+        + r\begin{pmatrix}
+            0 \\ 1 \\ 4 \\ 3
+        \end{pmatrix}.
+    \]
+    We can now use these vectors to form the columns of $A$, 
+    \[
+        A = \begin{pmatrix}
+            2 & 3 & 0 \\
+            1 & -2 & 1 \\
+            1 & 0 & 4 \\
+            -1 & -1 & 3
+        \end{pmatrix}
+    \]
+\end{solution}
+
+\underline{\#11 [2.9]:} Below is a matrix $A$ and an echelon form of $A$. Find bases for $\Col{A}$ and $\Nul{A}$, and then state the dimensions of these subspaces.
+\[
+    \begin{pmatrix}
+        1 & 2 & -5 & 0 & -1 \\
+        2 & 5 & -8 & 4 & 3 \\
+        -3 & -9 & 9 & -7 & -2 \\
+        3 & 10 & -7 & 11 & 7
+    \end{pmatrix}
+    \sim
+    \begin{pmatrix}
+        1 & 2 & -5 & 0 & -1 \\
+        0 & 1 & 2 & 4 & 5 \\
+        0 & 0 & 0 & 1 & 2 \\
+        0 & 0 & 0 & 0 & 0
+    \end{pmatrix}
+\]
+\begin{solution}
+    Since the pivot columns in the echelon form of $A$ are the first, second, and fourth we have one basis for $\Col{A}$ being 
+    \[
+        \braces{
+            \begin{pmatrix}
+                1 \\ 2 \\ -3 \\ 3
+            \end{pmatrix},
+            \begin{pmatrix}
+                2 \\ 5 \\ -9 \\ 10
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                0 \\ 4 \\ -7 \\ 11
+            \end{pmatrix}
+        }.
+    \]
+    It follows from the definition of dimension that $\dim\left[\Col{A}\right] = 3$. Since the third and fourth columns are non-pivot columns, $x_5$ and $x_3$ must be free variables. Let $x_5 = t$ and $x_3 = k$. Solving the rest of the system we see that 
+    \[
+        X = k\begin{pmatrix}
+            9 \\ -2 \\ 1 \\ 0 \\ 0
+        \end{pmatrix}
+        + t\begin{pmatrix}
+            -5 \\ 3 \\ 0 \\ -2 \\ 1
+        \end{pmatrix}.
+    \]
+    Thus, one possible basis for $\Nul{A}$ is 
+    \[
+        \braces{
+            \begin{pmatrix}
+                9 \\ -2 \\ 1 \\ 0 \\ 0
+            \end{pmatrix},
+            \begin{pmatrix}
+                -5 \\ 3 \\ 0 \\ -2 \\ 1
+            \end{pmatrix}
+        }.
+    \]
+    Once again, by definition we have $\dim\left[\Nul{A}\right] = 2$.
+\end{solution}
+
+\underline{\#13 [2.9]:} Find a basis for the subspace spanned by the given vectors below. What is the dimension of the subspace?
+\[
+    \begin{pmatrix}
+        1 \\ -3 \\ 2 \\ -4
+    \end{pmatrix},
+    \begin{pmatrix}
+        -3 \\ 9 \\ -6 \\ 12
+    \end{pmatrix},
+    \begin{pmatrix}
+        2 \\ -1 \\ 4 \\ 2
+    \end{pmatrix},
+    \begin{pmatrix}
+        -4 \\ 5 \\ -3 \\ 7
+    \end{pmatrix}
+\]
+\begin{solution}
+    Consider 
+    \[
+        A = \begin{pmatrix}
+            1 & -3 & 2 & -4 \\
+            -3 & 9 & -1 & 5 \\
+            2 & -6 & 4 & -3 \\
+            -4 & 12 & 2 & 7
+        \end{pmatrix} 
+        \xrightarrow{\text{ERO}}
+        \begin{pmatrix}
+            1 & -3 & 2 & -4 \\
+            0 & 0 & 5 & -7 \\
+            0 & 0 & 0 & 5 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}.
+    \]
+    Thus, one possible basis is 
+    \[
+        \braces{
+            \begin{pmatrix}
+                1 \\ -3 \\ 2 \\ -4
+            \end{pmatrix},
+            \begin{pmatrix}
+                2 \\ -1 \\ 4 \\ 2
+            \end{pmatrix},
+            \begin{pmatrix}
+                -4 \\ 5 \\ -3 \\ 7
+            \end{pmatrix}
+        }.
+    \]
+    Then, $\dim\left[\Col{A}\right] = 3$.
+\end{solution}
+
+\underline{\#13 [4.3]:} Assume that $A$ is row equivalent to $B$. Find bases for $\Nul{A}$, $\Col{A}$, and $\Row{A}$.
+\[
+    A = \begin{pmatrix}
+        -2 & -4 & -2 & -4 \\
+        2 & -6 & -3 & 1 \\
+        -3 & 8 & 2 & -3
+    \end{pmatrix}, 
+    B = \begin{pmatrix}
+        1 & 0 & 6 & 5 \\
+        0 & 2 & 5 & 3 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}
+\]
+\begin{solution}
+    Since $B$ has pivots in the first and second column we can find one possible basis for $\Col{A}$ to be 
+    \[
+        \braces{
+            \begin{pmatrix}
+                -2 \\ 2 \\ -3
+            \end{pmatrix},
+            \begin{pmatrix}
+                -4 \\ -6 \\ 8
+            \end{pmatrix}
+        }. 
+    \]
+    It also follow that one basis for $\Row{A}$ is 
+    \[
+        \braces{
+            \begin{pmatrix}
+                1 & 0 & 6 & 5
+            \end{pmatrix}, 
+            \begin{pmatrix}
+                0 & 2 & 5 & 3
+            \end{pmatrix}
+        }.
+    \]
+    Noting that $x_3$ and $x_4$ are free variables, let $x_3 = 2s$ and $x_4 = 2t$. Solving the rest of the system gives 
+    \[
+        X = s\begin{pmatrix}
+            -12 \\ -5 \\ 2 \\ 0
+        \end{pmatrix}
+        + t\begin{pmatrix}
+            -10 \\ -5 \\ 0 \\ 2
+        \end{pmatrix}.
+    \]
+    So, a basis for $\Nul{A}$ could be 
+    \[
+        \braces{
+            \begin{pmatrix}
+                -12 \\ -5 \\ 2 \\ 0
+            \end{pmatrix},
+            \begin{pmatrix}
+                -10 \\ -5 \\ 0 \\ 2
+            \end{pmatrix}
+        }.
+    \]
+\end{solution}
+
+\underline{\#43 [4.3]:} Consider the polynomials $\mathbf{p}_1(t) = 1+t^2$ and $\mathbf{p}_2(t) = 1-t^2$. Is $\braces{\mathbf{p}_1, \mathbf{p}_2}$ a linearly independent set in $\mathbb{P}_3$? Why or why not?
+\begin{solution}
+    Since neither polynomial is a multiple of the other, the set is linearly independent.
+\end{solution}
+
+\footnotetext{\LaTeX\ code for this document can be found on github \href{https://github.com/jeevanshah07/MATH250/blob/main/homework/homework4/main.tex}{\underline{here}}}
+\end{document}
