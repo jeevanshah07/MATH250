@@ -611,3 +611,372 @@ Combining all of these we get
         And, once again, because the generating set is composed of the solutions to $A\vec{x} = 0$, we know that it is linearly independent and thus forms a basis.
     \end{solution}
 \end{example}
+
+\subsection{Lecture 16: Linearly Independent Sets, Basis [4.3]}
+\begin{defbox}{Linear Independence}{}
+    A set of vectors $\braces{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_k}}$ is \textbf{linearly independent} if the equation 
+    \[
+        c_1\vec{v_1} + c_2\vec{v_2} + \cdots + c_u\vec{v_k}, \quad c_i \in \RR 
+    \]
+    is satisfied if, and only if, $c_1 = c_2 = \cdots = c_k = 0$. Otherwise, the set is \textbf{linearly depdendent}.
+\end{defbox}
+
+We can determine if a set is linearly independent by considering the equation $AC=0$ where 
+\[
+    \underset{n\times\,k}{A} = \begin{pmatrix}
+        | & | & & | \\
+        \vec{v_1} & \vec{v_2} & \cdots & \vec{v_k} \\
+        | & | & & |
+    \end{pmatrix}
+    \text{ and }
+    \underset{k\times\,1}{C} = \begin{pmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_k
+    \end{pmatrix}.
+\]
+Then,
+\begin{enumerate}
+    \item if $\rank{A} = k$, then $AC = 0$ has only the trivial solution $C=0$, so the set is linearly \textit{independent}.
+    \item if $\rank{A} < k$, then $AC = 0$ has an infite amount of solutions so the set is linearly \textit{depdendent}.
+\end{enumerate}
+
+\begin{impbox}{}{}
+    $\Span{\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k}}$ is a subspace of $\RR^{n}$ if $\vec{u_1}, \vec{u_2}, \ldots, \vec{u_k} \in \RR^{n}$
+\end{impbox}
+
+\begin{defbox}{Basis of a Subspace}{}
+    The basis of a subspace is the smallest linearly independent generating set who's span is the subspace.
+\end{defbox}
+
+\begin{example}{}{}
+    Find a basis of $\mathcal{W}$ 
+    \[
+        \mathcal{W} = \Span{
+            \begin{pmatrix}
+                1 \\ -2 \\ 3
+            \end{pmatrix},
+            \begin{pmatrix}
+                1 \\ 1 \\ -1
+            \end{pmatrix},
+            \begin{pmatrix}
+                2 \\ 1 \\ 3
+            \end{pmatrix},
+            \begin{pmatrix}
+                1 \\ 0 \\ 2
+            \end{pmatrix}
+        } 
+    \]
+    \begin{solution}
+        Consider the matrix who's columns are the vectors in the generating set of $\mathcal{W}$:
+        \[
+            A = \begin{pmatrix}
+                1 & 1 & 2 & 1 \\
+                -2 & 1 & 1 & 0 \\
+                3 & -1 & 3 & 2
+            \end{pmatrix} 
+            \xrightarrow[R_3 \to R_3 - 3R_1]{R_2 \to R_2 + 2R_1}
+            \begin{pmatrix}
+                1 & 1 & 2 & 1 \\
+                0 & 3 & 5 & 2 \\
+                0 & -4 & -3 & -1
+            \end{pmatrix} 
+            \xrightarrow{R_3 \to 3R_3 + 4R_2}
+            \begin{pmatrix}
+                1 & 1 & 2 & 1 \\
+                0 & 3 & 5 & 2 \\
+                0 & 0 & 11 & 5
+            \end{pmatrix}
+        \]
+        Now, since there isn't a pivot in the fourth column, the fourth vector in the generating set is redudant. Thus, one possible basis for $\mathcal{W}$ is 
+        \[
+            \braces{
+                \begin{pmatrix}
+                    1 \\ -2 \\ 3
+                \end{pmatrix},
+                \begin{pmatrix}
+                    1 \\ 1 \\ -1
+                \end{pmatrix},
+                \begin{pmatrix}
+                    2 \\ 1 \\ 3
+                \end{pmatrix}
+            }
+        \]
+    \end{solution}
+\end{example}
+
+You may also note that $\mathcal{W}$ from the above example is a subspace of $\RR^{3}$ and so $\Span{W} = \RR^3$.
+
+\begin{defbox}{Standard Basis of $\RR^{n}$}{}
+    The \textbf{standard basis} of $\RR^{n}$ is the set 
+    \[
+        \braces{\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n} 
+    \]
+    where $\mathbf{e}_k$ is the $k$-th column of $I_n$ (the identity matrix in $\RR^{n}$).
+\end{defbox}
+
+\begin{example}{}{}
+    Consider 
+    \[
+        \mathcal{S} = \braces{1 - x^2 + 2x^3, 1 + x, x^2, x^4} 
+    \] 
+    \begin{parts}
+        \part Determine if $\mathcal{S}$ is linearly independent.
+        \begin{solution}
+            By definition of linear independence we must have 
+            \begin{align*}
+                &c_1\left(1-x^2+2x^3\right) + c_2\left(1+x\right) + c_3\left(x^2\right) + c_4\left(x^4\right) = 0 \\
+                \Rightarrow& \left(c_1+c_2\right) + \left(c_2\right)x + \left(-c_1 + c_3\right)x^2 + \left(c_1\right)x^3 + \left(c_4\right)x^4 = 0 \\
+                \Rightarrow& c_1 = c_2 = c_3 = c_4 = 0
+            \end{align*}
+            Thus, $\mathcal{S}$ \textit{is} linearly independent.
+        \end{solution}
+        \part Determine if $\Span{\mathcal{S}} = \mathbf{P}_4$ 
+        \begin{solution}
+            Since there are only four vectors, $\Span{\mathcal{S}} \neq \mathbb{P}_4$.
+        \end{solution}
+    \end{parts}
+\end{example}
+
+Our answer in part b of the above example follows directly from the fact that $\mathbb{P}_n \cong \RR^{n+1}$ ($\mathbb{P}_n$ is \textit{isomorphic} to $\RR^{n+1}$), and in order for a set of vectors in $\RR^{n}$ to span $\RR^{n}$, there must be exactly $n$ vectors in the generating set. Now, because of this fact, we actually have an easier way to solve part a, rather than splitting up each term by degrees. \\ We can notice that the standard basis for $\mathbb{P}_4$ is 
+\[
+    \braces{
+        \begin{pmatrix}
+            1 \\ 0 \\ 0 \\ 0 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+            0 \\ x \\ 0 \\ 0 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+            0 \\ 0 \\ x^2 \\ 0 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+            0 \\ 0 \\ 0 \\ x^3 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+            1 \\ 0 \\ 0 \\ 0 \\ x^4
+        \end{pmatrix}
+    }
+\]
+since any polynomial in $\mathbb{P}_4$ can be made up as a linear combination of these vectors. If we modify this basis slightly to get 
+\[
+    \braces{
+        \begin{pmatrix}
+            1 \\ 0 \\ 0 \\ 0 \\ 0
+        \end{pmatrix},
+        x\begin{pmatrix}
+            0 \\ 1 \\ 0 \\ 0 \\ 0
+        \end{pmatrix},
+        x^2\begin{pmatrix}
+            0 \\ 0 \\ 1 \\ 0 \\ 0
+        \end{pmatrix},
+        x^3\begin{pmatrix}
+            0 \\ 0 \\ 0 \\ 1 \\ 0
+        \end{pmatrix},
+        x^4\begin{pmatrix}
+            1 \\ 0 \\ 0 \\ 0 \\ 1
+        \end{pmatrix}
+    }
+\]
+then we can see how we can represent $\mathcal{S}$ in the following manner:
+\[
+    \mathcal{S} = \braces{
+        \begin{pmatrix}
+            1 \\ 0 \\ -1 \\ 2 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+            1 \\ 1 \\ 0 \\ 0 \\ 0        
+        \end{pmatrix},
+        \begin{pmatrix}
+            0 \\ 0 \\ 1 \\ 0 \\ 0
+        \end{pmatrix},
+        \begin{pmatrix}
+            0 \\ 0 \\ 0 \\ 0 \\ 1
+        \end{pmatrix}
+    }.
+\]
+Now, consider the matrix who's columns are the vectors from $\mathcal{S}$:
+\[
+    A = \begin{pmatrix}
+        1 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        -1 & 0 & 1 & 0 \\
+        2 & 0 & 0 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}
+    \xrightarrow[R_4\to\,R_4 - 2R_1]{R_3 \to R_3 + R_1}
+    \begin{pmatrix}
+        1 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 1 & 1 & 0 \\
+        0 & -2 & 0 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}
+    \xrightarrow[R_4 \to R_4 + 2R_2]{R_3 \to R_3 - R_2}
+    \begin{pmatrix}
+        1 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 2 & 0 \\
+        0 & 0 & 0 & 1
+    \end{pmatrix}
+    \xrightarrow[R_4 \leftrightarrow R_5]{R_4 \to R_4 - 2R_3}
+    \begin{pmatrix}
+        1 & 1 & 0 & 0 \\
+        0 & 1 & 0 & 0 \\
+        0 & 0 & 1 & 0 \\
+        0 & 0 & 0 & 1 \\
+        0 & 0 & 0 & 0
+    \end{pmatrix}.
+\]
+So, $\rank{A} = 4 = k$ so $\mathcal{S}$ is linearly independent.
+
+\subsection{Lecture 17: Coordinates in Vector Spaces [4.4]}
+\begin{thm}{Uniqueness Theorem}{}
+    Consider a basis $\braces{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_n}}$ for $\RR^{n}$ and let $\vec{v} \in \RR^{n}$. Then if 
+    \begin{equation}{\label{eq:4}}
+        \vec{v} = c_1\vec{b_1} + c_2\vec{b_2} + \cdots\, + c_n\vec{b_n},
+    \end{equation}
+    $c_1, c_2, \ldots, c_n$ is a unique set of numbers for $\vec{v}$.
+    \begin{proof}
+        Suppose $\vec{v} \in \RR^{n}$ and $\RR^{n}$ has a basis $\braces{\vec{b_1}, \vec{b_2}, \ldots, \vec{b_n}}$. Now, assume that there are two different representations of $\vec{v}$: 
+        \begin{align*}
+            \vec{v} &= c_1\vec{b_1} + c_2\vec{b_2} + \cdots\, + c_n\vec{b_n} \\
+            \vec{v} &= \tilde{c_1}\vec{b_1} + \tilde{c_2}\vec{b_2} + \cdots\, + \tilde{c_n}\vec{b_n}.
+        \end{align*}
+        Then, 
+        \[
+            0 = \left(c_1 - \tilde{c_1}\right)\vec{b_1} + \left(c_2 - \tilde{c_2}\right)\vec{b_2} + \cdots\, + \left(c_n - \tilde{c_n}\right)\vec{b_n}.
+        \]
+        However, this is only possile if, and only if, $c_i = \tilde{c_i}$ for $0 \leq i \leq n$. Thus, $c_1, c_2, \ldots, c_n$ is unique.
+    \end{proof} 
+\end{thm}
+
+Consider equation~(\ref{eq:4}) in the form 
+\[
+    \vec{v} = \hat{B}C \text{ where } \hat{B} = \begin{pmatrix}
+        | & | & & | \\
+        \vec{b_1} & \vec{b_2} & \cdots & \vec{b_n} \\
+        | & | & & |
+    \end{pmatrix}
+    \text{ and }
+    C = \begin{pmatrix}
+        c_1 \\ c_2 \\ \vdots \\ c_n
+    \end{pmatrix}.
+\]
+We now re-label $C$ to be $[v]_{B}$ and call it the \textbf{vector coordinate of $\vec{v}$ in $B$}. Then, since $\hat{B}$ is invertible, 
+\[
+    \vec{v} = \hat{B}\left[v\right]_{B} \Rightarrow [v]_{B} = \hat{B}^{-1}\vec{v}
+\]
+
+\begin{example}{}{}
+    Find the vector coordinate of $\vec{v}$ in $\hat{B}$ if 
+    \[
+        \hat{B} = \braces{\begin{pmatrix}
+            1 \\ 1 \\ 1    
+        \end{pmatrix}, 
+        \begin{pmatrix}
+            1 \\ -1 \\ 1
+        \end{pmatrix},
+        \begin{pmatrix}
+            1 \\ 2 \\ 2
+        \end{pmatrix}}
+        \text{ and }
+        \vec{v} = \begin{pmatrix}
+            1 \\ -4 \\ 4
+        \end{pmatrix}
+    \]
+    \begin{solution}
+        We can find $\left(\hat{B}\,|\,\vec{v}\right)$ and use it to solve $\hat{B}\left[\vec{v}\right]_{B} = \vec{v}$.
+        \[
+            \begin{amatrix}{1}
+                \hat{B} & \vec{v}
+            \end{amatrix} =
+            \begin{amatrix}{3}
+                1 & 1 & 1 & 1 \\
+                1 & -1 & 2 & -4 \\
+                1 & 1 & 2 & 4
+            \end{amatrix}
+            \xrightarrow[R_3 \to R_3 - R_1]{R_2 \to R_2 - R_1}
+            \begin{amatrix}{3}
+                1 & 1 & 1 & 1 \\
+                0 & -2 & 1 & -5 \\
+                0 & 0 & 1 & 3
+            \end{amatrix}
+            = 
+            \begin{amatrix}{1}
+                \hat{B} & \vec{v}
+            \end{amatrix}_{\text{REF}}.
+        \]
+        Using this we can solve the system 
+        \[
+            \left.\begin{cases}
+                c_3 &= 3 \\
+                -2c_2 + c_3 &= -5 \Rightarrow c_2 = 4 \\
+                c_1 + c_2 + c_3 &= 1 \Rightarrow c_1 = -6
+            \end{cases}\right] \Rightarrow \left[\vec{v}\right]_{B} = \begin{pmatrix}
+                -6 \\ 4 \\ 3
+            \end{pmatrix}
+        \]
+    \end{solution}
+\end{example}
+
+\begin{example}{}{}
+    Consider the set $\hat{B}$ below as a basis for $\mathbb{P}_2$. Find teh coordinates of $\mathbf{p}(t) = 3 + t - 6t^2$ relative to $\hat{B}$.
+    \[
+        \hat{B} = \braces{
+            \begin{pmatrix}
+                1 \\ 0 \\ -1
+            \end{pmatrix},
+            \begin{pmatrix}
+                0 \\ 1 \\ -1
+            \end{pmatrix},
+            \begin{pmatrix}
+                2 \\ -2 \\ 1
+            \end{pmatrix}
+        } 
+    \]
+    \begin{solution}
+        This time around, we will find $\hat{B}^{-1}$ and use it to solve for $\left[\vec{v}\right]_{B}$.
+        \begin{align*}
+            \begin{Lamatrix}{6}{3}
+                1 & 0 & 2 & 1 & 0 & 0 \\
+                0 & 1 & -2 & 0 & 1 & 0 \\
+                -1 & -1 & 1 & 0 & 0 & 1
+            \end{Lamatrix}
+            &\xrightarrow{R_3 \to R_3 + R_1}
+            \begin{Lamatrix}{6}{3}
+                1 & 0 & 2 & 1 & 0 & 0 \\
+                0 & 1 & -2 & 0 & 1 & 0 \\
+                0 & -1 & 3 & 1 & 0 & 1
+            \end{Lamatrix} \\
+            &\xrightarrow{R_3 \to R_3 + R_2}
+            \begin{Lamatrix}{6}{3}
+                1 & 0 & 2 & 1 & 0 & 0 \\
+                0 & 1 & -2 & 0 & 1 & 0 \\
+                0 & 0 & 1 & 1 & 1 & 1
+            \end{Lamatrix} \\
+            &\xrightarrow{R_1 \to R_1 + R_2}
+            \begin{Lamatrix}{6}{3}
+                1 & 0 & 0 & 1 & 1 & 0 \\
+                0 & 1 & -2 & 0 & 1 & 0 \\
+                0 & 0 & 1 & 1 & 1 & 1
+            \end{Lamatrix} \\
+            &\xrightarrow{R_3 \to R_2 + 2R_3}
+            \begin{Lamatrix}{6}{3}
+                1 & 0 & 0 & 1 & 1 & 0 \\
+                0 & 1 & 0 & 2 & 3 & 2 \\
+                0 & 0 & 1 & 1 & 1 & 1
+            \end{Lamatrix} \\
+            &\Rightarrow \hat{B}^{-1} = \begin{pmatrix}
+                1 & 1 & 0 \\
+                2 & 3 & 2 \\
+                1 & 1 & 1
+            \end{pmatrix}.
+        \end{align*}
+        Thus, 
+        \[
+            \left[\vec{v}\right]_{B} = \hat{B}^{-1}\vec{v} = \begin{pmatrix}
+                4 \\ -3 \\ -2
+            \end{pmatrix} 
+        \]
+    \end{solution}
+\end{example}
