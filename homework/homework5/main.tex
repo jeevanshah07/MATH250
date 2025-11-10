@@ -1,0 +1,476 @@
+\documentclass{exam}
+\usepackage{../../shah250}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shtelen \\ Linear Algebra}{Homework 5}{Jeevan Shah}
+\runningheader{Linear Algebra \\ Homework 5}{}{Shah}
+\firstpagefooter{}{}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+\begin{document}
+\underline{\#13 [4.4]:} The set $\mathcal{B} = \braces{1+t^2, t+t^2, 1+2t+t^2}$ is a basis for $\mathbb{P}_2$. Find the coordinate vector of $\mathbf{p}\left(t\right)=1+4t+7t^2$ relative to $\mathcal{B}$.
+\begin{solution}
+    Using the isomorphism between $\RR^{3}$ and $\mathbb{P}_2$ we can rewrite $\mathcal{B}$ and $\mathbf{p}(t)$ as 
+    \[
+        \mathcal{B} = \braces{
+            \begin{pmatrix}
+                1 \\ 0 \\ 1
+            \end{pmatrix},
+            \begin{pmatrix}
+                0 \\ 1 \\ 1
+            \end{pmatrix},
+            \begin{pmatrix}
+                1 \\ 2 \\ 1
+            \end{pmatrix}
+        } 
+        \text{ and }
+        \mathbf{p} = \begin{pmatrix}
+            1 \\ 4 \\ 7
+        \end{pmatrix}.
+    \]
+    Now we know that $\left[\mathbf{p}\right]_{\mathcal{B}}$ must satisfy the equation ${B}\left[\mathbf{p}\right]_{\mathcal{B}} = \mathbf{p}$ if $B$ is the matrix whos columns are the vectors from $\mathcal{B}$. We can easily solve for $\left[\mathbf{p}\right]_{\mathcal{B}}$ by row reducing the agumented matrix $\left(B \mid \mathbf{p}\right)$. 
+    \begin{align*}
+        \begin{amatrix}{1} B & \mathbf{p} \end{amatrix} &= \begin{amatrix}{3}
+            1 & 0 & 1 & 1 \\
+            0 & 1 & 2 & 4 \\
+            1 & 1 & 1 & 7 
+        \end{amatrix} \\
+        \xrightarrow{R_3\to\,R_3-R_1}& \begin{amatrix}{3}
+            1 & 0 & 1 & 1 \\
+            0 & 1 & 2 & 4 \\
+            0 & 1 & 0 & 6 
+        \end{amatrix} \\
+        \xrightarrow{R_3\to\,R_3-R_2}& \begin{amatrix}{3}
+            1 & 0 & 1 & 1 \\
+            0 & 1 & 2 & 4 \\
+            0 & 0 & -2 & 2 
+        \end{amatrix} \\
+        \Rightarrow& \begin{cases}
+            x_3 &= -1 \\
+            x_2 &= 6 \\
+            x_1 &= 2
+        \end{cases}
+    \end{align*}
+    Thus, 
+    \[
+        \left[\mathbf{p}\right]_{\mathcal{B}} = \begin{pmatrix}
+            2 \\ 6 \\ -1
+        \end{pmatrix} 
+    \]
+\end{solution}
+
+\underline{\#31 [4.4]:}  Use coordinate vectors to test the linear independence of the set of polynomials below. 
+\[
+    \braces{1+2t^3, 2+t-3t^2, -t +2t^2-t^3}
+\]
+\begin{solution}
+    Using the isomorphism between $\mathbb{P}_3$ and $\RR^4$ we can write this set as 
+    \[
+        \braces{
+            \begin{pmatrix}
+                1 \\ 0 \\ 0 \\ 2
+            \end{pmatrix},
+            \begin{pmatrix} 
+                2 \\ 1 \\ -3 \\ 0
+            \end{pmatrix},
+            \begin{pmatrix}
+                0 \\ -1 \\ 2 \\ -1
+            \end{pmatrix}
+        }.
+    \]
+    Now we can form the matrix from the columns of the set 
+    \[
+        \underset{4 \times 3}{A} = \begin{pmatrix}
+            1 & 2 & 0 \\
+            0 & 1 & -1 \\
+            0 & -3 & 2 \\
+            2 & 0 & -1
+        \end{pmatrix}.
+    \]    
+    Then, 
+    \[
+        A \xrightarrow{R_4 \to R_2 -2R_1} \begin{pmatrix}
+            1 & 2 & 0 \\
+            0 & 1 & -1 \\
+            0 & -3 & 2 \\
+            0 & -4 & -1
+        \end{pmatrix}
+        \xrightarrow[R_4 \to R_4 + 4R_2]{R_3 \to R_3 +3R_2}
+        \begin{pmatrix}
+            1 & 2 & 0 \\
+            0 & 1 & -1 \\
+            0 & 0 & -1 \\
+            0 & 0 & -5
+        \end{pmatrix}.
+    \]
+    Thus $\rank{A} = 3 = n$ so the set \textbf{is} linearly independent.
+\end{solution}
+
+\underline{\#35 [4.4]:} Use coordinate vectors to test whether the following sets of polynomials span $\mathbb{P}_2$. 
+\begin{parts}
+    \part $\braces{1-3t+5t^2, -3 + 5t - 7t^2, -4+5t - 6t^2, 1-t^2}$
+    \begin{solution}
+        As usual, we will take take advantage of the isomorphism between $\mathbb{P}_2$ and $\RR^{3}$ to allow us to rewrite the set as 
+        \[
+            \braces{
+                \begin{pmatrix}
+                    1 \\ -3 \\ 5
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -3 \\ 5 \\ -7
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -4 \\ 5 \\ -6
+                \end{pmatrix},
+                \begin{pmatrix}
+                    1 \\ 0 \\ -1
+                \end{pmatrix}
+            }.
+        \]
+        We now form the matrix whos columns are the vectors from the above set, and row reduce: 
+        \[
+            \begin{pmatrix}
+                1 & -3 & -4 & 1 \\
+                -3 & 5 & 5 & 0 \\
+                5 & -7 & -6 & -1
+            \end{pmatrix}
+            \xrightarrow[R_3 \to R_3 - 5R_1]{R_2 \to R_2 + 3R_1}
+            \begin{pmatrix}
+                1 & -3 & -4 & 1 \\
+                0 & -4 & -7 & 3 \\
+                0 & 8 & 14 & -6
+            \end{pmatrix}
+            \xrightarrow{R_3 \to R_3 + 2R_2}
+            \begin{pmatrix}
+                1 & -3 & -4 & 1 \\
+                0 & -4 & -7 & 3 \\
+                0 & 0 & 0 & 0
+            \end{pmatrix}.
+        \]
+        This matrix has a rank of $2$ which is less than $\dim{\RR^3} = \dim{\mathbb{P}_2} = 3$, so these vectors \textbf{do not} span $\mathbb{P}_2$.
+    \end{solution}
+
+    \part $\braces{5t+t^2, 1-8t-2t^2, -3+4t+2t^2, 2-3t}$
+    \begin{solution}
+        We will follow an extremely similar process as in the above part and so certain details are omitted. 
+        \[
+            \begin{pmatrix}
+                0 & 1 & -3 & 2 \\
+                5 & -8 & 4 & -3 \\
+                1 & -2 & 2 & 0
+            \end{pmatrix} 
+            \xrightarrow[R_2 \to R_2 - 5R_3]{R_3 \leftrightarrow R_1}
+            \begin{pmatrix}
+                1 & -2 & 2 & 0 \\
+                0 & 2 & -6 & -3 \\
+                0 & 1 & -3 & 2
+            \end{pmatrix}
+            \xrightarrow[R_2 \to R_2 - 2R_3]{R_2 \leftrightarrow R_3}
+            \begin{pmatrix}
+                1 & -2 & 2 & 0 \\
+                0 & 1 & -3 & 2 \\
+                0 & 0 & 0 & -7
+            \end{pmatrix}.
+        \]
+        The rank of this matrix is $3 = \dim{\RR^3} = \dim{\mathbb{P}_2}$, so these vectors \textbf{do} span $\mathbb{P}_2$
+    \end{solution}
+\end{parts}
+\underline{\#31 [4.5]:}  Set $S$ be a subset of an $n$-dimensional vector space $V$, and suppose $S$ contains fewer than $n$ vectors. Explain why $S$ cannot span $V$. A
+\begin{solution}
+    \begin{proof}
+        Suppose not. Suppose that $S$ spans $V$. Now consider a subset of $S$, $S'$, that is a basis for $S$. $S'$ will contain at most $k$ vectors if $S$ has $k < n$ vectors. If $S'$ is a basis for $S$ and $S$ spans $V$, then $S'$ must be a basis for $V$ as well. However, all basis of $V$ must have $n$ vectors since $V$ is $n$-dimensional. Thus we have reached a contradiction since $S'$ must have $k$ vectors and $n$ vectors. Therefore, our supposition must be false and $S$ cannot span $V$.  
+    \end{proof}
+\end{solution}
+
+\newpage 
+
+\underline{\#39 [4.5]:} If $A$ is a $7 \times 5$ matrix, what is the largest possible rank of $A$? If $A$ is a $5 \times 7$ matrix, what is the largest possible rank of $A$?
+\begin{solution}
+    It is a known fact that for any $m \times n$ matrix $M$, $\rank{M} \leq \min{m, n}$. Thus, in either case $\rank{A} \leq \min{5, 7} = 5$. So, the largest possible rank is $5$. 
+\end{solution}
+
+\underline{\#15 [4.6]:}  in $\mathbb{P}_2$, find the change-of-coordinates matrix from the basis $\mathcal{B} = \braces{1-2t + t^2 , 3-4t+4t^2, 2t+3t^2}$ to the standard basis $\mathcal{C} = \braces{1, t, t^2}$. Then find the $\mathcal{B}$-coordinate vector for $-1+2t$.
+\begin{solution}
+    If $C$ is the matrix whos columns are the vectors in $\mathcal{C}$ and $B$ is the matrix whos columns are the vectors in $\mathcal{B}$, we can find the change-of-coordinates matrix $\underset{\mathcal{C} \leftarrow \mathcal{B}}{P}$ by augmenting $B$ and $C$ and row-reducing until we have $\left(I \mid \underset{\mathcal{C} \leftarrow \mathcal{B}}{P}\right)$. So, 
+    \[
+        \begin{Lamatrix}{6}{3}
+            1 & 0 & 0 & 1 & 3 & 0 \\
+            0 & 1 & 0 & -2 & -5 & 2 \\
+            0 & 0 & 1 & 1 & 4 & 3
+        \end{Lamatrix}.
+    \]
+    Since this is already in the required form we know that 
+    \[
+        \underset{\mathcal{C} \leftarrow \mathcal{B}}{P} = \begin{pmatrix}
+            1 & 3 & 0 \\
+            -2 & -5 & 2 \\
+            1 & 4 & 3
+        \end{pmatrix}.
+    \]
+    Now, to find the $\mathcal{B}$-coordinate vector for $-1+2t$ we must first find $\underset{\mathcal{B}\leftarrow\mathcal{C}}{P} = \left(\underset{\mathcal{C} \leftarrow \mathcal{B}}{P}\right)^{-1}$. Thus, 
+    \begin{align*}
+        \begin{Lamatrix}{6}{3}
+            1 & 3 & 0 & 1 & 0 & 0 \\
+            -2 & -5 & 2 & 0 & 1 & 0 \\
+            1 & 4 & 3 & 0 & 0 & 1 
+        \end{Lamatrix}
+        \xrightarrow[R_3 \to R_3 - R_1]{R_2 \to R_2 + 2R_1}&
+        \begin{Lamatrix}{6}{3}
+            1 & 3 & 0 & 1 & 0 & 0 \\
+            0 & 1 & 2 & 2 & 1 & 0 \\
+            0 & 1 & 3 & -1 & 0 & 1 
+        \end{Lamatrix} \\
+        \xrightarrow{R_3 \to R_3 - R_2}&
+        \begin{Lamatrix}{6}{3}
+            1 & 3 & 0 & 1 & 0 & 0 \\
+            0 & 1 & 2 & 2 & 1 & 0 \\
+            0 & 0 & 1 & -3 & -1 & 1 
+        \end{Lamatrix} \\
+        \xrightarrow[R_1 \to R_1 -3R_2]{R_2 \to R_2 - 2R_3}&
+        \begin{Lamatrix}{6}{3}
+            1 & 0 & 0 & -23 & -8 & 6 \\
+            0 & 1 & 0 & 8 & 3 & -2 \\
+            0 & 0 & 1 & -3 & -1 & 1 
+        \end{Lamatrix} \\
+        \Rightarrow \underset{\mathcal{B}\leftarrow\mathcal{C}}{P} =&
+        \begin{pmatrix}
+            -23 & -8 & 6 \\
+            8 & 3 & -2 \\
+            -3 & -1 & 1
+        \end{pmatrix}.
+    \end{align*}
+    Now we can use the equation $\underset{\mathcal{B}\leftarrow\mathcal{C}}{P}\vec{x} = \left[\vec{x}\right]_{\mathcal{B}}$, 
+    \[
+        \begin{pmatrix}
+            -23 & -8 & 6 \\
+            8 & 3 & -2 \\
+            -3 & -1 & 1
+        \end{pmatrix}
+        \begin{pmatrix}
+            -1 \\ 2 \\ 0
+        \end{pmatrix}
+        =
+        \boxed{\begin{pmatrix}
+            5 \\ -2 \\ 1
+        \end{pmatrix}
+        = 
+        \left[\vec{x}\right]_{\mathcal{B}}}
+    \]
+\end{solution}
+
+\underline{\#15 [5.1]:} Find a basis for the eigenspace corresponding to $\lambda = 3$ for the below matrix. 
+\[
+    A = \begin{pmatrix}
+        4 & 2 & 3 \\
+        -1 & 1 & -3 \\
+        2 & 4 & 9
+    \end{pmatrix}
+\]
+\begin{solution}
+    In order to find the eigenvectors for $\lambda$ we must consider the solution to the general homogenous equation $A-\lambda\,I = 0$. 
+    \[
+        \begin{pmatrix}
+            4 & 2 & 3 \\
+            -1 & 1 & -3 \\
+            2 & 4 & 9
+        \end{pmatrix} 
+        - 3
+        \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}
+        = \begin{pmatrix}
+            1 & 2 & 3 \\
+            -1 & -2 & -3 \\
+            2 & 4 & 6
+        \end{pmatrix}
+        \xrightarrow[R_3 \to R_3 - 2R_1]{R_2 \to R_2 + R_1}
+        \begin{pmatrix}
+            1 & 2 & 3 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0
+        \end{pmatrix}.
+    \]
+    Thus, we have 
+    \[
+        X_{\text{gen}} = s\begin{pmatrix}
+            -3 \\ 0 \\ 1
+        \end{pmatrix} + t\begin{pmatrix}
+            -2 \\ 1 \\ 0
+        \end{pmatrix}
+    \]
+    for $x_2 = t$ and $x_3 = s$. So, a basis for our eigenspace is 
+    \[
+        \Span{
+            \begin{pmatrix}
+                -3 \\ 0 \\ 1
+            \end{pmatrix},
+            \begin{pmatrix}
+                -2 \\ 1 \\ 0
+            \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\underline{\#17 [5.1]:} Find the eigenvalues of the matrix below 
+\[
+    \begin{pmatrix}
+        0 & 0 & 0 \\
+        0 & 2 & 5 \\
+        0 & 0 & -1
+    \end{pmatrix}
+\]
+\begin{solution}
+    Consider $A-\lambda\,I$, 
+    \[
+        \begin{pmatrix}
+            0 & 0 & 0 \\
+            0 & 2 & 5 \\
+            0 & 0 & -1
+        \end{pmatrix}
+        -\lambda
+        \begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}
+        = 
+        \begin{pmatrix}
+            -\lambda & 0 & 0 \\
+            0 & 2-\lambda & 0 \\
+            0 & 0 & -1 - \lambda
+        \end{pmatrix}.
+    \]
+    Since this is a triangular matrix, we know that its determinant is simply the product of the diagonal entries: 
+    \[
+        \det\left(A-\lambda\,I\right) = \left(-\lambda\right)\left(2-\lambda\right)\left(-1-\lambda\right) = 0 \Rightarrow \boxed{\lambda = 0, 2, -1}
+    \]
+\end{solution}
+
+\newpage
+
+\underline{\#7 [5.2]:} Find the eigenvalues and eigenvectors of the below matrix. 
+\[
+    \begin{pmatrix}
+        5 & 3 \\
+        -4 & 4
+    \end{pmatrix}
+\]
+\begin{solution}
+    Since this is a $2\times\,2$ matrix, we can go straight to the characteristic equation using the known formula $\lambda^2 - (a+d)\lambda + \left(ad-bc\right)$. We can use this to solve for $\lambda$. 
+    \[
+        0 = \lambda^2 - 9\lambda + 32 \Rightarrow \lambda = \frac{9 \pm \sqrt{9^2 - 4(32)}}{2} = \frac{9\pm\,i\sqrt{47}}{2}
+    \]
+    Thus, our two eigenvalues are 
+    \[
+        \boxed{
+            \lambda = \frac{9 + i{\sqrt{47}}}{2}, \frac{9 - i{\sqrt{47}}}{2}
+        }
+    \]
+    We can now find our eigenvectors: 
+    \begin{align*}
+        \begin{pmatrix}
+            5 & 3 \\ 
+            -4 & 4
+        \end{pmatrix} 
+        - \frac{9 + i\sqrt{47}}{2}\begin{pmatrix}
+            1 & 0 \\
+            0 & 1
+        \end{pmatrix}
+        &\Rightarrow \left(5 - \frac{9 + i\sqrt{47}}{2}\right)x_1 + 3x_2 = 0 \\
+        &\Rightarrow \left(10-9+i\sqrt{47}\right)x_1 + 6x_2 = 0 \\
+        &\Rightarrow 6x_2 = \left(-1 + i\sqrt{47}\right)x_1 \\
+        &\Rightarrow x_2 = \frac{x_1}{6}\left(-1 + i\sqrt{47}\right).
+    \end{align*}
+    Now, if we let $x_1 = 6t$ we can eliminate the fraction. The second eigenvector is easily found as the complex conjugate. So, our eigenvectors are 
+    \[
+        \boxed{\braces{
+            \begin{pmatrix}
+                6 \\ -1 + i\sqrt{47}
+            \end{pmatrix},
+            \begin{pmatrix}
+                6 \\ -1 - i\sqrt{47}
+            \end{pmatrix}
+        }}
+    \]
+\end{solution}
+
+\underline{\#9 [5.2]:} Find the characteristic polynomial of the matrix below using expansion across a row or down a column.
+\[
+    A = \begin{pmatrix}
+        1 & 0 & -1 \\
+        2 & 3 & -1 \\
+        0 & 6 & 0
+    \end{pmatrix}
+\]
+\begin{solution}
+    \begin{align*}
+        \det\left(A-\lambda\,I\right) = 0 &\Rightarrow \det\left[\begin{pmatrix}
+            1 & 0 & -1 \\
+            2 & 3 & -1 \\
+            0 & 7 & 0
+        \end{pmatrix}
+        - \lambda\begin{pmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & 0 \\
+            0 & 0 & 1
+        \end{pmatrix}\right] = 0 \\
+        &\Rightarrow \det\left[\begin{pmatrix}
+            1-\lambda & 0 & -1 \\
+            2 & 3-\lambda & -1 \\
+            0 & 6 & -\lambda 
+        \end{pmatrix}\right] \\
+        &= -6\left(\lambda-1+2\right) - \lambda\left(1-\lambda\right)\left(3-\lambda\right) \\
+        &= \boxed{-\lambda^3 +4\lambda^2 - 9\lambda - 6}
+    \end{align*}
+\end{solution}
+
+\newpage
+
+\underline{\#3 [5.5]:} Find the eigenvalues and a bsis for the eigenspace in $\mathbb{C}^2$ of the below matrix.
+\[
+    \begin{pmatrix}
+        1 & 5 \\
+        -2 & 3
+    \end{pmatrix}
+\]
+\begin{solution}
+    Since this is a $2\times\,2$ matrix we can go straight to the characteristic equation and solve for $\lambda$:
+    \[
+        0 = \lambda^2 - 4\lambda + 13 \Rightarrow \lambda = \frac{4 \pm \sqrt{16}-4(13)}{2} = 2\pm\,3i.
+    \]
+    We can solve for an eigenvector by looking at $A - \lambda\,I$ for a choosen eigenvalue: 
+    \begin{align*}
+        \begin{pmatrix}
+            1 & 5 \\
+            -2 & 3
+        \end{pmatrix} 
+        - 2+3i\begin{pmatrix}
+            1 & 0 \\ 0 & 1
+        \end{pmatrix}
+        &\Rightarrow \left(1-2+3i\right)x_1 + 5x_2 = 0 \\
+        &\Rightarrow 5x_2 = \left(1-3i\right)x_1 \\
+        &\Rightarrow x_2 = \frac{x_1}{5}\left(1-3i\right).
+    \end{align*}
+    If we let $x_1=5t$ to eliminate the fraction we can find our eigenvectors and our eigenspace. Note that the second eigenvector is simply found by taking the complex conjugate of the first eigenvectore. So, our the basis to our eigenspace is
+    \[
+        \boxed{\Span{
+            \begin{pmatrix}
+                5 \\ 1-3i
+            \end{pmatrix},
+            \begin{pmatrix}
+                5 \\ 1+3i
+            \end{pmatrix}
+        }}
+    \]
+\end{solution}
+
+\footnotetext{\LaTeX\ code for this document can be found on github \href{https://github.com/jeevanshah07/MATH250/blob/main/homework/homework5/main.tex}{\underline{here}}}
+\end{document}
