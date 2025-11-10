@@ -980,3 +980,245 @@ We now re-label $C$ to be $[v]_{B}$ and call it the \textbf{vector coordinate of
         \]
     \end{solution}
 \end{example}
+
+\subsection{Lecture 18: The Dimension of a Vector Space and Change of Basis [4.5-4.6]}
+
+\begin{thm}{}{}
+    If a vector space $V$ has a basis $\mathcal{B} = \braces{\vec{b_1}, \ldots, \vec{b_n}}$, then any set in $V$ containing more than $n$ vecotrs must be linearly dependent.
+\end{thm}
+
+\begin{thm}{}{}
+    If a vector $V$ has a basis of $n$ vectors, then every basis of $V$ must consist of exactly $n$ vectors. 
+\end{thm}
+
+\begin{defbox}{}{}{}
+    If a vector space $V$ is spanned by a finite set set, then $V$ is said to be have \underline{finite dimension}, and the \underline{dimension} of $V$, written as $\dim V$ is the number of vectors in a basis for $V$. If $V$ is not spanned by a finite set, then $V$ is said to be \underline{infinite-dimensional}.
+\end{defbox}
+
+\newpage
+
+The dimension of the zero vector space, $\braces{\vec{0}}$ is defined to be $0$. The standard basis for $\RR^{n}$ has $n$ vectors, so $\dim\left[\RR^{n}\right] = n$. The standard basis for $\mathbb{P}_n$ has $n+1$ vectors, so $\dim\left[\mathbb{P}_2\right] = n+1$.
+
+\begin{thm}{}{}
+    Let $H$ be a subspace of a finite dimensional vector space $V$. Any linearly indepedent set in $H$ can be expanded to a basis for $H$. Also, $H$ is finite dimensional and $\dim H \leq \dim V$. 
+\end{thm}
+
+\begin{thm}{}{}
+    Let $V$ be a $p$-dimensional vector space with $p \geq 1$. Any linearly independent set of exactly $p$ elements in $V$ is automatically a basis for $V$. Any set of exactly $p$ elements that spans $V$ is automatically a basis for $V$.
+\end{thm}
+
+\begin{defbox}{}{}
+    The \underline{rank} of an $m\times\,n$ matrix $A$, $\rank A$, is the dimension of the column space. The \underline{nullity} of $A$, $\nul A$, is the dimension of the null space.
+\end{defbox}
+
+The nullity of $A$ is also equal to the number of free variables in the homogenous system $A\vec{x}=0$.
+
+\begin{impbox}{}{}
+    $\rank A + \nul A =$ the number of columns in $A$. 
+\end{impbox}
+
+From these above theorems and facts we can extend our understanding of invertible matricies. 
+\begin{thm}{}{}
+    Let $A$ be an $n\times\,n$ matrix. If $A$ is invertible then,
+    \begin{enumerate}
+        \item $\Col{A}$ is a basis of $\RR^{n}$
+        \item $\Col{A} = \RR^{n}$
+        \item $\rank A = n$
+        \item $\nul A = 0$
+        \item $\Nul A = \braces{0}$
+    \end{enumerate}
+\end{thm}
+
+\begin{defbox}{Change of Coordinates}{}
+    Let $\mathcal{B} = \braces{b_1, \ldots, b_n}$ and $\mathcal{C} = \braces{c_1, \ldots, c_n}$ be basis of a vector space $V$. Then, there exists a unique $n\times\,n$ matrix $\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}$ such that 
+    \[
+        \left[\vec{x}\right]_{\mathcal{C}} = \underset{\mathcal{C}\leftarrow\mathcal{B}}{P}\left[\vec{x}\right]_{\mathcal{B}}.
+    \]
+    The columns of $\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}$ are the $\mathcal{C}$-coordinate vectors of the vectors in the basis $\mathcal{B}$. That is, 
+    \[
+        \underset{\mathcal{C}\leftarrow\mathcal{B}}{P} = \begin{pmatrix}
+            \left[b_1\right]_{\mathcal{C}} & \left[b_2\right]_\mathcal{C} & \cdots & \left[b_n\right]_{\mathcal{C}}.
+        \end{pmatrix} 
+    \]
+    The matrix $\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}$ is called the \underline{change-of-coordinates matrix from $\mathcal{B}$ to $\mathcal{C}$}.
+\end{defbox}
+
+\begin{example}{}{}
+    Consider the bases $\mathcal{B}$ and $\mathcal{C}$ below. Find $\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}$.
+    \[
+        \mathcal{B} = \braces{
+            \begin{pmatrix}
+                -9 \\ 1
+            \end{pmatrix},
+            \begin{pmatrix}
+                -5 \\ -1
+            \end{pmatrix}
+        } 
+        \text{ and }
+        \mathcal{C} = \braces{
+            \begin{pmatrix}
+                1 \\ -4
+            \end{pmatrix},
+            \begin{pmatrix}
+                3 \\ -5
+            \end{pmatrix}
+        }
+    \]
+
+    \begin{solution}
+        Consider the vectors in $\mathcal{B}$ to be $b_1$ and $b_2$ and similarly for $\mathcal{C}$ to be $c_1$ and $c_2$. We must find $\left[b_1\right]_{\mathcal{C}}$ and $\left[b_2\right]_{\mathcal{C}}$. If we let $\left[b_1\right]_{\mathcal{C}} = \begin{pmatrix} x_1 \\ x_2 \end{pmatrix}$ and $\left[b_2\right]_{\mathcal{C}} = \begin{pmatrix} y_1 \\ y_2 \end{pmatrix}$ we should have the following relationship:
+        \begin{align*}
+            b_1 &= c_1x_1 + c_2x_2 = \begin{pmatrix}
+                \left(c_1\right) & \left(c_2\right)
+            \end{pmatrix}
+            \begin{pmatrix}
+                x_1 \\ x_2
+            \end{pmatrix} \\
+            b_2 &= c_1y_1 + c_2y_2 = \begin{pmatrix}
+                \left(c_1\right) & \left(c_2\right)
+            \end{pmatrix}
+            \begin{pmatrix}
+                y_1 \\ y_2
+            \end{pmatrix}.
+        \end{align*}
+        Now, we can solve both these systems simulatneously by row reducing the matrix 
+        \[
+            \begin{Lamatrix}{4}{2}
+                \left(c_1\right) & \left(c_2\right) & \left(b_1\right) & \left(b_2\right)
+            \end{Lamatrix}.
+        \]
+        We do this as follows
+        \begin{align*}
+            \begin{Lamatrix}{4}{2}
+                \left(c_1\right) & \left(c_2\right) & \left(b_1\right) & \left(b_2\right)
+            \end{Lamatrix}
+            =&
+            \begin{Lamatrix}{4}{2}
+                1 & 3 & -9 & -5 \\
+                -4 & -5 & 1 & -1 
+            \end{Lamatrix} \\
+            \xrightarrow{R_2 \to R_2 + 4R_1}& 
+            \begin{Lamatrix}{4}{2}
+                1 & 3 & -9 & -5 \\
+                0 & 7 & -35 & -21 
+            \end{Lamatrix} \\
+            \xrightarrow{R_2 \to \frac{1}{7}R_2}&
+            \begin{Lamatrix}{4}{2}
+                1 & 3 & -9 & -5 \\
+                0 & 1 & -5 & -3 
+            \end{Lamatrix} \\
+            \xrightarrow{R_1 \to R_1 - 3R_2}
+            \begin{Lamatrix}{4}{2}
+                1 & 0 & 6 & 4 \\
+                0 & 1 & -5 & -3 
+            \end{Lamatrix}.
+        \end{align*}
+        Thus, 
+        \[
+            \left[b_1\right]_\mathcal{C} = \begin{pmatrix}
+                6 \\ -5
+            \end{pmatrix} 
+            \text{ and }
+            \left[b_2\right]_\mathcal{C} = \begin{pmatrix}
+                4 \\ -3
+            \end{pmatrix}.
+        \]
+        So,
+        \[
+            \boxed{\underset{\mathcal{C}\leftarrow\mathcal{B}}{P} = \begin{pmatrix}
+                6 & 4 \\
+                -5 & -3
+            \end{pmatrix}}
+        \]
+    \end{solution}
+\end{example}
+
+The method used here holds in most cases. In general we have
+\begin{impbox}{}{}
+    \[
+        \begin{Lamatrix}{4}{2}
+            \left(c_1\right) & \left(c_2\right) & \left(b_1\right) & \left(b_2\right)
+        \end{Lamatrix} 
+        \sim
+        \begin{Lamatrix}{2}{1}
+            I & \underset{\mathcal{C}\leftarrow\mathcal{B}}{P}
+        \end{Lamatrix} 
+    \]
+\end{impbox}
+
+\begin{example}{}{}
+    Consider the bases for $\RR^{2}$ given by $\mathcal{B} = \braces{b_1, b_2}$ and $\mathcal{C} = \braces{c_1, c_2}$ below.
+    \[
+        \mathcal{B} = \braces{\begin{pmatrix}
+            1 \\ -3
+        \end{pmatrix},
+        \begin{pmatrix}
+            -2 \\ 4
+        \end{pmatrix}} 
+        \text{ and }
+        \mathcal{C} = \braces{
+            \begin{pmatrix}
+                -7 \\ 9
+            \end{pmatrix},
+            \begin{pmatrix}
+                -5 \\ 7
+            \end{pmatrix}
+        }
+    \]
+    \begin{parts}
+        \part Find $\underset{\mathcal{B}\leftarrow\mathcal{C}}{P}$
+        \begin{solution}
+            Consider 
+            \[
+                \begin{Lamatrix}{4}{2}
+                    \left(b_1\right) & \left(b_2\right) & \left(c_1\right) & \left(c_2\right)
+                \end{Lamatrix}.
+            \]
+            Then, 
+            \begin{align*}
+                \begin{Lamatrix}{4}{2}
+                    1 & -2 & -7 & -5 \\
+                    -3 & 4 & 9 & 7
+                \end{Lamatrix} \\
+                \xrightarrow{R_2\to\,R_2+3R_1}&
+                \begin{Lamatrix}{4}{2}
+                    1 & -2 & -7 & -5 \\
+                    0 & -2 & -12 & -8
+                \end{Lamatrix} \\
+                \xrightarrow[R_1 \to R_1 + R_2]{R_2 \to -\frac{1}{2}R_2}&
+                \begin{Lamatrix}{4}{2}
+                    1 & 0 & 5 & 3 \\
+                    0 & 0 & 6 & 4
+                \end{Lamatrix}.
+            \end{align*}
+            Thus, 
+            \[
+                \boxed{
+                    \underset{\mathcal{B}\leftarrow\mathcal{C}}{P} = \begin{pmatrix}
+                        5 & 3 \\
+                        6 & 4
+                    \end{pmatrix}
+                } 
+            \]
+        \end{solution}
+
+        \part Find $\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}$
+        \begin{solution}
+            Before we start consider the relationship 
+            \[
+                \underset{\mathcal{C}\leftarrow\mathcal{B}}{P}\left[b_1\right]_\mathcal{B} = \left[b_1\right]_\mathcal{C}
+            \]
+            and multiply by $\left(\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}\right)^{-1}$ and notice that we now have 
+            \[
+                \left[b_1\right]_\mathcal{B} = \left(\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}\right)^{-1}\left[b_1\right]_\mathcal{C}.
+            \]
+            Therefore, $\underset{\mathcal{B}\leftarrow\mathcal{C}}{P} = \left(\underset{\mathcal{C}\leftarrow\mathcal{B}}{P}\right)^{-1}$! We can apply this property to our problem to see 
+            \[
+                \underset{\mathcal{C}\leftarrow\mathcal{B}}{P} = \left(\underset{\mathcal{B}\leftarrow\mathcal{C}}{P}\right)^{-1} = \frac{1}{2}\begin{pmatrix}
+                    4 & -3 \\
+                    -6 & 5
+                \end{pmatrix}
+            \]
+        \end{solution}
+    \end{parts}
+\end{example}
