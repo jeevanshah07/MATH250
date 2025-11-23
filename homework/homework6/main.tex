@@ -1,0 +1,363 @@
+\documentclass{exam}
+\usepackage{../../shah250}
+
+\hypersetup{colorlinks=true, linktoc=section, linkcolor=blue}
+
+\pagestyle{headandfoot}
+\firstpageheadrule
+\runningheadrule
+\firstpageheader{Prof. Shtelen \\ Linear Algebra}{Homework 6}{Jeevan Shah}
+\runningheader{Linear Algebra \\ Homework 6}{}{Shah}
+\firstpagefooter{}{}{}
+\runningfooter{ }{\thepage}{ }
+
+\printanswers
+
+\begin{document}
+\underline{\#5 [5.3]:} The matrix $A$ below is factored in the form $PDP^{-1}$. Use the Diagonalization Theorem to find the eigenvalues of $A$ and a basis for each eigenspace.
+\[
+    \begin{pmatrix}
+        2 & 2 & 1 \\
+        1 & 3 & 1 \\
+        1 & 2 & 2
+    \end{pmatrix} = 
+    \begin{pmatrix}
+        1 & 1 & 2 \\
+        1 & 0 & -1 \\
+        1 & -1 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+        5 & 0 & 0 \\
+        0 & 1 & 0 \\
+        0 & 0 & 1
+    \end{pmatrix}
+    \begin{pmatrix}
+        1/4 & 1/2 & 1/4 \\
+        1/4 & 1/2 & -3/4 \\
+        1/4 & -1/2 & 1/4
+    \end{pmatrix}
+\]
+\begin{solution}
+    By the diagonalization theorem we know that the entries across the main diagonal of $D$ are the eigenvalues of $A$. We also know that columns of $P$ form the corresponding eigenvectors to the eigenvalues in $D$. Thus, 
+    \[
+        \boxed{\text{Eigenvalues: } 5, 1, 1} 
+    \]
+    and,
+    \[
+        \boxed{\text{Basis for $\lambda=5$}: \begin{pmatrix}
+            1 \\ 1 \\ 1
+        \end{pmatrix}, \text{Basis for } \lambda=1: \begin{pmatrix}
+            1 \\ 0 \\ -1
+        \end{pmatrix}, \begin{pmatrix}
+            2 \\ -1 \\ 0
+        \end{pmatrix}} 
+    \]
+\end{solution}
+
+\underline{\#19 [5.3]:} Diagonalize the matrix below
+\[
+    \begin{pmatrix}
+        5 & -3 & 0 & 9 \\
+        0 & 3 & 1 & -2 \\
+        0 & 0 & 2 & 0 \\
+        0 & 0 & 0 & 2
+    \end{pmatrix}
+\]
+\begin{solution}
+    Let $A$ be the matrix above. Since $A$ is an upper triangular matrix, we know that the eigenvalues of $A$ are the entries along the main diagonal. Thus, $\lambda = 5, 3, 2, 2$. We must find the eigenvectors for each eigenvalue. For $\lambda = 5$, 
+    \[
+        A - 5I = \begin{pmatrix}
+            0 & -3 & 0 & 9 \\
+            0 & -2 & 1 & -2 \\
+            0 & 0 & -3 & 0 \\
+            0 & 0 & 0 & -3
+        \end{pmatrix} 
+        \Rightarrow \begin{cases}
+            x_4 &= 0 \\
+            x_3 &= 0 \\
+            x_2 &= 0 \\
+            x_1 &= t
+        \end{cases}
+        \Rightarrow \begin{pmatrix}
+            1 \\ 0 \\ 0 \\ 0
+        \end{pmatrix}
+    \]
+    For $\lambda = 3$,
+    \[
+        \begin{pmatrix}
+            2 & -3 & 0 & 9 \\
+            0 & 0 & 1 & -2 \\
+            0 & 0 & -1 & 0 \\
+            0 & 0 & 0 & -1
+        \end{pmatrix}
+        \Rightarrow \begin{cases}
+            x_4 &= 0 \\
+            x_3 &= 0 \\
+            x_2 &= 2t \\
+            x_1 &= 3t
+        \end{cases}
+        \Rightarrow \begin{pmatrix}
+            3 \\ 2 \\ 0 \\ 0
+        \end{pmatrix}
+    \]
+    For $\lambda = 2$,
+    \[
+        \begin{pmatrix}
+            3 & -3 & 0 & 9 \\
+            0 & 1 & 1 & -2 \\
+            0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0
+        \end{pmatrix}
+        \Rightarrow
+        \begin{cases}
+            x_4 &= s \\
+            x_3 &= t \\
+            x_2 &= 2s - t \\
+            x_1 &= -s - t
+        \end{cases}
+        \Rightarrow \begin{pmatrix}
+            -1 \\ 2 \\ 0 \\ 1
+        \end{pmatrix},
+        \begin{pmatrix}
+            -1 \\ -1 \\ 1 \\ 0
+        \end{pmatrix}
+    \]
+    Thus,
+    \[
+        \boxed{
+            P = \begin{pmatrix}
+                1 & 3 & -1 & -1 \\
+                0 & 2 & 2 & -1 \\
+                0 & 0 & 0 & 1 \\
+                0 & 0 & 1 & 0 
+            \end{pmatrix}
+            \text{ and }
+            D = \begin{pmatrix}
+                5 & 0 & 0 & 0 \\
+                0 & 3 & 0 & 0 \\
+                0 & 0 & 2 & 0 \\
+                0 & 0 & 0 & 2
+            \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\underline{\#11 [6.1]:} Find a unit vecotr in the direction of the given vector below 
+\[
+    \begin{pmatrix}
+        7/4 \\ 1/2 \\ 1
+    \end{pmatrix}
+\]
+\begin{solution}
+    Let $\vec{x}$ be the vector above. Then 
+    \[
+        \|\vec{x}\| = \sqrt{\frac{49}{16} + \frac{1}{4} + 1} = \frac{\sqrt{69}}{4} \Rightarrow \frac{\vec{x}}{\|\vec{x}\|} = \boxed{
+            \begin{pmatrix}
+                7/\sqrt{69} \\ 2/\sqrt{69} \\ 4/\sqrt{69}
+            \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\underline{\#35 [6.1]:} Suppose that a vector $\vec{y}$ is orthogonal to vectors $\vec{u}$ and $\vec{v}$. Show that $\vec{y}$ is orthogonal to the vector $\vec{u} + \vec{v}$.
+\begin{solution}
+    \begin{proof}
+        Suppose the above. Then, 
+        \begin{align*}
+            \vec{y} \cdot \left(\vec{u} + \vec{v}\right) &= \vec{y} \cdot \vec{u} + \vec{y} \cdot \vec{v} = 0
+        \end{align*}
+        Since $\vec{y}$ is orthogonal to $\vec{v}$ and $\vec{u}$. Thus, $\vec{y}$ is orthogonal to $\vec{u} + \vec{v}$.
+    \end{proof}
+\end{solution}
+
+\underline{\#17 [6.2]:} Determine if the two vectors below form an orthogonal set. If they do, turn the set into an orthonormal set. 
+\[
+    \begin{pmatrix}
+        1/3 \\ 1/3 \\ 1/3
+    \end{pmatrix},
+    \begin{pmatrix}
+        -1/2 \\ 0 \\ 1/2
+    \end{pmatrix}
+\]
+\begin{solution}
+    Let $\vec{u}$ and $\vec{v}$ be the vectors above. We can check if $\braces{\vec{u}, \vec{v}}$ is an orthogonal set by finding $\vec{u} \cdot \vec{v}$:
+    \[
+        \vec{u} \cdot \vec{v} = \frac{1}{3}\left(-\frac{1}{2}\right) + \frac{1}{3}\left(\frac{1}{2}\right) = 0 \therefore \vec{u} \perp \vec{v}
+    \]
+    We can now normalize the vectors as follows:
+    \begin{align*}
+        \|\vec{u}\| &= \frac{1}{\sqrt{3}} \Rightarrow \frac{\vec{u}}{\|\vec{u}\|} = \begin{pmatrix}
+            1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}
+        \end{pmatrix} \\
+        \|\vec{v}\| &= \frac{1}{\sqrt{2}} \Rightarrow \frac{\vec{v}}{\|\vec{v}\|} = \begin{pmatrix}
+            -1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}
+        \end{pmatrix}
+    \end{align*}
+    Thus, the orthonormal set is 
+    \[
+        \boxed{
+            \braces{
+                \begin{pmatrix}
+                    1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}
+                \end{pmatrix}, 
+                \begin{pmatrix}
+                    -1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}
+                \end{pmatrix}
+            }
+        } 
+    \]
+\end{solution}
+
+\underline{\#35 [6.2]:} Let $U$ be a square matrix with orthonormal columns. Explain why $U$ is invertible. 
+\begin{solution}
+    Since $U$ has orthonormal columns, the columns of $U$ form a basis for $\RR^{n}$ (if $U$ is $n\times\,n$). Since the columns of $U$ form a basis, they must be linearly independent. We know that any square matrix with linearly independent columns must be invertible since there only exist trivial solutions to the homogenous equation. 
+\end{solution}
+
+\underline{\#9 [6.3]:} Let $W$ be the subspace spanned by the $\vec{u}$'s, and write $\vec{y}$ as the sume of a vecotr in $W$ and a vector orthogonal to $W$.
+\[
+    \vec{y} = \begin{pmatrix}
+        4 \\ 3 \\ 3 \\ -1
+    \end{pmatrix}, 
+    \vec{u_1} = \begin{pmatrix}
+        1 \\ 1 \\ 0 \\ 1
+    \end{pmatrix},
+    \vec{u_2} = \begin{pmatrix}
+        -1 \\ 3 \\ 1 \\ -2
+    \end{pmatrix},
+    \vec{v_3} = \begin{pmatrix}
+        -1 \\ 0 \\ 1 \\ 1
+    \end{pmatrix}
+\]
+\begin{solution}
+    We will perform orthogonal decomoposition on $\vec{y}$ using $\vec{u_1}, \vec{u_2},$ and $\vec{u_3}$.
+    \begin{align*}
+        \hat{y} &= \frac{\vec{y}\cdot\vec{u_1}}{\vec{u_1}\cdot\vec{u_1}} + \frac{\vec{y}\cdot\vec{u_2}}{\vec{u_2}\cdot\vec{u_2}} + \frac{\vec{y}\cdot\vec{u_3}}{\vec{u_3}\cdot\vec{u_3}} \\
+        &= 2\vec{u_1} + \frac{2}{3}\vec{u_2} - \frac{2}{3}\vec{u_3} = \begin{pmatrix}
+            2 \\ 4 \\ 0 \\ 0
+        \end{pmatrix} \\
+        \Rightarrow \vec{y} - \hat{y} &= \begin{pmatrix}
+            2 \\ -1 \\ 3 \\ -1
+        \end{pmatrix} \\
+        \Rightarrow \vec{y} &= \boxed{
+            \begin{pmatrix}
+                2 \\ 4 \\ 0 \\ 0 
+            \end{pmatrix}
+            + \begin{pmatrix}
+                2 \\ -1 \\ 3 \\ -1
+            \end{pmatrix}
+        }
+    \end{align*}
+\end{solution}
+
+\underline{\#15 [6.3]:} Let $\vec{y}$, $\vec{u_1}$, and $\vec{u_2}$ be given below. Find the distance from $\vec{y}$ to the plane $\RR^{3}$ spanned by $\vec{u_1}$ and $\vec{u_2}$.
+\[
+    \vec{y} = \begin{pmatrix}
+        5 \\ -9 \\ 5
+    \end{pmatrix},
+    \vec{u_1} = \begin{pmatrix}
+        -3 \\ -5 \\ 1
+    \end{pmatrix}, 
+    \vec{u_2} = \begin{pmatrix}
+        -3 \\ 2 \\ 1
+    \end{pmatrix}
+\]
+\begin{solution}
+    We will start by finding $\vec{y}$ in $\Span{\vec{u_1}, \vec{u_2}}$: 
+    \[
+        \hat{y} = \frac{\vec{y}\cdot\vec{u_1}}{\vec{u_1}\cdot\vec{u_1}}\vec{u_1} + \frac{\vec{y}\cdot\vec{u_2}}{\vec{u_2}\cdot\vec{u_2}}\vec{u_2} = \frac{35}{35}\vec{u_1} + \frac{-28}{14}\vec{u_2} = \begin{pmatrix}
+            3 \\ -9 \\ -1
+        \end{pmatrix}
+    \]
+    Now we can calculate the distance:
+    \[
+        \vec{y} - \hat{y} = \begin{pmatrix}
+            2 \\ 0 \\ 6 
+        \end{pmatrix}
+        \Rightarrow \|\vec{y} - \hat{y}\| = \boxed{\sqrt{40}}
+    \]
+\end{solution}
+
+\underline{\#3 [6.4]:} The given set below is a basis for a subspace $W$. Use the Gram-Scmidt process to produce an orthogonal basis for $W$.
+\[
+    \begin{pmatrix}
+        2 \\ -5 \\ 1
+    \end{pmatrix},
+    \begin{pmatrix}
+        4 \\ -1 \\ 2
+    \end{pmatrix}
+\]
+\begin{solution}
+    Let $\vec{x_1}$ and $\vec{x_2}$ be the vectors above. We will use the Gram-Schmidt process with $\vec{x_1}$ and $\vec{x_2}$:
+    \begin{align*}
+        \vec{v_1} &= \vec{x_1} \\
+        \vec{v_2} &= \vec{x_2} - \frac{\vec{x_2}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} = \vec{x_2} - \frac{1}{2}\vec{v_1} = \begin{pmatrix}
+            3 \\ 3/2 \\ 3/2
+        \end{pmatrix}
+    \end{align*}
+    Thus, our orthogonal basis is
+    \[
+        \boxed{
+            \braces{
+                \begin{pmatrix}
+                    2 \\ -5 \\ 1
+                \end{pmatrix},
+                \begin{pmatrix}
+                    3 \\ 3/2 \\ 3/2
+                \end{pmatrix}
+            }
+        } 
+    \]
+\end{solution}
+
+\underline{\#9 [6.4]:} Find an orthogonal basis for the column space of the matrix below
+\[
+    \begin{pmatrix}
+        3 & -5 & 1 \\
+        1 & 1 & 1 \\
+        -1 & 5 & -2 \\
+        3 & -7 & 8
+    \end{pmatrix}
+\]
+\begin{solution}
+    We can start by noticing that 
+    \[
+        \Col{A} = \braces{
+            \begin{pmatrix}
+                3 \\ 1 \\ -1 \\ 3
+            \end{pmatrix},
+            \begin{pmatrix}
+                -5 \\ 1 \\ 5 \\ -7
+            \end{pmatrix},
+            \begin{pmatrix}
+                1 \\ 1 \\ -2 \\ 8
+            \end{pmatrix}
+        }.
+    \]
+    Now, let $\vec{x_1}, \vec{x_2}$, and $\vec{x_3}$ be the vectors in $\Col{A}$, respectively. We will now perform the Gram-Schmidt process using $\vec{x_1}, \vec{x_2}$, and $\vec{x_3}$.
+    \begin{align*}
+        \vec{v_1} &= \vec{x_1} \\
+        \vec{v_2} &= \vec{x_2} - \frac{\vec{x_2}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} = \vec{x_2} - \frac{-40}{20}\vec{v_1} = \begin{pmatrix}
+            1 \\ 3 \\ 3 \\ -1
+        \end{pmatrix} \\
+        \vec{v_3} &= \vec{x_3} - \frac{\vec{x_3}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} - \frac{\vec{x_3}\cdot\vec{v_2}}{\vec{v_2}\cdot\vec{v_2}}\vec{v_2} = \vec{x_3} - \frac{30}{20}\vec{v_1} - \frac{-10}{20}\vec{v_2} = \begin{pmatrix}
+            -3 \\ 1 \\ 1 \\ 3
+        \end{pmatrix} 
+    \end{align*}
+    Therefore, our orthogonal basis will be:
+    \[
+        \boxed{
+            \braces{
+                \begin{pmatrix}
+                    3 \\ 1 \\ -1 \\ 3
+                \end{pmatrix},
+                \begin{pmatrix}
+                    1 \\ 3 \\ 3 \\ -1
+                \end{pmatrix},
+                \begin{pmatrix}
+                    -3 \\ 1 \\ 1 \\ 3
+                \end{pmatrix}
+            }
+        } 
+    \]
+\end{solution}
+\end{document}
