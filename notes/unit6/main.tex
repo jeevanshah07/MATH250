@@ -1,0 +1,241 @@
+\section{Unit 6}
+\subsection{Lecture 23: Orthogonality, Orthogonal Projections [6.1, 6.2, 6.3]}
+
+\begin{thm}{}{}
+    Let $\vec{u}, \vec{v}, \vec{w} \in \RR^{n}$ and $c\in\RR$. Then, 
+    \begin{enumerate}
+        \item $\vec{u}\cdot\vec{v} = \vec{v}\cdot\vec{u}$
+        \item $\left(\vec{u}+\vec{v}\right)\cdot\vec{w} = \vec{u}\cdot\vec{w} + \vec{v}\cdot\vec{w}$
+        \item $\left(c\vec{u}\right)\cdot\vec{v} = c\left(\vec{u}\cdot\vec{v}\right) = \vec{u}\cdot\left(c\vec{v}\right)$
+        \item $\vec{u}\cdot\vec{u} \geq 0$, and $\vec{u}\cdot\vec{u} = 0$ if, and only if, $\vec{u} = 0$ 
+    \end{enumerate}  
+\end{thm}
+
+\begin{defbox}{Length of a Vector}{}
+    The \textbf{length} (or \textbf{norm}) of a vector $\vec{v}$, is the nonnegative scalar $\|\vec{v}\|$ defined by 
+    \[
+        \|\vec{v}\| = \sqrt{\vec{v}\cdot\vec{v}} = \sqrt{v_1^2 + v_2^2 + \cdots + v_n^2} \text{ and } \|\vec{v}\|^{2} = \vec{v} \cdot \vec{v}
+    \] 
+\end{defbox}
+
+A vector who has a length of $1$ is called a \textit{unit vector}. For any given vector, you can turn it into a unit vector by scaling it by the reciprocal of its magnitude (or length). If $\vec{v}$ is any vector, then $\hat{v} = \frac{1}{\|\vec{v}\|}\vec{v}$ is a unit vector \underline{in the same direction as $\vec{v}$}
+
+\begin{defbox}{Distance Between Two Vectors}{}
+    For $\vec{u}, \vec{v} \in\RR^{n}$, the \textbf{distance between $\vec{u}$ and $\vec{v}$}, written as $\mathop{\text{dist}}\left(\vec{u}, \vec{v}\right)$ is the length of the vector $\vec{u}-\vec{v}$. That is 
+    \[
+        \mathop{\text{dist}}\left(\vec{u}, \vec{v}\right) = \|\vec{u}-\vec{v}\| 
+    \] 
+\end{defbox}
+
+\begin{defbox}{Orthogonal Vectors}{}
+    Two vector $\vec{u}, \vec{v}\in\RR^{n}$ are orthogonal to each other if $\vec{u}\cdot\vec{v}=0$ 
+\end{defbox}
+
+\begin{thm}{The Pythagoren Theorem}{}
+    Two vectors $\vec{u}$ and $\vec{v}$ are orthogonal if, and only if, $\|\vec{u} + \vec{v}\|^2 = \|\vec{u}\|^2 + \|\vec{v}\|^2$ 
+\end{thm}
+
+If a vector $\vec{z}$ is orthogonal to every vector in a subspace $W$ of $\RR^{n}$, then $\vec{z}$ is said to be \textbf{orthogonal to $W$}. The set of all vectors $\vec{z}$ that are orthogonal to $W$ is called the \textbf{orthogonal complement} of $W$ and is denoted by $W^{\perp}$. A vector $\vec{x}$ is in $W^{\perp}$ if, and only if, $\vec{x}$ is orthogonal to every vector in a set that spans $W$. $W^{\perp}$ is a subspace of $\RR^{n}$. 
+
+\begin{thm}{}{}
+    Let $A$ be an $m\times\,n$ matrix. The orthogonal complement of the row space of $A$ is the null space of $A$, and the orthogonal complement of the column space of $A$ is the null space of $A^{T}$: 
+    \[
+        \left(\Row{A}\right)^{\perp} = \Nul{A} \text{ and } \left(\Col{A}\right)^{\perp} = \Nul{A^{T}}
+    \]
+\end{thm}
+
+\begin{defbox}{Angle Between Two Vectors}{}
+    If $\vec{u}, \vec{v} \in \RR^{n}$ then 
+    \[
+        \vec{u}\cdot\vec{v} = \|\vec{u}\|\|\vec{v}\|\cos\theta  
+    \]
+    where $\theta$ is the angle between $\vec{u}$ and $\vec{v}$.
+\end{defbox}
+
+\begin{defbox}{Orthogonal Sets}{}
+    A set of vectors $\braces{\vec{v_1}, \vec{v_2}, \ldots, \vec{v_p}}$ in $\RR^{n}$ is said to be an \textbf{orthogonal set} if each pair of distinct vectors from the set is orthogonal, that is, if $\vec{v_i} \cdot \vec{v_j} = 0$ for $i \neq j$.
+\end{defbox}
+
+A set $\braces{\vec{u_1}, \ldots, \vec{u_p}}$ is an \textbf{orthonormal set} if it is an orthogonal set of unit vectors.
+
+\begin{thm}{}{}
+    If $S=\braces{\vec{u_1}, \ldots, \vec{u_p}}$ is an orthogonal set of nonzero vectors in $\RR^{n}$, then $S$ is linearly independent and hence is a basis for the subspace spanned by $S$.  
+\end{thm}
+
+\begin{defbox}{Orthogonal Basis}{}
+    An \textbf{orthogonal basis} for a subspace $W$ of $\RR^{n}$  is a basis for $W$ that is also an orthogonal set. 
+\end{defbox}
+
+If $W$ is such a subspace spanned by an orthonormal set $\braces{\vec{u_1}, \ldots, \vec{u_p}}$, then the set is an \textbf{orthonormal basis} for $W$. The standard basis for $\RR^{n}$ is an orthonormal basis. 
+
+\begin{thm}{}{}
+    Let $\braces{\vec{u_1}, \ldots, \vec{u_p}}$ be an orthogonal basis for a subspace $W$ of $\RR^{n}$. For each $\vec{y}$ in $W$ the weights in the linear combination 
+    \[
+        \vec{y} = c_1\vec{u_1} + \cdots + c_p\vec{u_p} 
+    \] 
+    are given by 
+    \[
+        c_j = \frac{\vec{y}\cdot\vec{u_j}}{\vec{u_j}\cdot\vec{u_j}} \text{ for } j=1,\ldots,p 
+    \]
+\end{thm}
+
+The orthogonal projection of $\vec{y}$ onto $\vec{u}$ is $\displaystyle{\text{proj}}_{\vec{u}}\vec{y} = \frac{\vec{y}\cdot\vec{u}}{\vec{u}\cdot\vec{u}}\vec{u} = \hat{y}$
+
+\begin{thm}{}{}{\label{thm:6.6}}
+    An $m\times\,n$ matrix $U$ has orthonormal columns if, and only if, $U^{T}U=I$
+\end{thm}
+
+\begin{thm}{}{}
+    Let $U$ be an $m\times\,n$ matrix with orthonormal columns, and let $\vec{x}, \vec{y} \in \RR^{n}$. Then, 
+    \begin{enumerate}
+        \item $\|U\vec{x}\| = \|\vec{x}\|$
+        \item $\left(U\vec{x}\right)\cdot\left(U\vec{y}\right) = \vec{x}\cdot\vec{y}$
+        \item $\left(U\vec{x}\right)\cdot\left(U\vec{y}\right) = 0$ if, and only if, $\vec{x}\cdot\vec{y}=0$.
+    \end{enumerate}
+\end{thm}
+
+An \textbf{orthogonal matrix} is a square matrix $U$ such that $U^{-1}=U^{T}$.
+
+\begin{thm}{The Orthogonal Decomposition Theorem}{}
+    Let $W$ be a subspace of $\RR^{n}$. Then each $\vec{y}\in\RR^{n}$ can be written uniquely in the form 
+    \[
+        \vec{y}=\hat{y}+\vec{z} 
+    \]
+    where $\hat{y}\in\,W$ and $\vec{z}\in\,W^{\perp}$. In fact, if $\braces{\vec{u_1}, \ldots, \vec{u_p}}$ is any orthogonal basis of $W$, then 
+    \[
+        \hat{y} = \frac{\vec{y}\cdot\vec{u_1}}{\vec{u_1}\cdot\vec{u_1}}\vec{u_1} + \cdots + \frac{\vec{y}\cdot\vec{u_p}}{\vec{u_p}\cdot\vec{u_p}}\vec{u}_p
+    \]
+    and $\vec{z} = \vec{y}-\hat{y}$.
+\end{thm}
+
+If $\vec{y}\in\,W = \Span{\vec{u_1},\ldots,\vec{u_p}}$ then $\text{proj}_{W}\vec{y}=\vec{y}$
+
+\begin{thm}{Best Approximation Theorem}{}
+    Let $W$ be a subspace of $\RR^{n}$, let $\vec{y}\in\RR^{n}$, and let $\hat{y}$ be the orthogonal projection of $\vec{y}$ onto $W$. Then $\hat{y}$ is the closest point in $W$ to $\vec{y}$ in the sense that 
+    \[
+        \|\vec{y}-\hat{y}\| < \|\vec{y}-\vec{v}\| 
+    \]
+    for all distinct $\vec{v}\in\,W$
+\end{thm}
+
+\begin{thm}{}{}
+    If $\braces{\vec{u_1}, \ldots, \vec{u_p}}$ is an orthonormal basis for a subspace $W$ of $\RR^{n}$, then 
+    \[
+        \text{proj}_{W}\vec{y} = \left(\vec{y}\cdot\vec{u_1}\right)\vec{u_1} + \left(\vec{y}\cdot\vec{u_2}\right)\vec{u_2} + \cdots + \left(y\cdot\vec{u_p}\right)\vec{u_p} 
+    \]
+    If $U = \begin{pmatrix} \left(\vec{u_1}\right) & \left(\vec{u_2}\right) & \cdots & \left(\vec{u_p}\right)\end{pmatrix}$, then 
+    \[
+        \text{proj}_{W}\vec{y} = UU^{T}\vec{y} 
+    \]
+    for all $\vec{y} \in \RR^{n}$.
+\end{thm}
+
+\subsection{Lecture 24: The Gram-Schmidt Process [6.4]}
+\begin{thm}{The Gram-Schmidt Process}{}
+    Given a basis $\braces{\vec{x_1}, \vec{x_2}, \ldots, \vec{x_p}}$ for a nonzero subspace $W$ of $\RR^{n}$, define 
+    \begin{align*}
+        \vec{v_1} &= \vec{x_1} \\
+        \vec{v_2} &= \vec{x_2} - \frac{\vec{x_2}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} \\
+        \vec{v_3} &= \vec{x_3} - \frac{\vec{x_3}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} - \frac{\vec{x_3}\cdot\vec{v_2}}{\vec{v_2}\cdot\vec{v_2}}\vec{v_2} \\
+        &\vdots \\
+        \vec{v_p} &= \vec{x_p} - \frac{\vec{x_p}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} - \frac{\vec{x_p}\cdot\vec{v_2}}{\vec{v_2}\cdot\vec{v_2}} - \cdots - \frac{\vec{x_p}\cdot\vec{v}_{p-1}}{\vec{v}_{p-1}\cdot\vec{v}_{p-1}}
+    \end{align*}
+    Then $\braces{\vec{v_1}, \ldots, \vec{v_p}}$ is an orthogonal basis for $W$. In addition, 
+    \[
+        \Span{\vec{v_1}, \ldots, \vec{v_{k}}} = \Span{\vec{x_1}, \ldots, \vec{x_k}} \quad \text{for } 1 \leq k \leq p 
+    \]
+\end{thm}
+
+\begin{example}{}{}{\label{ex:1}}
+    Let $\vec{x_1}, \vec{x_2}$, and $\vec{x_3}$ be given below such that $\braces{\vec{x_1}, \vec{x_2}, \vec{x_3}}$ is a basis for a subspace $W$ of $\RR^{4}$. Construct an orthogonal basis for $W$. 
+    \[
+        \vec{x_1} = \begin{pmatrix}
+            1 \\ 1 \\ 1 \\ 1
+        \end{pmatrix}, 
+        \vec{x_2} = \begin{pmatrix}
+            0 \\ 1 \\ 1 \\ 1
+        \end{pmatrix},
+        \vec{x_3} = \begin{pmatrix}
+            0 \\ 0 \\ 1 \\ 1
+        \end{pmatrix}
+    \]
+    \begin{solution}
+        We will use the Gram-Schmidt process with $\vec{x_1}, \vec{x_2}$, and $\vec{x_3}$.
+        \begin{align*}
+            \vec{v_1} &= \vec{x_1} \\
+            \vec{v_2} &= \vec{x_2} - \frac{\vec{x_2}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} = \vec{x_2} - \frac{3}{4}\vec{v_1} = \begin{pmatrix}
+                -3/4 \\ 1/4 \\ 1/4 \\ 1/4
+            \end{pmatrix} \\
+            \vec{v_2}' &= 4\vec{v_2} = \begin{pmatrix}
+                -3 \\ 1 \\ 1 \\ 1
+            \end{pmatrix} \\
+            \vec{v_3} &= \vec{x_3} - \frac{\vec{x_3}-\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} - \frac{\vec{x_3}\cdot\vec{v_2}'}{\vec{v_2}'\cdot\vec{v_2}'} = \vec{x_3} - \frac{2}{4}\vec{v_1} - \frac{2}{12}\vec{v_2}' = \begin{pmatrix}
+                0 \\ -2/3 \\ 1/3 \\ 1/3
+            \end{pmatrix}
+        \end{align*}
+        Thus our othogonal basis is 
+        \[
+            \boxed{
+                \braces{
+                    \begin{pmatrix}
+                        1 \\ 1 \\ 1 \\ 1
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        -3 \\ 1 \\ 1 \\ 1
+                    \end{pmatrix},
+                    \begin{pmatrix}
+                        0 \\ -2/3 \\ 1/3 \\ 1/3
+                    \end{pmatrix}
+                }
+            } 
+        \]
+    \end{solution}
+\end{example}
+
+You form an orthonormal basis by taking an orthogonal basis in its entirety and normalizing each $\vec{u_k}$ to make it a unit vector, thus resulting in an orthonormal basis.
+
+\begin{thm}{$QR$ Factoriziation}{}
+    If $A$ is an $m\times\,n$ matrix with linearly independent columns, then $A$ can be factored as $A=QR$ where $Q$ is an $m\times\,n$ matrix whose columns form an orthonormal basis for $\Col{A}$ and $R$ is an $n\times\,n$ upper triangular invertible matrix with positive entires on its diagonal.
+\end{thm}
+
+\begin{example}{}{}
+    Find a $QR$ factoriziation of $A$ below
+    \[
+        A = \begin{pmatrix}
+            1 & 0 & 0 \\
+            1 & 1 & 0 \\
+            1 & 1 & 1 \\
+            1 & 1 & 1
+        \end{pmatrix}
+    \]
+    \begin{solution}
+        Notice that the columns of $A$ are actually $\vec{x_1}, \vec{x_2}$, and $\vec{x_3}$ from example~(\ref{ex:1}). We will scale $\vec{v_3}$ to $\vec{v_3}' = 3\vec{v_3}$ to simplify calculations. We can then normalize each of the three vectors to obtain the columns of $Q$: 
+        \[
+            Q = \begin{pmatrix}
+                1/2 & -3/\sqrt{12} & 0 \\
+                1/2 & 1/\sqrt{12} & -2/\sqrt{6} \\
+                1/2 & 1/\sqrt{12} & 1/\sqrt{6} \\
+                1/2 & 1/\sqrt{12} & 1/\sqrt{6}
+            \end{pmatrix} 
+        \]
+        By Theorem~(\ref{thm:6.6}) we know that $Q^{T}Q=I$. Thus, if $A=QR$ then left multiplying by $Q^T$ gives: $Q^{T}A = Q^{T}QR = R$. So, 
+        \[
+            R = \begin{pmatrix}
+                1/2 & 1/2 & 1/2 & 1/2 \\
+                -3/\sqrt{12} & 1/\sqrt{12} & 1/\sqrt{12} & 1/\sqrt{12} \\
+                0 & -2/\sqrt{6} & 1/\sqrt{6} & 1/\sqrt{6}
+            \end{pmatrix}
+            \begin{pmatrix}
+                1 & 0 & 0 \\
+                1 & 1 & 0 \\
+                1 & 1 & 1 \\
+                1 & 1 & 1
+            \end{pmatrix}
+            = \begin{pmatrix}
+                2 & 3/2 & 1 \\
+                0 & 3/\sqrt{12} & 2/\sqrt{12} \\
+                0 & 0 & 2/\sqrt{6}
+            \end{pmatrix}
+        \]
+    \end{solution}
+\end{example}
