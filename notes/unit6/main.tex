@@ -194,7 +194,7 @@ If $\vec{y}\in\,W = \Span{\vec{u_1},\ldots,\vec{u_p}}$ then $\text{proj}_{W}\vec
 
 You form an orthonormal basis by taking an orthogonal basis in its entirety and normalizing each $\vec{u_k}$ to make it a unit vector, thus resulting in an orthonormal basis.
 
-\begin{thm}{$QR$ Factoriziation}{}
+\begin{thm}{$QR$ Factoriziation}{\label{thm:6.3.1}}
     If $A$ is an $m\times\,n$ matrix with linearly independent columns, then $A$ can be factored as $A=QR$ where $Q$ is an $m\times\,n$ matrix whose columns form an orthonormal basis for $\Col{A}$ and $R$ is an $n\times\,n$ upper triangular invertible matrix with positive entires on its diagonal.
 \end{thm}
 
@@ -239,3 +239,138 @@ You form an orthonormal basis by taking an orthogonal basis in its entirety and 
         \]
     \end{solution}
 \end{example}
+
+\subsection{Lecture 24: The Least-Squares Problem [6.5]}
+\begin{defbox}{Least-Square Solution}{}{}
+    If $A$ is $m\times\,n$ and $\vec{b}$ is in $\RR^{n}$, a \textbf{least-squares solution} of $A\vec{x}=\vec{b}$ is an $\hat{x}$ in $\RR^{n}$ such that 
+    \[
+        \|\vec{b}-A\hat{x}\| \leq \|\vec{b}-A\vec{x}\| 
+    \]
+    for all $\vec{x}$ in $\RR^{n}$
+\end{defbox}
+
+\begin{thm}{}{}{}
+    The set of least-square solutions of $A\vec{x}=\vec{b}$ coincides with the nonempty set of solutions of the normal equation $A^{T}A\vec{x}=A^{T}\vec{b}$
+\end{thm}
+
+\begin{example}{}{}{\label{ex:6.4.1}}
+    Find the least-squares solution of the inconsistent system $A\vec{x}=\vec{b}$ with 
+    \[
+        A = \begin{pmatrix}
+            4 & 0 \\
+            0 & 2 \\
+            1 & 1 
+        \end{pmatrix}, 
+        \quad\vec{b} = \begin{pmatrix}
+            2 \\ 0 \\ 11
+        \end{pmatrix}
+    \] 
+    \begin{solution}
+        We can start by finding $A^{T}A$ and $A^{T}\vec{b}$:
+        \begin{align}
+            A^{T}A &= \begin{pmatrix}
+                4 & 0 & 1 \\
+                0 & 2 & 1
+            \end{pmatrix}
+            \begin{pmatrix}
+                4 & 0 \\
+                0 & 2 \\
+                1 & 1 
+            \end{pmatrix}
+            = \begin{pmatrix}
+                17 & 1 \\
+                1 & 5
+            \end{pmatrix} \nonumber \\
+            A^{T}\vec{b} &= \begin{pmatrix}
+                4 & 0 & 1 \\
+                0 & 2 & 1 
+            \end{pmatrix}
+            \begin{pmatrix}
+                2 \\ 0 \\ 11
+            \end{pmatrix}
+            = \begin{pmatrix}
+                19 \\ 11
+            \end{pmatrix} {\label{eq:6.4.0}}
+        \end{align}
+        Now, it should be clear that columns of $A^{T}A$ are linearly independent and thus $A^{T}A$ is invertible. We can leverage this fact to solve for $\hat{x}$ in the following manner:
+        \begin{equation}{\label{eq:6.4.1}}
+            A^{T}A\hat{x}=A^{T}\vec{b} \Rightarrow \hat{x}=\left(A^{T}A\right)^{-1}A^{T}\vec{b} 
+        \end{equation}
+        since left multiplying by $\left(A^{T}A\right)^{-1}$ on the left side of the equation simply just gives the identity matrix. In order to use equation~(\ref{eq:6.4.1}) we must first find $\left(A^{T}A\right)^{-1}$. Since we are dealing with a $2\times\,2$ matrix we can simply just use the formula for the inverse of a $2\times\,2$~(\ref{2.2:formula}). This gives 
+        \begin{equation} {\label{eq:6.4.2}}
+            \left(A^{T}A\right)^{-1} = \frac{1}{84}\begin{pmatrix}
+                5 & -1 \\ -1 & 17
+            \end{pmatrix} 
+        \end{equation}
+        Thus, we can apply~(\ref{eq:6.4.1}) with~(\ref{eq:6.4.0}) and~(\ref{eq:6.4.2})
+        \[
+            \hat{x} = \frac{1}{84}\begin{pmatrix}
+                5 & -1 \\
+                -1 & 17
+            \end{pmatrix}
+            \begin{pmatrix}
+                19 \\ 11
+            \end{pmatrix}
+            = \begin{pmatrix}
+                1 \\ 2
+            \end{pmatrix}
+        \]
+    \end{solution}
+\end{example}
+
+\begin{thm}{}{}
+    Let $A$ be any $m\times\,n$ matrix. The following statements are logically equivalent: 
+    \begin{enumerate}
+        \item The equation $A\vec{x}=\vec{b}$ has a unique least-squares solution for each $\vec{b}$ in $\RR^{m}$
+        \item The columns of $A$ are linearly independent
+        \item The matrix $A^{T}A$ is invertible
+    \end{enumerate} 
+    When these statements are true, the least-squares solution $\hat{x}$ is given by 
+    \[
+        \hat{x} = \left(A^{T}A\right)A^{T}\vec{b} 
+    \]
+\end{thm}
+
+\begin{defbox}{Least-Square Error}{}
+    If $\hat{x}$ is the least-square solution to the system $A\vec{x}=\vec{b}$, then the distance from $\vec{b}$ to $A\hat{x}$ is called the \textbf{least-square error} of this approximation, given by 
+    \[
+        \|\vec{b} - A\hat{x}\| 
+    \]
+\end{defbox}
+
+For example, in order to find the the least-square error of example~(\ref{ex:6.4.1}) we first find $A\hat{x}$ to be 
+\[
+    A\hat{x} = \begin{pmatrix}
+        4 & 0 \\
+        0 & 2 \\
+        1 & 1 
+    \end{pmatrix}
+    \begin{pmatrix}
+        1 \\ 2
+    \end{pmatrix}
+    = \begin{pmatrix}
+        4 \\ 4 \\ 3
+    \end{pmatrix}
+\]
+Thus, 
+\[
+    \vec{b} - A\hat{x} = \begin{pmatrix}
+        2 \\ 0 \\ 11
+    \end{pmatrix} 
+    - \begin{pmatrix}
+        4 \\ 4 \\ 3
+    \end{pmatrix}
+    = \begin{pmatrix}
+        -2 \\ -4 \\ 8
+    \end{pmatrix}
+    \Rightarrow 
+    \| \vec{b} - A\hat{x} \| = \sqrt{84}
+\]
+This tells us that for every vector $\vec{x}$ in $\RR^{2}$ its distance between $\vec{b}$ and $A\vec{x}$ is \textbf{at least} $\sqrt{84}$.
+
+\begin{thm}{}{}
+    Given an $m\times\,n$ matrix $A$ with linearly independent columns, let $A=QR$ be a $QR$ factoriziation of $A$~(\ref{thm:6.3.1}). The, for each $\vec{b}$ in $\RR^{m}$, the equation $A\vec{x}=\vec{b}$ has a unique least-squares solution, given by 
+    \[
+        \hat{x} = R^{-1}Q^{T}\vec{b} 
+    \]
+\end{thm}
