@@ -289,3 +289,314 @@ We can also further classify $Q$ as \textbf{positive semidefinite} if $\forall \
 \end{thm}
 
 A \textbf{positive definite matrix} $A$ is a symmetric m atrix for which the quadratic from $\vec{x}^{T}A\vec{x}$ is positive definite. There exist analagous definitions for negative definite, positive semidefinite, negative semidefinite, and indefinite.
+
+\subsection{Lecture 28: Final Review}
+\colorbox{red}{\underline{Practice Question 1:}} Find the orthogonal diagonalization of $A$ below such that $D=Q^{T}AQ$
+\[
+    A = \begin{pmatrix}
+        4 & 2 & 2 \\
+        2 & 4 & 2 \\
+        2 & 2 & 4
+    \end{pmatrix} 
+\] 
+\begin{solution}
+    We start by finding the eigenvalues:
+    \begin{align*}
+        \det{A-\lambda I} =& \begin{vmatrix}
+            4-\lambda & 2 & 2 \\
+            2 & 4-\lambda & 2 \\
+            2 & 2 & 4-\lambda 
+        \end{vmatrix} \\
+        \xrightarrow{R_1 \to R_1 - R_2}& \begin{vmatrix}
+            2 - \lambda & \lambda - 2 & 0 \\
+            2 & 4-\lambda & 2 \\
+            2 & 2 & 4-\lambda
+        \end{vmatrix} \\
+        \xrightarrow{C_2 \to C_2 + C_1}& \begin{vmatrix}
+            2-\lambda & 0 & 0 \\
+            2 & 6-\lambda & 2 \\
+            2 & 4 & 4-\lambda
+        \end{vmatrix} \\
+        =&\,(2-\lambda)((6-\lambda)(4-\lambda)-8) = 0 \\
+        \Rightarrow&\,(2-\lambda)(\lambda^2-10\lambda+16) =(2-\lambda)(\lambda-2)(\lambda-8) \\
+        \Rightarrow&\, \lambda_1 = 8, \lambda_2 = \lambda_3 = 2
+    \end{align*}
+    Next we can find the eigenvectors. For $\lambda_1=8$ we have: 
+    \begin{align*}
+        A - 8I = &\begin{pmatrix}
+            -4 & 2 & 2 \\
+            2 & -4 & 2 \\
+            2 & 2 & -4 
+        \end{pmatrix} 
+        \xrightarrow[R_3 \to \frac{1}{2}R_3]{\frac{1}{2}R_1 \leftrightarrow \frac{1}{2}R_2} \begin{pmatrix}
+            1 & -2 & 1 \\
+            -2 & 1 & 1 \\
+            1 & 1 & -2 
+        \end{pmatrix} \\
+        \xrightarrow[R_3 \to R_3 - R_1]{R_2 \to R_2 + 2R_1} &\begin{pmatrix}
+            1 & -2 & 1 \\
+            0 & -3 & 3 \\
+            0 & 3 & -3 
+        \end{pmatrix} 
+        \xrightarrow{R_3 \to R_3 + R_2} \begin{pmatrix}
+            1 & -2 & 1 \\
+            0 & -3 & 3 \\
+            0 & 0 & 0
+        \end{pmatrix} \\
+        \Rightarrow &\begin{cases}
+            x_3 &= t \\
+            x_2 &= t \\
+            x_1 &= t
+        \end{cases}
+        \Rightarrow X = t\begin{pmatrix}
+            1 \\ 1 \\ 1
+        \end{pmatrix}
+        \Rightarrow \vec{u}_1 = \begin{pmatrix}
+            1/\sqrt{3} \\ 1/\sqrt{3} \\ 1/\sqrt{3}
+        \end{pmatrix}
+    \end{align*}
+    Where $\vec{u}_1$ is our orthonormal eigenvector. Now for $\lambda_2 = \lambda_3$: 
+    \begin{align*}
+        A-2I = &\begin{pmatrix}
+            2 & 2 & 2 \\
+            2 & 2 & 2 \\
+            2 & 2 & 2 
+        \end{pmatrix}
+        \xrightarrow[\substack{R_3 \to R_3 - R_1 \\ R_1 \to \frac{1}{2}R_1}]{R_2 \to R_2 - R_1}
+        \begin{pmatrix}
+            1 & 1 & 1 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0 
+        \end{pmatrix} \\
+        \Rightarrow &\begin{cases}
+            x_3 &= s \\
+            x_2 &= t \\
+            x_1 &= -s-t
+        \end{cases}
+        \Rightarrow X = s\overbrace{\begin{pmatrix}
+            -1 \\ 0 \\ 1
+        \end{pmatrix}}^{\vec{v_1}} +\, t\overbrace{\begin{pmatrix}
+            -1 \\ 1 \\ 0
+        \end{pmatrix}}^{\vec{v_2}}
+    \end{align*}
+    Now, notice that $\vec{v_1} \cdot \vec{v_2} \neq 0$ so $\vec{v_1}$ and $\vec{v_2}$ are not orthogonal. In order to make $\vec{v_2}$ orthogonal to $\vec{v_1}$ we can perform the Gram-Schmidt Process~(\ref{thm:gram}), 
+    \[
+        \vec{z_2} = \vec{v_2} - \frac{\vec{v_2}\cdot\vec{v_1}}{\vec{v_1}\cdot\vec{v_1}}\vec{v_1} = \begin{pmatrix}
+            -1 \\ 1 \\ 0
+        \end{pmatrix}
+        - \frac{1}{2}\begin{pmatrix}
+            -1 \\ 0 \\ 1
+        \end{pmatrix}
+        = \begin{pmatrix}
+            -1/2 \\ 1 \\ -1/2
+        \end{pmatrix}
+        \Rightarrow 2\vec{z_2} = \begin{pmatrix}
+            -1 \\ 2 \\ -1
+        \end{pmatrix}
+    \]
+    So, $\braces{\vec{v_1}, \vec{z_2}}$ is an orthogonal set. Turning it into an orthonormal set we have 
+    \[
+        \braces{\vec{u_2}, \vec{u_3}} = \braces{
+            \begin{pmatrix}
+                -1/\sqrt{2} \\ 0 \\ 1/\sqrt{2}
+            \end{pmatrix},
+            \begin{pmatrix}
+                -1/\sqrt{6} \\ 2/\sqrt{6} \\ -1/\sqrt{6}
+            \end{pmatrix}
+        }
+    \]
+    Thus, 
+    \[
+        \boxed{
+            D = \begin{pmatrix}
+                8 & 0 & 0 \\
+                0 & 2 & 0 \\
+                0 & 0 & 2
+            \end{pmatrix},
+            \quad 
+            Q = \begin{pmatrix}
+                1/\sqrt{3} & -1/\sqrt{2} & -1/\sqrt{6} \\
+                1/\sqrt{3} & 0 & 2/\sqrt{6} \\
+                1/\sqrt{3} & 1/\sqrt{2} & -1/\sqrt{6} 
+            \end{pmatrix}
+        }
+    \]
+\end{solution}
+
+\colorbox{red}{\underline{Practice Question 2:}} Let $W$ be the set below. Find the projection of $\vec{b}$ on $W$ and then find $W^{\perp}$
+\[
+    W = \Span{
+        \begin{pmatrix}
+            1 \\ -1 \\ 2
+        \end{pmatrix},
+        \begin{pmatrix}
+            1 \\ -1 \\ -1
+        \end{pmatrix}
+    }, 
+    \quad \vec{b} = \begin{pmatrix}
+        2 \\ 3 \\ 5
+    \end{pmatrix}
+\]
+\begin{solution}
+    First we will find the projection of $\vec{b}$ on $W$. Notice that we can write $\vec{b}$ as 
+    \[
+        \vec{b} = \underbrace{c_1\vec{u_1} + c_2\vec{u_2}}_{\vec{b}_W} + \overbrace{c_v\vec{v_3}}^{\vec{b}_{W^{\perp}}}
+    \]
+    Where $\vec{u_1}$ and $\vec{u_2}$ are the two vectors in $W$ and $\vec{v_3} \in W^{\perp}$. Notice that since $\vec{u_1}$ and $\vec{u_2}$ are orthogonal and $\vec{u_1}$ and $\vec{v_3}$ are also orthogonal,
+    \begin{align*}
+        \vec{b} \cdot \vec{u_1} &= \vec{u_1}\cdot(c_1\vec{u_1} + c_2\vec{u_2} + c_3\vec{v_3}) \\
+        &= \vec{u_1} \cdot c_1\vec{u_1} + \vec{u_1}\cdot c_2\vec{u_2} + \vec{u_1} \cdot c_3\vec{v_3} \\
+        &= \vec{u_1} \cdot c_1\vec{u_1} \\
+        &\Rightarrow 9 = 6c_1 \\
+        &\Rightarrow c_1 = 3/2
+    \end{align*}
+    Repeating to find $c_2$: 
+    \begin{align*}
+        \vec{b}\cdot\vec{u_2} &= \vec{u_2} \cdot c_2\vec{u_2} \\
+        &\Rightarrow -6 = 3c_2 \\
+        &\Rightarrow c_2 = -2
+    \end{align*}
+    Thus the projection of $\vec{b}$ on $W$ is
+    \[
+        \boxed{
+            \vec{b}_W = 3/2\vec{u_1} - 2\vec{u_2} = \begin{pmatrix}
+                -1/2 \\ 1/2 \\ 5
+            \end{pmatrix} 
+        }
+    \]
+    Now to find $W^{\perp}$ notice that if $A$ is the matrix whose columns are the vectors in $W$, and $\vec{v} \in W^\perp$ then $A^T\vec{v} = 0$ since $\vec{v} \cdot \vec{u_1} = \vec{v} \cdot \vec{u_2} = 0$ by definition of $W^\perp$. Thus we can solve
+    \begin{align*}
+        A^T\vec{v} = 0 &\Rightarrow \begin{pmatrix}
+            1 & 1 \\
+            -1 & -1 \\
+            2 & -1 
+        \end{pmatrix}^T\vec{v} = 0 \\
+        &\Rightarrow \begin{pmatrix}
+            1 & -1 & 2 \\
+            1 & -1 & -1 
+        \end{pmatrix}
+        \xrightarrow{R_2 \to R_2 - R_1} \begin{pmatrix}
+            1 & -1 & 2 \\
+            0 & 0 & -3
+        \end{pmatrix} \\
+        &\Rightarrow \begin{cases}
+            x_3 &= 0 \\
+            x_2 &= t \\
+            x_1 &= t
+        \end{cases}
+        \Rightarrow X = \boxed{t\begin{pmatrix}
+            1 \\ 1 \\ 0
+        \end{pmatrix} = W^\perp}
+    \end{align*}
+    Notice that we can use this to check our answer to the previous part.
+    \begin{align*}
+        \vec{b}\cdot{v} &= c_3\vec{v}\cdot\vec{v} \\
+        \Rightarrow 5 &= 2c_3 \\
+        \Rightarrow c_3 &= 5/2
+        \Rightarrow \vec{b}_{W^\perp} = c_3\vec{v} = \begin{pmatrix}
+            5/2 \\ 5/2 \\ 0
+        \end{pmatrix}
+    \end{align*}
+    But, 
+    \[
+        \vec{b} - \vec{b}_W = \vec{b}_{W^\perp} = \begin{pmatrix}
+            5/2 \\ 5/2 \\ 0
+        \end{pmatrix} 
+    \]
+    Since both our answers agree, we know we are correct.
+\end{solution}
+
+\colorbox{red}{\underline{Practice Question 3:}} Figure out what curve is represented by the quadratic form below. Then find the angle of rotation
+\[
+    2x^2 - 4xy + 5y^2 = 36
+\]
+\begin{solution}
+    We can start by turining the quadratic form into it matrix form:
+    \[
+        A = \begin{pmatrix}
+            2 & -2 \\
+            -2 & 5
+        \end{pmatrix},
+        \quad X = \begin{pmatrix}
+            x \\ y
+        \end{pmatrix}
+    \]
+    where $X^{T}AX = 36$. Now we can perform a change of variables to remove the cross-product terms. We'll use $X = PY \Rightarrow 36 = Y^{T}DY$ where $Y = \left(\begin{smallmatrix} x' \\ y' \end{smallmatrix}\right)$, with $D$ being a diagonal matrix whos entries are the eigenvalues of $A$. Since $A$ is $2\times\,2$ we can use the characteristic equation for a $2\times\,2$ matrix~(\ref{eq:5}):
+    \[
+        \lambda^2 - 7\lambda + 6 = \left(\lambda-1\right)\left(\lambda-6\right) \Rightarrow \lambda_1 = 6, \lambda_2 = 1
+    \]
+    Thus, 
+    \[
+        D = \begin{pmatrix}
+            6 & 0 \\
+            0 & 1
+        \end{pmatrix}
+        \Rightarrow 36 = Y^{T}DY \Rightarrow \frac{(x')^2}{6} + \frac{(y')^2}{36} = 1, \quad Y = \begin{pmatrix}
+            x' \\ y'
+        \end{pmatrix}
+    \]
+    We can easily see in this form that our curve is an ellipse with major axis from $(0, -6)$ to $(0, 6)$ and minor axis from $(-\sqrt{6}, 0)$ to $(\sqrt{6}, 0)$. \\
+    Now, to find the angle of rotation we need to find the eigenvectors. 
+    \begin{align*}
+        A - 1I &= \begin{pmatrix}
+            1 & -2 \\
+            -2 & 4
+        \end{pmatrix}
+        \to
+        \begin{pmatrix}
+            1 & -2 \\
+            0 & 0 
+        \end{pmatrix}
+        \Rightarrow X = t\begin{pmatrix}
+            2 \\ 1
+        \end{pmatrix}
+        \Rightarrow
+        \vec{u_1} = \begin{pmatrix}
+            2/\sqrt{5} \\ 1/\sqrt{5}
+        \end{pmatrix} \\
+        A - 6I &= \begin{pmatrix}
+            -4 & -2 \\
+            -2 & -1
+        \end{pmatrix}
+        \to 
+        \begin{pmatrix}
+            -4 & -2 \\
+            0 & 0
+        \end{pmatrix}
+        \Rightarrow 
+        X = t\begin{pmatrix}
+            -1 \\ 2
+        \end{pmatrix}
+        \Rightarrow \vec{u_2} = \begin{pmatrix}
+            -1/\sqrt{5} \\ 2/\sqrt{5}
+        \end{pmatrix} \\
+        \Rightarrow Q &= \begin{pmatrix}
+            2/\sqrt{5} & -1/\sqrt{5} \\
+            1/\sqrt{5} & 2/\sqrt{5}
+        \end{pmatrix}
+        = \underbrace{\begin{pmatrix}
+            \cos\theta & -\sin\theta \\
+            \sin\theta & \cos\theta
+        \end{pmatrix}}_{\text{Rotation Matrix}} \\
+        &\Rightarrow \boxed{\theta = \arccos{2/\sqrt{5}}}
+    \end{align*}
+    Here is a picture of our quadratic form (after the change of variables): \\
+    \begin{tikzpicture}
+        \begin{axis}[
+            axis lines = center,
+            grid = both,
+            xmax = 4.5,
+            xmin = -4.5,
+            ymax = 7.5,
+            ymin = -7.5,
+            xlabel=$x'$, ylabel=$y'$
+        ]
+        \addplot[
+            domain=0:2*pi,
+            samples=200,
+        ]
+        ({sqrt(6)*cos(deg(x))}, {6*sin(deg(x))});
+        \end{axis}
+    \end{tikzpicture}
+
+\end{solution}
